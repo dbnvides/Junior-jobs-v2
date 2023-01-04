@@ -9,7 +9,7 @@ export const Footer = styled.footer`
     background-color: var(--color-primary);
     border-radius: 0 7rem 0 0;
 
-    position: absolute;
+    position: static;
     left: 0;
     bottom: 0;
 
