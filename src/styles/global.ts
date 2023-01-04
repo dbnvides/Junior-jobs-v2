@@ -41,6 +41,8 @@ textarea:focus, input:focus, select:focus {
     --color-secondary-2: rgba(255, 0, 0, 0.6);
     --grey-1: rgb(244, 246, 248);
     --grey-2: rgb(201, 201, 201);
+    --grey-3: rgb(110, 128, 152);
+    --grey-4: rgb(25, 32, 45);
     --negative: rgb(230, 0, 0);
     --warning: rgb(255, 205, 7);
     --sucess: rgb(22, 136, 33);
@@ -61,4 +63,4 @@ textarea:focus, input:focus, select:focus {
     --radius-2: 8px;
 }
 
-`
+`;
