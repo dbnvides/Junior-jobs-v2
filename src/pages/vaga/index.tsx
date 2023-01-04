@@ -1,9 +1,12 @@
 import { Container } from "../../components/Container"
+import { StyledFooter } from "../../components/Footer"
+import { Header } from "../../components/Header"
 import { StyledMain } from "./style"
 
 export const Vaga = () =>{
     return (
         <>
+        <Header/>
         <Container>
             <StyledMain>
                 <div className="card">
@@ -33,15 +36,7 @@ export const Vaga = () =>{
                 </div>
             </StyledMain>
         </Container>
-        <footer>
-            <div>
-                <div>
-                    <h3>Engenheiro de Software</h3>
-                    <p>So Digital Inc.</p>
-                </div>
-                <button>Candidatar</button>
-            </div>
-        </footer>
+        <StyledFooter/>
         </>
     )
 }

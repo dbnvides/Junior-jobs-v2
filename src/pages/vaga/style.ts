@@ -3,20 +3,18 @@ import styled from "styled-components";
 export const StyledMain = styled.main`
 display: flex;
 flex-direction: column;
-align-items: center;
 justify-content: center;
 
-padding: 16px;
-gap: 16px;
-
 background-color: var(--grey-1);
+padding: 16px;
+gap: 16px;   
 
 p{
-    color: #6E8098;
+    color: var(--grey-3);
 }
 
 h1 , h2 , h3 , h4 , h5 {
-    color: #19202D;
+    color: var(--grey-4);
 }
 
 .card{
@@ -36,7 +34,7 @@ h1 , h2 , h3 , h4 , h5 {
     border-radius: var(--radius-2);
 
     position: relative;
-
+    
     div{
         width: 50px;
         height: 50px;
