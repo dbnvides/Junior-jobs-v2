@@ -26,7 +26,7 @@ export const StyledMain = styled.main`
       height: 140px;
       padding: 0;
     }
-    .avatarProfile {
+    .avatarDefault {
       display: flex;
       align-items: center;
       justify-content: center;
