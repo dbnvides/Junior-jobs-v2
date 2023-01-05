@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Login } from "../pages/login";
 import { Job } from "../pages/job";
 
+
 export const MainRoutes = () => {
     return(
         <Routes>
