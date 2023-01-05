@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { IContextChildren } from "../../contexts/types";
 import { api } from "../../services/api";
 
@@ -7,6 +6,8 @@ interface IJobContext{
   jobById(id : number, userId: number): Promise<void>
   job: IJob
   company: ICompany
+  applyJob(jobId : number | undefined): void
+  applyList: number[]
 }
 
 interface IJob{
@@ -35,9 +36,10 @@ export const jobContext = createContext({} as IJobContext)
 export const JobProvider = ({ children }: IContextChildren) => {
     const [job , setJob] = useState<IJob>({})
     const [company , setCompany] = useState<ICompany>({})
+    const [applyList , setApplyList] = useState<number[]>([])
     
-    const jobById = async (id : number, userId: number): Promise<void> => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldmpvYjJAbWFpbC5jb20iLCJpYXQiOjE2NzI5NDAxNDEsImV4cCI6MTY3Mjk0Mzc0MSwic3ViIjoiMSJ9.ypUWJETzSXr8EBQ_Ig4e0qDpVYXns84yLZ3fsu8Vh-k"
+    const jobById = async (id : number | undefined, userId: number | undefined): Promise<void> => {
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGdnLmNvbSIsImlhdCI6MTY3Mjk0ODk0NSwiZXhwIjoxNjcyOTUyNTQ1LCJzdWIiOiIxMCJ9.5iaHjXopaAPk1If0MJwdqqGZgL2KQPYAYhv-1NRbshs"
       
         try {
           const jobs = await api.get(`jobs`,{
@@ -62,12 +64,20 @@ export const JobProvider = ({ children }: IContextChildren) => {
     }
 
     useEffect(()=>{
-      jobById(1,1)
+      jobById(2,1)
+
     },[])
+    
+    const applyJob = (jobId : number) =>{
+
+    setApplyList([...applyList, jobId]) 
+
+    }
 
 return(
-    <jobContext.Provider value={{ jobById, job, company}}>
+    <jobContext.Provider value={{ jobById, job, company, applyJob, applyList }}>
         {children}
     </jobContext.Provider>
 )
+
 }

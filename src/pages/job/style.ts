@@ -34,6 +34,7 @@ h1 , h2 , h3 , h4 , h5 {
     border-radius: var(--radius-2);
 
     position: relative;
+    bottom: 32px;
     
     div{
         width: 50px;
@@ -50,6 +51,13 @@ h1 , h2 , h3 , h4 , h5 {
         }
     }
 
+    span{
+        text-align: center;
+        p{
+           margin: 16px 0 8px;
+        }
+    }
+        
     a{
         display: flex;
         align-items: center;
@@ -70,16 +78,20 @@ h1 , h2 , h3 , h4 , h5 {
 .description{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-
+    
     width: 100%;
     height: max-content;
+    min-height: 70vh;
+
+    overflow: auto;
 
     gap: 16px;
     padding: 32px 16px;
 
     background-color: var(--white);
     border-radius: var(--radius-2);
+
+   
 
     button{
         display: flex;
@@ -96,10 +108,13 @@ h1 , h2 , h3 , h4 , h5 {
 
         margin: 32px 0 16px;
     }
+
+    .text {
+        margin-bottom: 40px;
+       }
 }
 
 @media (min-width: 768px) {
-
 
     .card{
         margin: 0 auto;
@@ -135,8 +150,7 @@ h1 , h2 , h3 , h4 , h5 {
         position: relative;
         justify-content: flex-start;
 
-        min-height: 80vh;
-        overflow: auto;
+        
 
         button{
             position: absolute;
