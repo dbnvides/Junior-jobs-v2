@@ -4,7 +4,7 @@ import {
   StyledVacancy,
   StyledVacancyList,
   StyledViewMoreContainer,
-} from "../../styles/home";
+} from "./style";
 import test from "../../assets/img/logo.png";
 import { Header } from "../../components/Header";
 import { StyledFooter } from "../../components/Footer";
