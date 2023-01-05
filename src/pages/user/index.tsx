@@ -5,25 +5,18 @@ import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
-
-interface IResponseProfile {
-  email: string;
-  name: string;
-  documentation: string;
-  avatar: string;
-  type: "dev" | "company";
-  id: number;
-  jobs?: [];
-}
+import { IJobUser, IResponseProfile } from "./types";
 
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
-
-  // const { name, email, documentation, avatar, type } = userData;
+  const [jobs, setJobs] = useState<IJobUser | []>([]);
 
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjcyOTM1NzgxLCJleHAiOjE2NzI5MzkzODEsInN1YiI6IjMifQ.02_-GEKcK909oqI_Io0DAsf3_dBzPzUjGO1oFN0sA-g";
   useEffect(() => {
+    //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
+    // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
+
     const getDataProfile = async (): Promise<void> => {
       try {
         const response = await api.get("/users/3", {
@@ -33,6 +26,7 @@ export const UserProfile = () => {
         });
 
         const dataUser = response.data;
+
         const data = {
           email: dataUser.email,
           name: dataUser.name,
@@ -75,7 +69,21 @@ export const UserProfile = () => {
 
           <section className="sectionJob">
             <h2>Vagas</h2>
-            <ul></ul>
+            <ul>
+              {
+                //LIBERAR APÓS FINALIZAR A PARTE DE CANDIDATAR A VAGA
+                /* {jobs.map((job) => (
+                <CardCompany
+                  id={job.id}
+                  avatar={job.avatar}
+                  period={job.period}
+                  title={job.job_name}
+                  responsabilitys={job.responsabilitys}
+                  workType={job.work_type}
+                />
+              ))} */
+              }
+            </ul>
           </section>
         </StyledMain>
       </Container>
