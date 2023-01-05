@@ -39,14 +39,22 @@ export const StyledViewMoreContainer = styled.div`
   justify-content: center;
 
   button {
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40%;
-    height: 40px;
+    width: 15%;
+    height: 60px;
     border-radius: var(--radius-1);
     background-color: var(--color-primary);
     color: var(--white);
+
+    @media only screen and (max-width: 1300px) {
+      width: 25%;
+    }
+    @media only screen and (max-width: 768px) {
+      width: 75%;
+    }
   }
 `;
 
