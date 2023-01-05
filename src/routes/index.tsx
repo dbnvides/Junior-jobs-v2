@@ -9,7 +9,7 @@ export const MainRoutes = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<h1>register</h1>} />
       <Route path="/company" element={<Company />} />
-      <Route path="/vaga" element={<Job />} />
+      <Route path="/job/:name" element={<Job />} />
     </Routes>
   );
 };

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { IContextChildren } from "../../contexts/types";
 import { api } from "../../services/api";
 
@@ -36,7 +37,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
     const [company , setCompany] = useState<ICompany>({})
     
     const jobById = async (id : number, userId: number): Promise<void> => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldmpvYjJAbWFpbC5jb20iLCJpYXQiOjE2NzI5MzA3MTYsImV4cCI6MTY3MjkzNDMxNiwic3ViIjoiMSJ9.j5jpLlJeUvuxdeEqae8LsLkdoPT1yScmESo6spyXNqY"
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRldmpvYjJAbWFpbC5jb20iLCJpYXQiOjE2NzI5NDAxNDEsImV4cCI6MTY3Mjk0Mzc0MSwic3ViIjoiMSJ9.ypUWJETzSXr8EBQ_Ig4e0qDpVYXns84yLZ3fsu8Vh-k"
       
         try {
           const jobs = await api.get(`jobs`,{
