@@ -15,6 +15,9 @@ export const CardCompanyContainer = styled.div`
     position: absolute;
     top: 0;
     margin-top: -20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
   }
 
   .description {

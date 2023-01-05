@@ -5,6 +5,63 @@ export const CompanyPageContainer = styled.div`
   margin: 0 auto;
   height: 100vh;
 
+  .perfil {
+    height: 200px;
+    background-color: var(--white);
+    width: 300px;
+    margin: 0 auto;
+    position: relative;
+    margin-top: 30px;
+    padding: 50px 20px 30px 20px;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .boxImg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      margin-top: -75px;
+      margin-left: 110px;
+
+      > img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+      }
+    }
+
+    .infPerfil {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 30px;
+
+      h2 {
+        font-size: var(--title-3);
+      }
+
+      p {
+        font-size: var(--title-5);
+        color: var(--grey-3);
+      }
+
+      button {
+        background-color: var(--grey-2);
+        color: var(--color-primary);
+        padding: 15px;
+        border-radius: 5px;
+        font-size: var(--text);
+        font-weight: var(--bold);
+        cursor: pointer;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+
   .boxTitle {
     display: flex;
     justify-content: space-between;
@@ -35,6 +92,40 @@ export const CompanyPageContainer = styled.div`
       margin: 0 auto;
       margin-top: 35px;
       margin-bottom: 50px;
+    }
+
+    .perfil {
+      max-width: 730px;
+      height: 140px;
+      width: 95%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30px 0 0;
+
+      .boxImg {
+        max-width: 20%;
+        max-height: 100%;
+        position: static;
+        margin: 0px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0px;
+        }
+      }
+
+      .infPerfil {
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          padding-left: 30px;
+        }
+      }
     }
   }
 `;
