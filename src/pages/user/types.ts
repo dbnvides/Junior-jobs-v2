@@ -15,4 +15,5 @@ export interface IJobUser {
   description: string;
   requeriments: string;
   responsabilitys: string;
+  candidates: number[];
 }

@@ -11,12 +11,25 @@ import { ModalBase } from "../../components/Modal";
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
   const [jobs, setJobs] = useState<IJobUser[] | []>([]);
+  const [myJobs, setMyJobs] = useState<IJobUser[] | []>([]);
+
+  //Função para sair da vaga
+  // const unapply = (id: number) => {
+  //   const newArr = jobs.filter((item) => item.id === id);
+  //   setMyJobs(newArr);
+  // };
 
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjcyOTQ2NzQ1LCJleHAiOjE2NzI5NTAzNDUsInN1YiI6IjMifQ.7T8NrHBqJdGYhozveys2Kx42wMIGU70Saoxaw5HVoL0";
   useEffect(() => {
     //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
     // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
+
+    // FUNÇÃO PARA FILTRAR AS VAGAS APLICADAS
+    // const applyJobs = (id: number | undefined) => {
+    //   const newArr = jobs.filter((item) => item.candidates.id === id);
+    //   setMyJobs(newArr);
+    // };
 
     const getDataProfile = async (): Promise<void> => {
       try {
@@ -34,6 +47,7 @@ export const UserProfile = () => {
 
         setJobs(jobs.data);
 
+        // applyJobs(userData?.id);
         const dataUser = response.data;
 
         const data = {
