@@ -6,13 +6,14 @@ import { StyledFooter } from "../../components/Footer";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJobUser, IResponseProfile } from "./types";
+import { ModalBase } from "../../components/Modal";
 
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
-  const [jobs, setJobs] = useState<IJobUser | []>([]);
+  const [jobs, setJobs] = useState<IJobUser[] | []>([]);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjcyOTM1NzgxLCJleHAiOjE2NzI5MzkzODEsInN1YiI6IjMifQ.02_-GEKcK909oqI_Io0DAsf3_dBzPzUjGO1oFN0sA-g";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjcyOTQ2NzQ1LCJleHAiOjE2NzI5NTAzNDUsInN1YiI6IjMifQ.7T8NrHBqJdGYhozveys2Kx42wMIGU70Saoxaw5HVoL0";
   useEffect(() => {
     //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
     // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
@@ -25,6 +26,14 @@ export const UserProfile = () => {
           },
         });
 
+        const jobs = await api.get("/jobs", {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        setJobs(jobs.data);
+
         const dataUser = response.data;
 
         const data = {
@@ -34,6 +43,7 @@ export const UserProfile = () => {
           avatar: dataUser.avatar,
           type: dataUser.type,
           id: dataUser.id,
+          apply_jobs: dataUser.apply_jobs,
         };
         setUserData(data);
       } catch (error) {
@@ -42,10 +52,12 @@ export const UserProfile = () => {
     };
     getDataProfile();
   }, []);
-
   return (
     <>
       <Header />
+      <ModalBase title={"Editar perfil"}>
+        <div>teste</div>
+      </ModalBase>
       <Container>
         <StyledMain>
           <section className="sectionProfile">
@@ -70,9 +82,7 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {
-                //LIBERAR APÓS FINALIZAR A PARTE DE CANDIDATAR A VAGA
-                /* {jobs.map((job) => (
+              {/* {jobs.map((job) => (
                 <CardCompany
                   id={job.id}
                   avatar={job.avatar}
@@ -81,8 +91,7 @@ export const UserProfile = () => {
                   responsabilitys={job.responsabilitys}
                   workType={job.work_type}
                 />
-              ))} */
-              }
+              ))} */}
             </ul>
           </section>
         </StyledMain>
