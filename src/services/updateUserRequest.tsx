@@ -6,7 +6,7 @@ export interface iUpdateUser {
   aplly_jobs?: [];
 }
 
-export async function updateUser(data: iUpdateUser, id: number) {
+export const updateUser = async (data: iUpdateUser, id: number) => {
   const token = localStorage.getItem("token");
   try {
     const response = await api.patch(`users/${id}`, data, {
@@ -17,4 +17,4 @@ export async function updateUser(data: iUpdateUser, id: number) {
   } catch (error) {
     console.log(error);
   }
-}
+};
