@@ -2,15 +2,33 @@ import styled from "styled-components";
 
 export const StyledHome = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--grey-1);
+
+  > * {
+    :nth-child(2) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 export const StyledVacancyList = styled.ul`
   width: 100%;
-  height: 85vh;
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 30% 30% 30%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 100px;
+
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const StyledViewMoreContainer = styled.div`
@@ -40,6 +58,8 @@ export const StyledVacancy = styled.li`
   display: flex;
   flex-direction: column;
   gap: 26px;
+  background-color: var(--white);
+  margin-top: 20%;
 
   div {
     img {
@@ -55,10 +75,14 @@ export const StyledVacancy = styled.li`
     gap: 8px;
 
     h2 {
-      color: var(--color-primary);
+      color: var(--grey-4);
     }
     p {
-      color: var(--grey-2);
+      color: var(--grey-3);
     }
+  }
+
+  h4 {
+    color: var(--grey-4);
   }
 `;
