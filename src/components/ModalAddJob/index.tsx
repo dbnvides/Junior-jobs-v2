@@ -40,12 +40,12 @@ export const ModalAddJob = () => {
             .max(1000, "Descrição muito longa"),
         requirements: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe os requerimentos para a vaga")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
         responsabilities: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe as responsabilidades do desenvolvedor")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
     });
