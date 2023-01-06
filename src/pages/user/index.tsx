@@ -6,8 +6,8 @@ import { StyledFooter } from "../../components/Footer";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJobUser, IResponseProfile } from "./types";
-import { ModalBase } from "../../components/Modal";
 import { CardCompany } from "../../components/CardCompany";
+import ModalEditProfile from "./modalEditProfile";
 
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
@@ -21,7 +21,7 @@ export const UserProfile = () => {
   // };
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjczMDE1NTE2LCJleHAiOjE2NzMwMTkxMTYsInN1YiI6IjMifQ.lXQJJKDlauWaV4D_HatPndXyAPJZvpkwYb17AJpMSFY";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjczMDIyMzUxLCJleHAiOjE2NzMwMjU5NTEsInN1YiI6IjMifQ.p4bM-X_LHcZPldxT5d_euvJlvdfZj79xUYmNpE2GFcM";
   useEffect(() => {
     //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
     // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
@@ -73,10 +73,8 @@ export const UserProfile = () => {
   }, []);
   return (
     <>
+      <ModalEditProfile />
       <Header />
-      <ModalBase title={"Editar perfil"}>
-        <div>teste</div>
-      </ModalBase>
       <Container>
         <StyledMain>
           <section className="sectionProfile">
