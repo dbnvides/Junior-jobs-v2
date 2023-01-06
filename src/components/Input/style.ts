@@ -23,7 +23,7 @@ export const StyleField = styled.fieldset`
     border-radius: var(--radius-1);
     border: 1px solid black;
 
-    color: #9daec2;
+    color: var(--color-primary);
 
     padding-left: 10px;
   }
