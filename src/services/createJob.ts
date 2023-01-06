@@ -12,7 +12,7 @@ export interface iCreateJob {
 }
 
 export const createJob = async (data: iCreateJob) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("@TOKEN");
     try {
         const response = await api.post<iCreateJob>("jobs/", data, {
             headers: {

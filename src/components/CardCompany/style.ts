@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardCompanyContainer = styled.div`
+export const StyledCardCompanyContainer = styled.li`
   height: 300px;
   background-color: var(--white);
   width: 300px;
@@ -18,6 +18,22 @@ export const CardCompanyContainer = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 10px;
+  }
+
+  .avatarDefault {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    margin-top: -20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 30px;
+    color: var(--white);
+    border-radius: var(--radius-2);
+    background-color: var(--grey-3);
   }
 
   .description {

@@ -101,7 +101,9 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {/* {jobs.map((job) => (
+              {/* {
+                //LIBERAR APÓS FINALIZAR A PARTE DE CANDIDATAR A VAGA
+                 {jobs.map((job) => (
                 <CardCompany
                   id={job.id}
                   avatar={job.avatar}
@@ -109,7 +111,9 @@ export const UserProfile = () => {
                   title={job.job_name}
                   responsabilitys={job.responsabilitys}
                   workType={job.work_type}
-                />
+                >
+                <button>Teste</button>
+                <CardCompany/>
               ))}  */}
             </ul>
           </section>
