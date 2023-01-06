@@ -10,6 +10,7 @@ export interface IResponseProfile {
 
 export interface IJobUser {
   job_name: string;
+  id: number;
   period: string;
   work_type: string;
   description: string;

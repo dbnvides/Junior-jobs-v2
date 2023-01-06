@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJobUser, IResponseProfile } from "./types";
 import { ModalBase } from "../../components/Modal";
+import { CardCompany } from "../../components/CardCompany";
 
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
@@ -20,15 +21,19 @@ export const UserProfile = () => {
   // };
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjcyOTQ2NzQ1LCJleHAiOjE2NzI5NTAzNDUsInN1YiI6IjMifQ.7T8NrHBqJdGYhozveys2Kx42wMIGU70Saoxaw5HVoL0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjczMDE1NTE2LCJleHAiOjE2NzMwMTkxMTYsInN1YiI6IjMifQ.lXQJJKDlauWaV4D_HatPndXyAPJZvpkwYb17AJpMSFY";
   useEffect(() => {
     //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
     // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
 
     // FUNÇÃO PARA FILTRAR AS VAGAS APLICADAS
     // const applyJobs = (id: number | undefined) => {
-    //   const newArr = jobs.filter((item) => item.candidates.id === id);
-    //   setMyJobs(newArr);
+    //   let test: any = [];
+    //   const newArr = jobs.forEach((item) => {
+    //     test = item.candidates;
+    //   });
+    //   const newId = test.filter((el: any) => el.id === id);
+    //   console.log(newId);
     // };
 
     const getDataProfile = async (): Promise<void> => {
@@ -105,7 +110,7 @@ export const UserProfile = () => {
                   responsabilitys={job.responsabilitys}
                   workType={job.work_type}
                 />
-              ))} */}
+              ))}  */}
             </ul>
           </section>
         </StyledMain>
