@@ -26,7 +26,7 @@ export const Company = () => {
             <h1>Vagas</h1>
             <button> Adicionar Vagas</button>
           </div>
-          <CardCompany />
+         
         </div>
       </CompanyPageContainer>
       <StyledFooter />
