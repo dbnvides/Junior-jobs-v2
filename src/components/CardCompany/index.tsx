@@ -1,38 +1,53 @@
-import { CardCompanyContainer } from "./style";
+import { StyledCardCompanyContainer } from "./style";
 import img from "../../assets/img/company.svg";
 import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconEditar from "../../assets/img/icon-editar.svg";
 import iconVisualizar from "../../assets/img/icon-visu.svg";
+import { IPropCard } from "./types";
+import { FaUser } from "react-icons/fa";
 
-export const CardCompany = () => {
+export const CardCompany = ({
+  period,
+  job_name,
+  work_type,
+  avatar,
+  description,
+  requirements,
+  responsabilitys,
+  id,
+  nameCompany,
+  locality,
+  children,
+}: IPropCard) => {
   return (
-    <CardCompanyContainer>
-      <img src={img} alt="img" />
+    <StyledCardCompanyContainer>
+      {avatar ? (
+        <img src={avatar} alt="img" />
+      ) : (
+        <div className="avatarDefault">
+          <FaUser />
+        </div>
+      )}
       <div>
         <div className="infCompany">
           <div>
-            <p>Integral</p>
-            <h1>Front-End Júnior</h1>
-            <span>Scoot</span>
+            <p>{period}</p>
+            <h1>{job_name}</h1>
+            <span>{nameCompany}</span>
           </div>
 
-          <p>Recife</p>
+          <p>{locality}</p>
         </div>
 
         <div className="description">
-          <p>
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus
-            hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque,
-            aliquet vel, dapibus id, mattis vel, nisi. ,est. Sed lectus.
-            Praesent elementum hendrerit tortor. Sed semper lorem at felis.
-            Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod
-            dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu,
-            dapibus eu, fermentum et, dapibus sed, urna.
-          </p>
+          <p>{description}</p>
+          <p>{requirements}</p>
+          <p>{responsabilitys}</p>
         </div>
 
         <div className="boxButtons">
-          <button>
+          {children}
+          {/* <button>
             <img src={iconEditar} alt="Editar" />
           </button>
           <button>
@@ -40,9 +55,9 @@ export const CardCompany = () => {
           </button>
           <button>
             <img src={iconVisualizar} alt="Visualizar" />
-          </button>
+          </button> */}
         </div>
       </div>
-    </CardCompanyContainer>
+    </StyledCardCompanyContainer>
   );
 };
