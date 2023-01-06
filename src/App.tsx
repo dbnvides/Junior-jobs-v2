@@ -1,4 +1,3 @@
-import { JobProvider } from "./pages/job/JobContext";
 import { MainRoutes as Routes } from "./routes";
 import { Global } from "./styles/global";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,9 +19,7 @@ function App() {
         theme="colored"
       />
       <Global />
-      <JobProvider>
-        <Routes />
-      </JobProvider>
+      <Routes />
     </>
   );
 }

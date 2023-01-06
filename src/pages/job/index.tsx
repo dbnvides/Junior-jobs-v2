@@ -8,8 +8,8 @@ import { StyledMain } from "./style"
 
 export const Job = () => {
     const { job: {  job_name, period, work_type, description, requirements,
-        responsabilitys, id}, company: { name, avatar }, applyJob, applyList } = useContext(jobContext)
-        
+        responsabilitys, id}, company: { name, avatar }, addJob } = useContext(jobContext)
+
     return (
         <>
             <Header />
@@ -29,8 +29,7 @@ export const Job = () => {
                         <p>{work_type} - {period}</p>
                         <h3>{job_name}</h3>
                         <h5>Rio de janeiro</h5>
-                        <button type="button" onClick={()=>{
-                            applyJob(id)}}> Candidatar </button>
+                        <button type="button" onClick={()=>{addJob(id!)}}> Candidatar </button>
                         <p className="text">{description}</p>
                         <h3>Requerimentos</h3>
                         <p className="text">{requirements}</p>

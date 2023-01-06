@@ -1,13 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import { IContextChildren } from "../../contexts/types";
 import { api } from "../../services/api";
+import { iUpdateUser, updateUser } from "../../services/updateUserRequest";
 
 interface IJobContext{
   jobById(id : number, userId: number): Promise<void>
   job: IJob
   company: ICompany
-  applyJob(jobId : number | undefined): void
-  applyList: number[]
+  addJob(jobId: number): void
 }
 
 interface IJob{
@@ -34,50 +34,66 @@ interface ICompany {
 export const jobContext = createContext({} as IJobContext)
 
 export const JobProvider = ({ children }: IContextChildren) => {
-    const [job , setJob] = useState<IJob>({})
-    const [company , setCompany] = useState<ICompany>({})
-    const [applyList , setApplyList] = useState<number[]>([])
-    
-    const jobById = async (id : number | undefined, userId: number | undefined): Promise<void> => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnQGdnLmNvbSIsImlhdCI6MTY3Mjk0ODk0NSwiZXhwIjoxNjcyOTUyNTQ1LCJzdWIiOiIxMCJ9.5iaHjXopaAPk1If0MJwdqqGZgL2KQPYAYhv-1NRbshs"
-      
-        try {
-          const jobs = await api.get(`jobs`,{
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
+  const [job , setJob] = useState<IJob>({})
+  const [company , setCompany] = useState<ICompany>({})
+  const [applyed , setApplyed] = useState<number[]>([])
+  const [loading , setLoading] = useState<boolean>(false)
+  
 
-          const companys = await api.get(`users`,{
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
+  const userID = Number(localStorage.getItem("@ID"))
+  const token = localStorage.getItem("@TOKEN")
 
-         setJob(jobs.data.find((job : IJob)=> job.id === id ))
-         setCompany(companys.data.find((company : ICompany)=> company.id === userId ))
-        } 
+  const jobById = async (id : number, userId: number): Promise<void> => {
 
-        catch (error) {
-          console.log(error);
-        }
+    try {
+    const jobs = await api.get(`jobs`,{
+    headers: {
+    authorization: `Bearer ${token}`,
+    },
+    });
+
+    const users = await api.get(`users`,{
+    headers: {
+    authorization: `Bearer ${token}`,
+    },
+    });
+
+    setJob(jobs.data.find((job : IJob)=> job.id === id ))
+    setCompany(users.data.find((company : ICompany)=> company.id === userId ))
+    setApplyed(users.data.find((user : ICompany)=> user.id === userID ).apply_jobs || [])
+    } 
+
+    catch (error) {
+    console.log(error);
     }
+  }
 
-    useEffect(()=>{
-      jobById(2,1)
+  useEffect(()=>{
+    jobById(1,1)
+  },[])
 
-    },[])
-    
-    const applyJob = (jobId : number) =>{
+  const applyJob : iUpdateUser = {
+    apply_jobs: applyed,
+  };
 
-    setApplyList([...applyList, jobId]) 
-
+  useEffect(()=>{
+    if(loading){
+      updateUser(applyJob, userID);
     }
+  },[applyed])
 
-return(
-    <jobContext.Provider value={{ jobById, job, company, applyJob, applyList }}>
-        {children}
+  const addJob = (jobId: number): void => {
+    setLoading(true)
+
+    !applyed.includes(jobId) && 
+    setApplyed([...applyed, jobId]);
+
+  }
+  
+  return(
+    <jobContext.Provider value={{ jobById, job, company, addJob}}>
+      {children}
     </jobContext.Provider>
-)
+  )
 
 }
