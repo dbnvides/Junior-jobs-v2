@@ -9,11 +9,10 @@ export const MainRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register/>} />
-      <Route element={<ProtectRoutes/>}>
+      <Route path="/register" element={<Register />} />
+      <Route element={<ProtectRoutes />}>
         <Route path="/company" element={<Company />} />
         <Route path="/user" element={<UserProfile />} />
-
       </Route>
     </Routes>
   );

@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
-  min-width: 280px;
-  max-width: 500px;
-  margin-top: 2rem;
+  width: 300px;
+  max-width: 100%;
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 769px) {
+    width: 539px;
+  }
 
   button {
     width: 100%;

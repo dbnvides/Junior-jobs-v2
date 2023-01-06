@@ -3,38 +3,27 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJobUser, IResponseProfile } from "./types";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
+import { authContext } from "../../contexts/authContext";
 
 export const UserProfile = () => {
   const [userData, setUserData] = useState<IResponseProfile | null>(null);
   const [jobs, setJobs] = useState<IJobUser[] | []>([]);
   const [myJobs, setMyJobs] = useState<IJobUser[] | []>([]);
 
+  const { user } = useContext(authContext);
   //Função para sair da vaga
   // const unapply = (id: number) => {
   //   const newArr = jobs.filter((item) => item.id === id);
   //   setMyJobs(newArr);
   // };
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpb25pc2lvQG1haWwuY29tIiwiaWF0IjoxNjczMDIyMzUxLCJleHAiOjE2NzMwMjU5NTEsInN1YiI6IjMifQ.p4bM-X_LHcZPldxT5d_euvJlvdfZj79xUYmNpE2GFcM";
   useEffect(() => {
-    //QUANDO O LOCAL STORAGE JA ESTIVER COM O TOKEN SÓ DESFAZER O COMENTARIO
-    // const token = JSON.parse(localStorage.getItem("@TOKEN") || "");
-
-    // FUNÇÃO PARA FILTRAR AS VAGAS APLICADAS
-    // const applyJobs = (id: number | undefined) => {
-    //   let test: any = [];
-    //   const newArr = jobs.forEach((item) => {
-    //     test = item.candidates;
-    //   });
-    //   const newId = test.filter((el: any) => el.id === id);
-    //   console.log(newId);
-    // };
+    const token = localStorage.getItem("@TOKEN");
 
     const getDataProfile = async (): Promise<void> => {
       try {
@@ -52,7 +41,6 @@ export const UserProfile = () => {
 
         setJobs(jobs.data);
 
-        // applyJobs(userData?.id);
         const dataUser = response.data;
 
         const data = {
@@ -71,6 +59,32 @@ export const UserProfile = () => {
     };
     getDataProfile();
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+    if (userData) {
+      const getJob = async (id: number): Promise<void> => {
+        try {
+          const response = await api.get(`/jobs/${id}`, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          });
+
+          setMyJobs([...myJobs, response.data]);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const applyJobs = (id: number | undefined) => {
+        const newJob = userData?.apply_jobs?.map((item: number) => {
+          getJob(item);
+        });
+      };
+      applyJobs(userData?.id);
+    }
+  }, [userData]);
+
   return (
     <>
       <ModalEditProfile />
@@ -99,20 +113,16 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {/* {
-                //LIBERAR APÓS FINALIZAR A PARTE DE CANDIDATAR A VAGA
-                 {jobs.map((job) => (
+              {myJobs.map((job) => (
                 <CardCompany
                   id={job.id}
-                  avatar={job.avatar}
+                  key={job.id}
                   period={job.period}
-                  title={job.job_name}
+                  job_name={job.job_name}
                   responsabilitys={job.responsabilitys}
-                  workType={job.work_type}
-                >
-                <button>Teste</button>
-                <CardCompany/>
-              ))}  */}
+                  work_type={job.work_type}
+                />
+              ))}
             </ul>
           </section>
         </StyledMain>

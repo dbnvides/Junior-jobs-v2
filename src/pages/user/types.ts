@@ -5,7 +5,7 @@ export interface IResponseProfile {
   avatar: string;
   type: "dev" | "company";
   id: number;
-  apply_jobs?: IJobUser[];
+  apply_jobs?: number[];
 }
 
 export interface IJobUser {
