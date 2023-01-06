@@ -2,12 +2,14 @@ import { Header } from "../../components/Header";
 import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
+import { ModalViewer } from "../../components/ModalViewer";
 import img from "../../assets/img/company.svg";
 
 export const Company = () => {
   return (
     <>
       <Header />
+      <ModalViewer />
       <CompanyPageContainer>
         <div className="perfil">
           <div className="boxImg">
@@ -26,7 +28,12 @@ export const Company = () => {
             <h1>Vagas</h1>
             <button> Adicionar Vagas</button>
           </div>
-          <CardCompany />
+          <ul>
+            <CardCompany />
+            <CardCompany />
+            <CardCompany />
+            <CardCompany />
+          </ul>
         </div>
       </CompanyPageContainer>
       <StyledFooter />
