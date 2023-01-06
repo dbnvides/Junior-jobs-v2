@@ -4,6 +4,7 @@ export interface iRegister {
   name: string;
   email: string;
   password: string;
+  confirPass: string;
   documentation: string;
   avatar: string;
   type: string;

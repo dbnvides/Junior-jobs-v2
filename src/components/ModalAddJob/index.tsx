@@ -17,6 +17,10 @@ export const ModalAddJob = () => {
         responsabilities: string;
     }
 
+    interface iCandidates {
+        candidates: [];
+    }
+
     const formSchema = yup.object().shape({
         job_name: yup
             .string()
@@ -40,12 +44,12 @@ export const ModalAddJob = () => {
             .max(1000, "Descrição muito longa"),
         requirements: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe os requerimentos para a vaga")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
         responsabilities: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe as responsabilidades do desenvolvedor")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
     });
@@ -62,8 +66,15 @@ export const ModalAddJob = () => {
     const onSubmitFunction: SubmitHandler<iFormSchemaModalAddJob> = async (
         data
     ) => {
-        console.log(data);
-        // await createJob(data);
+        const candidates = { candidates: [] };
+        const localstorageId = localStorage.getItem("@ID");
+        const userId = Number(localstorageId);
+        console.log(userId);
+        console.log({ ...data, ...candidates, userId });
+        const newData = { ...data, ...candidates, userId };
+        console.log(newData);
+
+        await createJob(newData);
     };
 
     return (
