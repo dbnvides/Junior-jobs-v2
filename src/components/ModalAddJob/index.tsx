@@ -17,6 +17,10 @@ export const ModalAddJob = () => {
         responsabilities: string;
     }
 
+    interface iCandidates {
+        candidates: [];
+    }
+
     const formSchema = yup.object().shape({
         job_name: yup
             .string()
@@ -62,8 +66,15 @@ export const ModalAddJob = () => {
     const onSubmitFunction: SubmitHandler<iFormSchemaModalAddJob> = async (
         data
     ) => {
-        console.log(data);
-        // await createJob(data);
+        const candidates = { candidates: [] };
+        const localstorageId = localStorage.getItem("@ID");
+        const userId = Number(localstorageId);
+        console.log(userId);
+        console.log({ ...data, ...candidates, userId });
+        const newData = { ...data, ...candidates, userId };
+        console.log(newData);
+
+        await createJob(newData);
     };
 
     return (
