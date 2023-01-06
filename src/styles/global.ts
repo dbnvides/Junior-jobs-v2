@@ -33,6 +33,10 @@ textarea:focus, input:focus, select:focus {
     outline: 0;    
 }
 
+body{
+    background: var(--grey-1);
+}
+
 :root{
     --white: rgb(255, 255, 255);
     --color-primary: rgb(31, 23, 23);

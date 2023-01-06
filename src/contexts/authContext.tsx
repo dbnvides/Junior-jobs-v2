@@ -25,6 +25,7 @@ interface iUser {
     avatar: string;
     type: string;
     id: number
+    apply_jobs?: any
 }
 export const authContext = createContext({} as iContextValue)
 
