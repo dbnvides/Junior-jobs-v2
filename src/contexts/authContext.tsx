@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
@@ -13,7 +13,9 @@ interface iChildren {
 
 interface iContextValue {
     registerUser: (body: iRegister) => Promise<void>,
-    login: (body: iLogin) => Promise<void>
+    login: (body: iLogin) => Promise<void>,
+    user: iUser[] | null,
+    loading: boolean
 }
 interface iUser {
     email: string;
@@ -23,12 +25,40 @@ interface iUser {
     avatar: string;
     type: string;
     id: number
+    apply_jobs?: any
 }
 export const authContext = createContext({} as iContextValue)
 
 export const AuthProvider = ({ children }: iChildren) => {
     const [ user , setUser ] = useState<iUser[] | null>(null)
+    const [ loading , setLoading ] =useState(true)
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        const loadUser = async () =>{
+            const token = localStorage.getItem("@TOKEN")
+            const id = localStorage.getItem("@ID")
+
+            if(!token){
+                setLoading(false)
+                return null
+            }
+            try {
+                const { data } = await api.get(`users/${id}`,{
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setUser(data)
+            } catch (error) {
+                console.error(error)
+            }finally{
+                setLoading(false)
+            }
+
+        }
+        loadUser()
+    },[])
 
     const registerUser = async (body : iRegister) => {
         try {
@@ -57,7 +87,7 @@ export const AuthProvider = ({ children }: iChildren) => {
             toast.success("Login feito com sucesso")
             setTimeout(() => {
                 if(userResponse.type ==="Dev"){
-                    navigate("/UserProfile")
+                    navigate("/user")
                 }else{
                     navigate("/company")
                 }
@@ -69,7 +99,7 @@ export const AuthProvider = ({ children }: iChildren) => {
 
 
     return (
-        <authContext.Provider value={{ registerUser, login }}>
+        <authContext.Provider value={{ registerUser, login, user,loading }}>
             {children}
         </authContext.Provider>
     )

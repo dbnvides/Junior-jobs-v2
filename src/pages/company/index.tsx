@@ -32,7 +32,6 @@ export const Company = () => {
             <CardCompany />
             <CardCompany />
             <CardCompany />
-            <CardCompany />
           </ul>
         </div>
       </CompanyPageContainer>
