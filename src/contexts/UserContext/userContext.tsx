@@ -8,7 +8,7 @@ export const jobContext = createContext({} as IJobContext);
 
 export const JobProvider = ({ children }: IContextChildren) => {
   const [job, setJob] = useState<IJob>({});
-  const [allJobs, setAllJobs] = useState<IJob[] | []>([]);
+  const [allJobs, setAllJobs] = useState<IJob[]>([]);
   const [company, setCompany] = useState<ICompany>({});
   const [applyed, setApplyed] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
   };
 
   return (
-    <jobContext.Provider value={{ jobById, job, company, addJob, setAllJobs }}>
+    <jobContext.Provider value={{ jobById, job, company, addJob, setAllJobs, allJobs }}>
       {children}
     </jobContext.Provider>
   );
