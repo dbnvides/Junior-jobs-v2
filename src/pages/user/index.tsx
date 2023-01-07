@@ -4,61 +4,67 @@ import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
-import { api } from "../../services/api";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
 import { jobContext } from "../../contexts/UserContext/userContext";
+import { IJob } from "../../contexts/UserContext/type";
 export const UserProfile = () => {
-  const [myJobs, setMyJobs] = useState<number[]>([]);
+  const [myJobs, setMyJobs] = useState<IJob[]>([]);
   const [loading, setLoading] = useState(false);
   const { user } = useContext(authContext);
-  const { allJobs, setAllJobs } = useContext(jobContext);
+  const { allJobs } = useContext(jobContext);
 
   //Função para sair da vaga
   // const unapply = (id: number) => {
   //   const newArr = jobs.filter((item) => item.id === id);
   //   setMyJobs(newArr);
   // };
-  const token = localStorage.getItem("@TOKEN");
 
-  // if (loading) {
+  // useEffect(() => {
+  //   const getJob = async (id: number): Promise<void> => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await api.get(`/jobs/${id}`, {
+  //         headers: {
+  //           authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       setAllJobs((allJobs) => [...allJobs, response.data]);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setLoading(false);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
   //   const applyJobs = () => {
   //     const newJob = user?.apply_jobs?.map((item, id) => {
-  //       setMyJobs((myJobs) => [...myJobs, item]);
-  //       console.log(myJobs);
+  //       return getJob(item);
   //     });
   //   };
 
   //   applyJobs();
-  // }
+  // }, []);
 
   useEffect(() => {
-    const getJob = async (id: number): Promise<void> => {
-      setLoading(true);
-      try {
-        const response = await api.get(`/jobs/${id}`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
+    const token = localStorage.getItem("@TOKEN");
+    const applyJobs = () => {
+      if (allJobs.length > 0) {
+        const test = allJobs.map((item) => {
+          if (item.candidates) {
+            item.candidates!.filter((id) => {
+              if (id === user?.id) {
+                setMyJobs((myJobs) => [...myJobs, item]);
+              }
+            });
+          }
         });
-        setAllJobs((allJobs) => [...allJobs, response.data]);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      } finally {
-        setLoading(false);
       }
     };
-
-    const applyJobs = () => {
-      const newJob = user?.apply_jobs?.map((item, id) => {
-        return getJob(item);
-      });
-    };
-
     applyJobs();
-  }, []);
+  }, [allJobs]);
 
   return (
     <>
@@ -88,7 +94,7 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {allJobs.map((job, id) => (
+              {myJobs.map((job, id) => (
                 <CardCompany
                   id={job.id}
                   key={id}

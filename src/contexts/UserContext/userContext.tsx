@@ -38,8 +38,26 @@ export const JobProvider = ({ children }: IContextChildren) => {
     }
   };
 
+  const getAllJob = async (): Promise<void> => {
+    setLoading(true);
+    try {
+      const response = await api.get(`/jobs`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setAllJobs(response.data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     jobById(1, 1);
+    getAllJob();
   }, []);
 
   const applyJob: iUpdateUser = {
