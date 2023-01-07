@@ -13,7 +13,7 @@ interface iChildren {
 interface iContextValue {
   registerUser: (body: iRegister) => Promise<void>;
   login: (body: iLogin) => Promise<void>;
-  user: iUser[] | null;
+  user: iUser | null;
   loading: boolean;
 }
 interface iUser {
@@ -29,7 +29,7 @@ interface iUser {
 export const authContext = createContext({} as iContextValue);
 
 export const AuthProvider = ({ children }: iChildren) => {
-  const [user, setUser] = useState<iUser[] | null>(null);
+  const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 

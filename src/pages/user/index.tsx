@@ -5,85 +5,65 @@ import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { IJobUser, IResponseProfile } from "./types";
+import { IJobUser } from "./types";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
+import { jobContext } from "../../contexts/UserContext/userContext";
 
 export const UserProfile = () => {
-  const [userData, setUserData] = useState<IResponseProfile | null>(null);
-  const [jobs, setJobs] = useState<IJobUser[] | []>([]);
   const [myJobs, setMyJobs] = useState<IJobUser[] | []>([]);
-
+  const [allJobs, setAllJobs] = useState<IJobUser[] | any>([]);
   const { user } = useContext(authContext);
+
   //Função para sair da vaga
   // const unapply = (id: number) => {
   //   const newArr = jobs.filter((item) => item.id === id);
   //   setMyJobs(newArr);
   // };
-
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
-
-    const getDataProfile = async (): Promise<void> => {
+    const getJob = async (id: number): Promise<void> => {
       try {
-        const response = await api.get("/users/3", {
+        const response = await api.get(`/jobs/${id}`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
         });
-
-        const jobs = await api.get("/jobs", {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-
-        setJobs(jobs.data);
-
-        const dataUser = response.data;
-
-        const data = {
-          email: dataUser.email,
-          name: dataUser.name,
-          documentation: dataUser.documentation,
-          avatar: dataUser.avatar,
-          type: dataUser.type,
-          id: dataUser.id,
-          apply_jobs: dataUser.apply_jobs,
-        };
-        setUserData(data);
+        setMyJobs([...myJobs, response.data]);
       } catch (error) {
         console.log(error);
       }
     };
-    getDataProfile();
+    const applyJobs = () => {
+      const newJob = user?.apply_jobs?.forEach((id: number) => {
+        return getJob(id);
+      });
+    };
+    applyJobs();
   }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-    if (userData) {
-      const getJob = async (id: number): Promise<void> => {
-        try {
-          const response = await api.get(`/jobs/${id}`, {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
+  // useEffect(() => {
+  //   const token = localStorage.getItem("@TOKEN");
+  //   const getJob = async (id: number): Promise<void> => {
+  //     try {
+  //       const response = await api.get(`/jobs`, {
+  //         headers: {
+  //           authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       setMyJobs(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  // }, []);
 
-          setMyJobs([...myJobs, response.data]);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      const applyJobs = (id: number | undefined) => {
-        const newJob = userData?.apply_jobs?.map((item: number) => {
-          getJob(item);
-        });
-      };
-      applyJobs(userData?.id);
-    }
-  }, [userData]);
+  // const test = user?.apply_jobs.map((id: number) => {
+  //   const test1 = myJobs.find((item) => item.id === id);
+  //   console.log("teste");
+  //   return setAllJobs([...allJobs, test1]);
+  // });
 
   return (
     <>
@@ -92,9 +72,9 @@ export const UserProfile = () => {
       <Container>
         <StyledMain>
           <section className="sectionProfile">
-            {userData?.avatar ? (
+            {user?.avatar ? (
               <div className="avatarProfile">
-                <img src={userData.avatar} alt="foto de perfil" />
+                <img src={user.avatar} alt="foto de perfil" />
               </div>
             ) : (
               <div className="avatarDefault">
@@ -103,9 +83,9 @@ export const UserProfile = () => {
             )}
 
             <div className="contentProfile">
-              <h2>{userData?.name}</h2>
-              <p>{userData?.documentation}</p>
-              <span>{userData?.email}</span>
+              <h2>{user?.name}</h2>
+              <p>{user?.documentation}</p>
+              <span>{user?.email}</span>
             </div>
             <button>Editar Perfil</button>
           </section>
