@@ -7,13 +7,10 @@ import { useContext, useEffect, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
-import { jobContext } from "../../contexts/UserContext/userContext";
-import { IJob } from "../../contexts/UserContext/type";
+
 export const UserProfile = () => {
-  const [myJobs, setMyJobs] = useState<IJob[]>([]);
   const [loading, setLoading] = useState(false);
-  const { user } = useContext(authContext);
-  const { allJobs } = useContext(jobContext);
+  const { user, isVisible, setVisible } = useContext(authContext);
 
   //Função para sair da vaga
   // const unapply = (id: number) => {
@@ -48,10 +45,6 @@ export const UserProfile = () => {
   //   applyJobs();
   // }, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("@TOKEN");
-  }, []);
-
   return (
     <>
       <ModalEditProfile />
@@ -74,7 +67,7 @@ export const UserProfile = () => {
               <p>{user?.documentation}</p>
               <span>{user?.email}</span>
             </div>
-            <button>Editar Perfil</button>
+            <button onClick={() => setVisible(true)}>Editar Perfil</button>
           </section>
 
           <section className="sectionJob">

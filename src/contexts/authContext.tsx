@@ -1,3 +1,4 @@
+import { isVisible } from "@testing-library/user-event/dist/utils";
 import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +17,8 @@ interface iContextValue {
   login: (body: iLogin) => Promise<void>;
   user: iUser | null;
   loading: boolean;
+  isVisible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 interface iUser {
   email: string;
@@ -32,6 +35,7 @@ export const authContext = createContext({} as iContextValue);
 export const AuthProvider = ({ children }: iChildren) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isVisible, setVisible] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,7 +99,7 @@ export const AuthProvider = ({ children }: iChildren) => {
   };
 
   return (
-    <authContext.Provider value={{ registerUser, login, user, loading }}>
+    <authContext.Provider value={{ registerUser, login, user, loading, isVisible, setVisible }}>
       {children}
     </authContext.Provider>
   );
