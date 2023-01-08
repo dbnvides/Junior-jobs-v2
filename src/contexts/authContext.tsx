@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { iLogin } from "../services/loginRequest";
 import { iRegister } from "../services/registerRequest";
+import { IJob } from "./UserContext/type";
 
 interface iChildren {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ interface iUser {
   avatar: string;
   type: string;
   id: number;
-  apply_jobs?: number[];
+  apply_jobs?: IJob[];
 }
 export const authContext = createContext({} as iContextValue);
 

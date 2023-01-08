@@ -36,5 +36,5 @@ export interface IResponseProfile {
   avatar: string;
   type: "dev" | "company";
   id: number;
-  apply_jobs?: number[];
+  apply_jobs?: IJob[];
 }

@@ -50,21 +50,7 @@ export const UserProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
-    const applyJobs = () => {
-      if (allJobs.length > 0) {
-        const test = allJobs.map((item) => {
-          if (item.candidates) {
-            item.candidates!.filter((id) => {
-              if (id === user?.id) {
-                setMyJobs((myJobs) => [...myJobs, item]);
-              }
-            });
-          }
-        });
-      }
-    };
-    applyJobs();
-  }, [allJobs]);
+  }, []);
 
   return (
     <>
@@ -94,7 +80,7 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {myJobs.map((job, id) => (
+              {user?.apply_jobs!.map((job, id) => (
                 <CardCompany
                   id={job.id}
                   key={id}
