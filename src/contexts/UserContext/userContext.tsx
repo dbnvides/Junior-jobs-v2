@@ -2,13 +2,12 @@ import { createContext, useEffect, useState } from "react";
 import { IContextChildren } from "../../contexts/types";
 import { api } from "../../services/api";
 import { iUpdateUser, updateUser } from "../../services/updateUserRequest";
-import { ICompany, IJob, IJobContext, IResponseProfile } from "./type";
+import { ICompany, IJob, IJobContext } from "./type";
 
 export const jobContext = createContext({} as IJobContext);
 
 export const JobProvider = ({ children }: IContextChildren) => {
   const [job, setJob] = useState<IJob>({});
-  const [allJobs, setAllJobs] = useState<IJob[]>([]);
   const [company, setCompany] = useState<ICompany>({});
   const [applyed, setApplyed] = useState<number[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -38,26 +37,8 @@ export const JobProvider = ({ children }: IContextChildren) => {
     }
   };
 
-  const getAllJob = async (): Promise<void> => {
-    setLoading(true);
-    try {
-      const response = await api.get(`/jobs`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      setAllJobs(response.data);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     jobById(1, 1);
-    getAllJob();
   }, []);
 
   const applyJob: iUpdateUser = {
@@ -77,8 +58,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
   };
 
   return (
-    <jobContext.Provider value={{ jobById, job, company, addJob, setAllJobs, allJobs }}>
-      {children}
-    </jobContext.Provider>
+    <jobContext.Provider value={{ jobById, job, company, addJob }}>{children}</jobContext.Provider>
   );
 };

@@ -3,8 +3,6 @@ export interface IJobContext {
   job: IJob;
   company: ICompany;
   addJob(jobId: number): void;
-  setAllJobs: React.Dispatch<React.SetStateAction<[] | IJob[]>>;
-  allJobs: IJob[];
 }
 
 export interface IJob {

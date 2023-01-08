@@ -6,8 +6,13 @@ import { Textarea } from "../../../components/Textarea";
 import { formEditSchema } from "./editSchema";
 import { StyledModalEditProfile } from "./styled";
 import { ModalBase } from "../../../components/Modal";
+import { authContext } from "../../../contexts/authContext";
+import { useContext, useState } from "react";
 
 export const ModalEditProfile = () => {
+  const { user } = useContext(authContext);
+  const [userData, setUserData] = useState<IFormModalEdit | {}>({});
+
   const {
     register,
     handleSubmit,
@@ -29,6 +34,7 @@ export const ModalEditProfile = () => {
             <Input
               label="Avatar"
               type="text"
+              propValue={user?.avatar}
               placeholder="Link da sua foto de perfil"
               {...register("avatar")}
             />
@@ -36,7 +42,7 @@ export const ModalEditProfile = () => {
               label="Email"
               type="email"
               placeholder="Seu email aqui!"
-              // value={userData?.email}
+              propValue={user?.email}
               {...register("email")}
             />
             {errors.email && <span className="errorMessage">{errors.email.message}</span>}
@@ -44,6 +50,7 @@ export const ModalEditProfile = () => {
               label="Linkedin"
               type="text"
               placeholder="Coloque seu link aqui!"
+              propValue={user?.documentation}
               {...register("linkedin")}
             />
             {errors.linkedin && <span className="errorMessage">{errors.linkedin.message}</span>}
@@ -51,6 +58,7 @@ export const ModalEditProfile = () => {
               label="Tecnologias"
               type="text"
               placeholder="React, js, ..."
+              // propValue={user}
               {...register("tecnology")}
             />
             {errors.tecnology && <span className="errorMessage">{errors.tecnology.message}</span>}
