@@ -1,12 +1,11 @@
+import { MainRoutes as Routes } from "./routes/index";
 import { Global } from "./styles/global";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <Global />
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -19,6 +18,7 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+      <Global />
       <Routes />
     </>
   );

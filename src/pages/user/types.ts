@@ -5,14 +5,16 @@ export interface IResponseProfile {
   avatar: string;
   type: "dev" | "company";
   id: number;
-  jobs?: IJobUser[];
+  apply_jobs?: number[];
 }
 
 export interface IJobUser {
   job_name: string;
+  id: number;
   period: string;
   work_type: string;
   description: string;
   requeriments: string;
   responsabilitys: string;
+  candidates: number[];
 }

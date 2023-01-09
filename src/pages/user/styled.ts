@@ -26,6 +26,40 @@ export const StyledMain = styled.main`
       height: 140px;
       padding: 0;
     }
+
+    .avatarProfile {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: -25px;
+      border-radius: 4px 0 0 4px;
+      overflow: hidden;
+    }
+
+    .avatarProfile img {
+      width: 50px;
+      height: 50px;
+      object-position: center;
+      object-fit: cover;
+      position: relative;
+    }
+
+    @media (min-width: 769px) {
+      .avatarProfile {
+        width: 140px;
+        height: 140px;
+        position: relative;
+        top: 0;
+      }
+
+      .avatarProfile img {
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        object-fit: cover;
+      }
+    }
+
     .avatarDefault {
       display: flex;
       align-items: center;
