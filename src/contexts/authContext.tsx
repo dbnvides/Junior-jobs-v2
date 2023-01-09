@@ -36,7 +36,7 @@ export const authContext = createContext({} as iContextValue);
 export const AuthProvider = ({ children }: iChildren) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isVisible, setVisible] = useState(true);
+  const [isVisible, setVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
