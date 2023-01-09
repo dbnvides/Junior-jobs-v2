@@ -51,7 +51,7 @@ body{
     --warning: rgb(255, 205, 7);
     --sucess: rgb(22, 136, 33);
     --information: rgb(21, 91, 203);
-
+ 
     --title-1: 34px;
     --title-2: 28px;
     --title-3: 24px;
