@@ -5,13 +5,15 @@ import { Register } from "../pages/register";
 import { ProtectRoutes } from "../components/ProtectRoutes";
 import { UserProfile } from "../pages/user";
 import { Job } from "../pages/job";
+import { Home } from "../pages/home";
 
 export const MainRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register/>} />
-      <Route element={<ProtectRoutes/>}>
+      <Route path="/register" element={<Register />} />
+      <Route element={<ProtectRoutes />}>
+        <Route path="/home" element={<Home />} />
         <Route path="/company" element={<Company />} />
         <Route path="/user" element={<UserProfile />} />
         <Route path="/job/:name" element={<Job />} />
