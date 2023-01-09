@@ -12,8 +12,17 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 
 export const Home = () => {
-  const { jobsList, setJobsList, searchTitle, setSearchTitle }: any =
-    useContext(ContextoTeste);
+  const {
+    jobsList,
+    setJobsList,
+    searchTitle,
+    setSearchTitle,
+    searchLocal,
+    setSearchLocal,
+  }: any = useContext(ContextoTeste);
+
+  const [pageCounter, setPageCounter] = useState(12);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     const getJobs = async () => {
@@ -28,8 +37,10 @@ export const Home = () => {
   }, [setJobsList]);
 
   const renderAllJobs = () => {
-    return jobsList.map((elem: any) => {
-      return <CardJob elem={elem} key={elem["id"]} />;
+    return jobsList.map((elem: any, index: any) => {
+      return (
+        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+      );
     });
   };
 
@@ -37,8 +48,21 @@ export const Home = () => {
     const filteredJobs = jobsList.filter((elem: any) => {
       return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
     });
-    return filteredJobs.map((elem: any) => {
-      return <CardJob elem={elem} key={elem["id"]} />;
+    return filteredJobs.map((elem: any, index: any) => {
+      return (
+        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+      );
+    });
+  };
+
+  const renderFullTime = () => {
+    const filteredJobs = jobsList.filter((elem: any) => {
+      return elem.period === "integral";
+    });
+    return filteredJobs.map((elem: any, index: any) => {
+      return (
+        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+      );
     });
   };
 
@@ -58,12 +82,24 @@ export const Home = () => {
             </div>
             <div className="filterLocal">
               <img src={localizationIcon} alt="" />
-              <input type="text" placeholder="Filtrar por localidade..." />
+              <input
+                type="text"
+                placeholder="Filtrar por localidade..."
+                onChange={(e) => {
+                  setSearchLocal(e.target.value);
+                }}
+              />
             </div>
             <div className="searchContainer">
               <div>
                 <label>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={check}
+                    onChange={() =>
+                      check === false ? setCheck(true) : setCheck(false)
+                    }
+                  />
                   Apenas Integral
                 </label>
               </div>
@@ -78,11 +114,17 @@ export const Home = () => {
             </div>
           </FilterBar>
           <StyledJobsList>
-            {searchTitle === "" ? renderAllJobs() : renderTitleFilter()}
+            {check
+              ? renderFullTime()
+              : searchTitle === "" && searchLocal === ""
+              ? renderAllJobs()
+              : renderTitleFilter()}
           </StyledJobsList>
         </Container>
         <StyledViewMoreContainer>
-          <button>Carregar Mais</button>
+          <button onClick={() => setPageCounter(pageCounter + 12)}>
+            Carregar Mais
+          </button>
         </StyledViewMoreContainer>
         <StyledFooter />
       </StyledHome>
