@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
@@ -17,33 +17,6 @@ export const UserProfile = () => {
   //   const newArr = jobs.filter((item) => item.id === id);
   //   setMyJobs(newArr);
   // };
-
-  // useEffect(() => {
-  //   const getJob = async (id: number): Promise<void> => {
-  //     setLoading(true);
-  //     try {
-  //       const response = await api.get(`/jobs/${id}`, {
-  //         headers: {
-  //           authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       setAllJobs((allJobs) => [...allJobs, response.data]);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setLoading(false);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   const applyJobs = () => {
-  //     const newJob = user?.apply_jobs?.map((item, id) => {
-  //       return getJob(item);
-  //     });
-  //   };
-
-  //   applyJobs();
-  // }, []);
 
   return (
     <>
@@ -73,16 +46,20 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {user?.apply_jobs!.map((job, id) => (
-                <CardCompany
-                  id={job.id}
-                  key={id}
-                  period={job.period}
-                  job_name={job.job_name}
-                  responsabilitys={job.responsabilitys}
-                  work_type={job.work_type}
-                />
-              ))}
+              {user?.apply_jobs ? (
+                user?.apply_jobs!.map((job, id) => (
+                  <CardCompany
+                    id={job.id}
+                    key={id}
+                    period={job.period}
+                    job_name={job.job_name}
+                    responsabilitys={job.responsabilitys}
+                    work_type={job.work_type}
+                  />
+                ))
+              ) : (
+                <div>Sem vagas</div>
+              )}
             </ul>
           </section>
         </StyledMain>

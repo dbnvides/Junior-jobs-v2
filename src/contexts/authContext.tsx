@@ -19,6 +19,7 @@ interface iContextValue {
   loading: boolean;
   isVisible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
 }
 interface iUser {
   email: string;
@@ -99,7 +100,9 @@ export const AuthProvider = ({ children }: iChildren) => {
   };
 
   return (
-    <authContext.Provider value={{ registerUser, login, user, loading, isVisible, setVisible }}>
+    <authContext.Provider
+      value={{ registerUser, login, user, setUser, loading, isVisible, setVisible }}
+    >
       {children}
     </authContext.Provider>
   );

@@ -8,9 +8,10 @@ interface iInputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder: string;
   label?: string;
   propValue?: string;
+  propOnChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 export const Input = forwardRef<HTMLInputElement, iInputProps>(
-  ({ label, type, placeholder, propValue, ...rest }, ref) => {
+  ({ label, type, placeholder, propValue, propOnChange, ...rest }, ref) => {
     const [showPass, setShowPass] = useState(false);
     const [icon, setIcon] = useState(false);
 
@@ -27,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, iInputProps>(
           placeholder={placeholder}
           ref={ref}
           value={propValue}
+          onChange={propOnChange}
           {...rest}
         />
         {type === "password" && (

@@ -8,11 +8,12 @@ import { StyledModalEditProfile } from "./styled";
 import { ModalBase } from "../../../components/Modal";
 import { authContext } from "../../../contexts/authContext";
 import { useContext, useState } from "react";
+import { api } from "../../../services/api";
+import { toast } from "react-toastify";
 
 export const ModalEditProfile = () => {
-  const { user } = useContext(authContext);
-  const [userData, setUserData] = useState<IFormModalEdit | {}>({});
-
+  const [loading, setLoading] = useState(false);
+  const { user, setVisible, setUser } = useContext(authContext);
   const {
     register,
     handleSubmit,
@@ -20,10 +21,37 @@ export const ModalEditProfile = () => {
   } = useForm<IFormModalEdit>({
     mode: "onChange",
     resolver: yupResolver(formEditSchema),
+    defaultValues: {
+      name: user?.name,
+      email: user?.email,
+      // linkedin: user?.linkedin,
+      // tecnology: user?.tecnology,
+      avatar: user?.avatar,
+    },
   });
 
+  const updateUser = async (data: IFormModalEdit, id: number) => {
+    const token = localStorage.getItem("@TOKEN");
+    try {
+      setLoading(true);
+      const response = await api.patch(`users/${id}`, data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("Perfil atualizado com sucesso!");
+      setVisible(false);
+      setUser(response.data);
+    } catch (error) {
+      toast.error("Perfil não atualizado!");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onSubmitFunction: SubmitHandler<IFormModalEdit> = async (data) => {
-    console.log(data);
+    updateUser(data, user?.id!);
   };
 
   return (
@@ -31,10 +59,10 @@ export const ModalEditProfile = () => {
       <StyledModalEditProfile>
         <div className="modalEditProfileContainer">
           <form noValidate onSubmit={handleSubmit(onSubmitFunction)}>
+            <Input label="Nome" type="text" placeholder="Digite seu nome" {...register("name")} />
             <Input
               label="Avatar"
               type="text"
-              propValue={user?.avatar}
               placeholder="Link da sua foto de perfil"
               {...register("avatar")}
             />
@@ -42,7 +70,6 @@ export const ModalEditProfile = () => {
               label="Email"
               type="email"
               placeholder="Seu email aqui!"
-              propValue={user?.email}
               {...register("email")}
             />
             {errors.email && <span className="errorMessage">{errors.email.message}</span>}
@@ -50,7 +77,6 @@ export const ModalEditProfile = () => {
               label="Linkedin"
               type="text"
               placeholder="Coloque seu link aqui!"
-              propValue={user?.documentation}
               {...register("linkedin")}
             />
             {errors.linkedin && <span className="errorMessage">{errors.linkedin.message}</span>}
@@ -58,7 +84,6 @@ export const ModalEditProfile = () => {
               label="Tecnologias"
               type="text"
               placeholder="React, js, ..."
-              // propValue={user}
               {...register("tecnology")}
             />
             {errors.tecnology && <span className="errorMessage">{errors.tecnology.message}</span>}
