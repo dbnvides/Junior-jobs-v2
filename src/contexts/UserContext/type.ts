@@ -3,7 +3,6 @@ export interface IJobContext {
   job: IJob;
   company: ICompany;
   addJob(job : IJob): void;
-  loading: boolean
 }
 
 export interface IJob {

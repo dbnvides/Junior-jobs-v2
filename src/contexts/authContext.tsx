@@ -22,7 +22,7 @@ interface iContextValue {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
 }
-interface iUser {
+export interface iUser {
   email: string;
   name: string;
   password: string;

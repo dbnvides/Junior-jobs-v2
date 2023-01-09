@@ -10,7 +10,7 @@ export const Job = () => {
   const {job ,
     job: { job_name, period, work_type, description, requirements, responsabilitys },
     company: { name, avatar },
-    addJob, loading
+    addJob
   } = useContext(jobContext);
 
   return (

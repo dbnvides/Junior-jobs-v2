@@ -1,15 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { IContextChildren } from "../../contexts/types";
 import { api } from "../../services/api";
 import { iUpdateUser, updateUser } from "../../services/updateUserRequest";
+import { iUser } from "../authContext";
 import { ICompany, IJob, IJobContext } from "./type";
 
 export const jobContext = createContext({} as IJobContext);
 
 export const JobProvider = ({ children }: IContextChildren) => {
   const [job, setJob] = useState<IJob>({});
-  const [user , setUser] = useState<any>({})
+  const [user , setUser] = useState<iUser | null>(null)
   const [company, setCompany] = useState<ICompany>({});
   const [applyed, setApplyed] = useState<IJob[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -33,8 +34,8 @@ export const JobProvider = ({ children }: IContextChildren) => {
 
       setJob(jobs.data.find((job: IJob) => job.id === id));
       setCompany(users.data.find((company: ICompany) => company.id === userId));
-      setUser(users.data.find((user: any) => user.id === userID));
-      setApplyed(users.data.find((user: ICompany) => user.id === userID).apply_jobs || []);
+      setUser(users.data.find((user: iUser) => user.id === userID));
+      setApplyed(users.data.find((user: iUser) => user.id === userID).apply_jobs || []);
 
     } catch (error) {
       console.log(error);
@@ -57,7 +58,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
   }, [applyed]);
 
   const addJob = (job : IJob): void => {
-    const find = user?.apply_jobs?.find((item : any) => item.id === job.id) || false 
+    const find = user?.apply_jobs?.find((item : IJob) => item.id === job.id) || false 
   
     if(!find && !loading){
       setLoading(true);
@@ -75,6 +76,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
   };
 
   return (
-    <jobContext.Provider value={{ jobById, job, company, addJob, loading }}>{children}</jobContext.Provider>
+    <jobContext.Provider value={{ jobById, job, company, addJob }}>{children}</jobContext.Provider>
   );
 };
