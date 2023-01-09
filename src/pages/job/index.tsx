@@ -7,10 +7,10 @@ import { jobContext } from "../../contexts/UserContext/userContext";
 import { StyledMain } from "./style";
 
 export const Job = () => {
-  const {
-    job: { job_name, period, work_type, description, requirements, responsabilitys, id },
+  const {job ,
+    job: { job_name, period, work_type, description, requirements, responsabilitys },
     company: { name, avatar },
-    addJob,
+    addJob, loading
   } = useContext(jobContext);
 
   return (
@@ -37,11 +37,10 @@ export const Job = () => {
             <button
               type="button"
               onClick={() => {
-                addJob(id!);
+                addJob(job);
               }}
             >
-              {" "}
-              Candidatar{" "}
+              Candidatar
             </button>
             <p className="text">{description}</p>
             <h3>Requerimentos</h3>
