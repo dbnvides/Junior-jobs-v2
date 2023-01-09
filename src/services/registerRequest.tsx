@@ -7,7 +7,12 @@ export interface iRegister {
   confirPass: string;
   documentation: string;
   avatar: string;
-  type: string;
+  types?: {
+    type :string;
+    linkedin: string;
+    tecnology: string;
+    bio: string;
+  }
 }
 
 export const registerUser = async (data: iRegister) => {

@@ -5,7 +5,6 @@ import { Register } from "../pages/register";
 import { ProtectRoutes } from "../components/ProtectRoutes";
 import { UserProfile } from "../pages/user";
 import { Job } from "../pages/job";
-import { MyUserContext } from "../components/ProtectRoutes/MyUserContext";
 
 export const MainRoutes = () => {
   return (
@@ -13,6 +12,7 @@ export const MainRoutes = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectRoutes />}>
+        <Route path="/home" element={<Home />} />
         <Route path="/company" element={<Company />} />
         <Route element={<MyUserContext />}>
           <Route path="/user" element={<UserProfile />} />
