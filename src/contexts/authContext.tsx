@@ -17,6 +17,7 @@ interface iContextValue {
   login: (body: iLogin) => Promise<void>;
   user: iUser | null;
   loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isVisible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
@@ -43,6 +44,7 @@ export const AuthProvider = ({ children }: iChildren) => {
     const loadUser = async () => {
       const token = localStorage.getItem("@TOKEN");
       const id = localStorage.getItem("@ID");
+      setLoading(true);
 
       if (!token) {
         setLoading(false);
@@ -93,15 +95,26 @@ export const AuthProvider = ({ children }: iChildren) => {
         } else {
           navigate("/company");
         }
+        setLoading(false);
       }, 2000);
     } catch (error) {
       toast.error("Email ou senha invalidos");
+      setLoading(false);
     }
   };
 
   return (
     <authContext.Provider
-      value={{ registerUser, login, user, setUser, loading, isVisible, setVisible }}
+      value={{
+        registerUser,
+        login,
+        user,
+        setUser,
+        loading,
+        setLoading,
+        isVisible,
+        setVisible,
+      }}
     >
       {children}
     </authContext.Provider>
