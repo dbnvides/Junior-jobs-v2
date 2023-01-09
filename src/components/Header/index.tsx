@@ -13,6 +13,7 @@ export const Header = () => {
       <Container>
         <nav>
           <img src={Logo} alt="Júnior Jobs" />
+
           <div className="boxMenu">
             {user ? (
               <img src={Logo} alt="Foto de perfil" />

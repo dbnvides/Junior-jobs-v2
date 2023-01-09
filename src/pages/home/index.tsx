@@ -7,7 +7,7 @@ import searchIcon from "../../assets/img/search-icon.png";
 import localizationIcon from "../../assets/img/localization-icon.png";
 import funnelIcon from "../../assets/img/funnel-icon.png";
 import { FilterBar } from "./style";
-import { ContextoTeste } from "../../contexts/HomeContext";
+import { HomeContext } from "../../contexts/HomeContext";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 
@@ -19,7 +19,7 @@ export const Home = () => {
     setSearchTitle,
     searchLocal,
     setSearchLocal,
-  }: any = useContext(ContextoTeste);
+  }: any = useContext(HomeContext);
 
   const [pageCounter, setPageCounter] = useState(12);
   const [check, setCheck] = useState(false);

@@ -1,13 +1,13 @@
 import { createContext, useState } from "react";
 
-export const ContextoTeste: any = createContext({});
+export const HomeContext: any = createContext({});
 
 export const ContextoProvider = ({ children }: any) => {
   const [jobsList, setJobsList] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocal, setSearchLocal] = useState("");
   return (
-    <ContextoTeste.Provider
+    <HomeContext.Provider
       value={{
         jobsList,
         setJobsList,
@@ -18,6 +18,6 @@ export const ContextoProvider = ({ children }: any) => {
       }}
     >
       {children}
-    </ContextoTeste.Provider>
+    </HomeContext.Provider>
   );
 };

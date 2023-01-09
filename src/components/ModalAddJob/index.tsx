@@ -40,12 +40,12 @@ export const ModalAddJob = () => {
             .max(1000, "Descrição muito longa"),
         requirements: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe os requerimentos para a vaga")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
         responsabilities: yup
             .string()
-            .required("Informe o titulo da vaga")
+            .required("Informe as responsabilidades do desenvolvedor")
             .min(2, "Descrição muito curta")
             .max(1000, "Descrição muito longa"),
     });
@@ -62,13 +62,26 @@ export const ModalAddJob = () => {
     const onSubmitFunction: SubmitHandler<iFormSchemaModalAddJob> = async (
         data
     ) => {
-        console.log(data);
-        // await createJob(data);
+        const candidates = { candidates: [] };
+        const localstorageId = localStorage.getItem("@ID");
+        const userId = Number(localstorageId);
+        const newData = { ...data, ...candidates, userId };
+
+        await createJob(newData);
+        /* setShowAddJobModal(false)} */
     };
 
     return (
         <StyledModalAddJob>
-            <div className="modalAddJobContainer">
+            <div
+                className="modalAddJobContainer" /* onClick={() => setShowAddJobModal(false)} */
+            >
+                <h3 className="modalAddJobTitle">Adicionar vaga</h3>
+                <button
+                    className="closeModalAddJobButton" /* onClick={() => setShowAddJobModal(false)} */
+                >
+                    X
+                </button>
                 <form noValidate onSubmit={handleSubmit(onSubmitFunction)}>
                     <Input
                         label="Título"
@@ -136,7 +149,11 @@ export const ModalAddJob = () => {
                             {errors.responsabilities.message}
                         </span>
                     )}
-                    <button type="submit" disabled={!isDirty || !isValid}>
+                    <button
+                        className="addJobButton"
+                        type="submit"
+                        disabled={!isDirty || !isValid}
+                    >
                         Adicionar vaga
                     </button>
                 </form>
