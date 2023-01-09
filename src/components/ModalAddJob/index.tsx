@@ -55,23 +55,40 @@ export const ModalAddJob = () => {
                             {errors.job_name.message}
                         </span>
                     )}
-                    <Input
-                        label="Período"
-                        type="text"
-                        placeholder="Integral ou meio período"
+                    <label htmlFor="period" className="labelAddJobModal">
+                        Período
+                    </label>
+                    <select
+                        id="period"
+                        className="selectAddJobModal"
                         {...register("period")}
-                    />
+                    >
+                        <option value="" hidden>
+                            Informe o período de trabalho
+                        </option>
+                        <option value="Integral">Integral</option>
+                        <option value="Meio Período">Meio Período</option>
+                    </select>
                     {errors.period && (
                         <span className="errorMessage">
                             {errors.period.message}
                         </span>
                     )}
-                    <Input
-                        label="Tipo de trabalho"
-                        type="text"
-                        placeholder="Home-office, presencial ou híbrido"
+                    <label htmlFor="work_type" className="labelAddJobModal">
+                        Tipo de trabalho
+                    </label>
+                    <select
+                        id="work_type"
+                        className="selectAddJobModal"
                         {...register("work_type")}
-                    />
+                    >
+                        <option value="" hidden>
+                            Informe o tipo de trabalho
+                        </option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Híbrido">Híbrido</option>
+                        <option value="Home Office">Home Office</option>
+                    </select>
                     {errors.work_type && (
                         <span className="errorMessage">
                             {errors.work_type.message}

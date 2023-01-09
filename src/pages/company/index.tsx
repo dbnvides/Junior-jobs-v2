@@ -3,7 +3,7 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import img from "../../assets/img/company.svg";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
 
