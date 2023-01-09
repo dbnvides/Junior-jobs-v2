@@ -2,7 +2,7 @@ import { Container } from "../Container";
 import Logo from "../../assets/img/logo.png";
 import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
-import { StyledHeader } from "./styled";
+import { StyledHeader, StyledHeaderNoUser } from "./styled";
 import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
@@ -18,13 +18,12 @@ export const Header = () => {
   };
 
   return (
-    <StyledHeader>
-      <Container>
-        <nav>
-          {loading ? null : user ? (
-            <>
+    <>
+      {loading ? null : user ? (
+        <StyledHeader>
+          <Container>
+            <nav>
               <img src={Logo} alt="Júnior Jobs" />
-
               <div className="boxMenu">
                 <div>
                   <AiOutlineUser />
@@ -33,14 +32,20 @@ export const Header = () => {
                   <IoLogOutOutline />
                 </button>
               </div>
-            </>
-          ) : (
-            <>
-              <img src={Logo} alt="Júnior Jobs" />
-            </>
-          )}
-        </nav>
-      </Container>
-    </StyledHeader>
+            </nav>
+          </Container>
+        </StyledHeader>
+      ) : (
+        <>
+          <StyledHeaderNoUser>
+            <Container>
+              <nav>
+                <img src={Logo} alt="Júnior Jobs" />
+              </nav>
+            </Container>
+          </StyledHeaderNoUser>
+        </>
+      )}
+    </>
   );
 };

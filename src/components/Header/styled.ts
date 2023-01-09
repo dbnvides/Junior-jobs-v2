@@ -53,4 +53,6 @@ export const StyledHeader = styled.header`
   }
 `;
 
-
+export const StyledHeaderNoUser = styled(StyledHeader)`
+  height: 100px;
+`;
