@@ -5,6 +5,8 @@ import { Register } from "../pages/register";
 import { ProtectRoutes } from "../components/ProtectRoutes";
 import { UserProfile } from "../pages/user";
 import { Job } from "../pages/job";
+import { MyUserContext } from "../components/ProtectRoutes/MyUserContext";
+import { Home } from "../pages/home";
 
 export const MainRoutes = () => {
   return (
