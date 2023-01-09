@@ -20,7 +20,6 @@ export const Home = () => {
     searchLocal,
     setSearchLocal,
   }: any = useContext(HomeContext);
-
   const [pageCounter, setPageCounter] = useState(12);
   const [check, setCheck] = useState(false);
 
@@ -34,36 +33,40 @@ export const Home = () => {
       }
     };
     getJobs();
-  }, [setJobsList]);
+  }, []);
 
   const renderAllJobs = () => {
-    return jobsList.map((elem: any, index: any) => {
-      return (
-        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-      );
-    });
+    if (jobsList) {
+      return jobsList.map((elem: any, index: any) => {
+        return (
+          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+        );
+      });
+    }
   };
-
   const renderTitleFilter = () => {
-    const filteredJobs = jobsList.filter((elem: any) => {
-      return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
-    });
-    return filteredJobs.map((elem: any, index: any) => {
-      return (
-        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-      );
-    });
+    if (jobsList) {
+      const filteredJobs = jobsList.filter((elem: any) => {
+        return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
+      });
+      return filteredJobs.map((elem: any, index: any) => {
+        return (
+          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+        );
+      });
+    }
   };
-
   const renderFullTime = () => {
-    const filteredJobs = jobsList.filter((elem: any) => {
-      return elem.period === "integral";
-    });
-    return filteredJobs.map((elem: any, index: any) => {
-      return (
-        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-      );
-    });
+    if (jobsList) {
+      const filteredJobs = jobsList.filter((elem: any) => {
+        return elem.period === "integral";
+      });
+      return filteredJobs.map((elem: any, index: any) => {
+        return (
+          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+        );
+      });
+    }
   };
 
   return (
