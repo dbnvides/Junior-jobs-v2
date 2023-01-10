@@ -41,6 +41,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
       setCompany(users.data.find((company: ICompany) => company.id === companyId));
       setUser(users.data.find((user: iUser) => user.id === userId));
       setApplyed(users.data.find((user: iUser) => user.id === userId).apply_jobs || []);
+      
       setLoading(false)
 
     } catch (error) {
