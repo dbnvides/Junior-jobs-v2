@@ -33,24 +33,18 @@ export const Home = () => {
 
   console.log(jobsList);
   const renderAllJobs = () => {
-    if (jobsList) {
-      return jobsList.map((elem: any, index: any) => {
-        return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
-      });
-    }
+    return jobsList.map((elem: any, index: any) => {
+      return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
   };
-
   const renderTitleFilter = () => {
-    if (jobsList) {
-      const filteredJobs = jobsList.filter((elem: any) => {
-        return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
-      });
-      return filteredJobs.map((elem: any, index: any) => {
-        return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
-      });
-    }
+    const filteredJobs = jobsList.filter((elem: any) => {
+      return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
+    });
+    return filteredJobs.map((elem: any, index: any) => {
+      return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
   };
-
   const renderFullTime = () => {
     const filteredJobs = jobsList.filter((elem: any) => {
       return elem.period === "integral";

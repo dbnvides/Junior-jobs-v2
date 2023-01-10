@@ -4,7 +4,7 @@ export interface IJobContext {
   jobById(id: number, userId: number): Promise<void>;
   job: IJob;
   company: ICompany;
-  addJob(jobId: number): void;
+  addJob(job : IJob): void;
 }
 
 export interface IJob {
