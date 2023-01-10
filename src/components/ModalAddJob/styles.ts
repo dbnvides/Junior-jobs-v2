@@ -63,6 +63,24 @@ export const StyledModalAddJob = styled.div`
             gap: 1rem;
         }
 
+        .labelAddJobModal {
+            font-size: 20px;
+            font-weight: var(--bold);
+            color: var(--color-primary);
+        }
+
+        .selectAddJobModal {
+            width: 100%;
+            height: 50px;
+            background-color: #e9e8e8;
+            border-radius: var(--radius-1);
+            border: 1px solid black;
+
+            color: var(--color-primary);
+
+            padding-left: 10px;
+        }
+
         .addJobButton {
             width: 100%;
             height: 48px;
