@@ -9,7 +9,7 @@ import { MyUserContext } from "../components/ProtectRoutes/MyUserContext";
 import { Home } from "../pages/home";
 import { MyHomeContext } from "../components/ProtectRoutes/MyHomeContext";
 
-export const MainRoutes = () => {
+export const MainRoutes = () => { 
   return (
     <Routes>
       <Route path="/" element={<Login />} />

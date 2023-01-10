@@ -10,8 +10,15 @@ import { FilterBar } from "./style";
 import { HomeContext } from "../../contexts/HomeContext";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
+import { authContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const { user } = useContext(authContext);
+  const navigate = useNavigate();
+
+  user?.type !== "Dev" && navigate(`/company`);
+
   const {
     jobsList,
     setJobsList,

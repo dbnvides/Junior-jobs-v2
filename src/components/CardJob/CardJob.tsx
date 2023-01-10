@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { StyledJob } from "../../pages/home/style";
 import { api } from "../../services/api";
 
 export const CardJob = ({ elem }: any) => {
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -23,7 +24,7 @@ export const CardJob = ({ elem }: any) => {
   }, []);
 
   return (
-    <StyledJob>
+    <StyledJob onClick={() => navigate(`/job/${elem.job_name}`)}>
       <div>
         <img src={user !== undefined && user.avatar} alt="" />
         <p>

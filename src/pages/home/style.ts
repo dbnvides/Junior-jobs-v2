@@ -55,6 +55,7 @@ export const StyledViewMoreContainer = styled.div`
 `;
 
 export const StyledJob = styled.li`
+  cursor: pointer;
   position: relative;
   border-radius: var(--radius-2);
   width: 100%;
