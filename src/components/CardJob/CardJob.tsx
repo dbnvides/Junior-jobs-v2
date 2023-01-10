@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { StyledJob } from "../../pages/home/style";
 import { api } from "../../services/api";
 
 export const CardJob = ({ elem }: any) => {
+  const navigate = useNavigate()
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const userObtained = await api.get(`users/${elem.userId}`, {
+        const userObtained = await api.get(`users/${elem.usersId}`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
@@ -23,9 +25,13 @@ export const CardJob = ({ elem }: any) => {
   }, []);
 
   return (
-    <StyledJob>
+    <StyledJob onClick={()=>{
+      localStorage.setItem("@JOBID", elem.id)
+      localStorage.setItem("@COMPANYID", elem.usersId)
+      navigate(`/job/${elem.job_name}`)}}>
+
       <div>
-        <img src={user !== undefined && user.avatar} alt="" />
+        <img src={user?.avatar} alt="logo da empresa" />
         <p>
           1m atrás • <span>{elem.period}</span>
         </p>
