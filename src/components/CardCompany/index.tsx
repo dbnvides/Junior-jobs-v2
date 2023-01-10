@@ -1,10 +1,11 @@
-import { StyledCardCompanyContainer } from "./style";
-import img from "../../assets/img/company.svg";
-import iconExcluir from "../../assets/img/icon-excluir.svg";
-import iconEditar from "../../assets/img/icon-editar.svg";
-import iconVisualizar from "../../assets/img/icon-visu.svg";
+import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
+import { useContext, useEffect, useState } from "react";
+import { ICompany, IJob, IResponseProfile } from "../../contexts/UserContext/type";
+import { authContext } from "../../contexts/authContext";
+import { api } from "../../services/api";
+import { IJobUser } from "../../pages/user/types";
 
 export const CardCompany = ({
   period,
@@ -12,13 +13,36 @@ export const CardCompany = ({
   work_type,
   avatar,
   description,
-  requirements,
-  responsabilitys,
   id,
-  nameCompany,
-  locality,
   children,
 }: IPropCard) => {
+  const [nameCompany, setNameCompany] = useState<ICompany>({});
+  const [loading, setLoading] = useState(false);
+  const { user } = useContext(authContext);
+
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+
+    const getDataCompany = async () => {
+      try {
+        setLoading(true);
+        const { data } = await api.get(`users`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        setNameCompany(data.find((company: ICompany) => company.id === id));
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getDataCompany();
+  }, []);
+
   return (
     <StyledCardCompanyContainer>
       {avatar ? (
@@ -29,34 +53,23 @@ export const CardCompany = ({
         </div>
       )}
       <div>
-        <div className="infCompany">
-          <div>
+        <StyledInfCompany>
+          <div className="smallDetail">
+            <p>{work_type}</p>
             <p>{period}</p>
-            <h1>{job_name}</h1>
-            <span>{nameCompany}</span>
           </div>
 
-          <p>{locality}</p>
-        </div>
+          <h1 className="titleJob">{job_name}</h1>
+          <span className="nameCompany">{nameCompany.name}</span>
+          {/*Localidade da compania*/}
+          <p className="locality">{nameCompany.id}</p>
+        </StyledInfCompany>
 
         <div className="description">
           <p>{description}</p>
-          <p>{requirements}</p>
-          <p>{responsabilitys}</p>
         </div>
 
-        <div className="boxButtons">
-          {children}
-          {/* <button>
-            <img src={iconEditar} alt="Editar" />
-          </button>
-          <button>
-            <img src={iconExcluir} alt="Excluir" />
-          </button>
-          <button>
-            <img src={iconVisualizar} alt="Visualizar" />
-          </button> */}
-        </div>
+        <div className="boxButtons">{children}</div>
       </div>
     </StyledCardCompanyContainer>
   );

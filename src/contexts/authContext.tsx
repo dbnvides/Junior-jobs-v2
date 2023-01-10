@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }: iChildren) => {
       toast.success("Login feito com sucesso");
       setTimeout(() => {
         if (userResponse.type === "Dev") {
-          navigate("/user");
+          navigate("/home");
         } else {
           navigate("/company");
         }
