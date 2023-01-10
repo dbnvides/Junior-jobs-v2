@@ -1,10 +1,10 @@
 import { iUser } from "../authContext";
 
 export interface IJobContext {
-  jobById(id: number, userId: number): Promise<void>;
   job: IJob;
   company: ICompany;
   addJob(job : IJob): void;
+  loading: boolean
 }
 
 export interface IJob {
