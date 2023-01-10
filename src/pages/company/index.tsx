@@ -6,11 +6,16 @@ import img from "../../assets/img/company.svg";
 import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 import { LoadPage } from "../../components/Loading";
-
 export const Company = () => {
-    const { isVisible, setVisible, loadingInModal, setEditProfileCompany } =
+    const { user, isVisible, setVisible, loadingInModal, setEditProfileCompany } =
         useContext(authContext);
+    const navigate = useNavigate()
+
+    if(user?.type === "Dev"){
+        navigate("/user")
+    }
 
     return (
         <>

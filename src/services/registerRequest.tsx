@@ -12,6 +12,7 @@ export interface iRegister {
     linkedin: string;
     tecnology: string;
     bio: string;
+    locality:string;
   }
 }
 

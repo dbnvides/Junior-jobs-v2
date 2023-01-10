@@ -94,20 +94,20 @@ export const AuthProvider = ({ children }: iChildren) => {
             localStorage.setItem("@ID", userResponse.id);
             setUser(userResponse);
 
-            toast.success("Login feito com sucesso");
-            setTimeout(() => {
-                if (userResponse.type === "Dev") {
-                    navigate("/user");
-                } else {
-                    navigate("/company");
-                }
-                setLoading(false);
-            }, 2000);
-        } catch (error) {
-            toast.error("Email ou senha invalidos");
-            setLoading(false);
+      toast.success("Login feito com sucesso");
+      setTimeout(() => {
+        if (userResponse.type === "Dev") {
+          navigate("/user");
+        } else {
+          navigate("/company");
         }
-    };
+        setLoading(false);
+      }, 2000);
+    } catch (error) {
+      toast.error("Email ou senha invalidos");
+      setLoading(false);
+    }
+  };
 
     return (
         <authContext.Provider
