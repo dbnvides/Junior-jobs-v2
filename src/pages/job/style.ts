@@ -47,6 +47,8 @@ h1 , h2 , h3 , h4 , h5 {
         top: -25px;
 
         img{
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
     }

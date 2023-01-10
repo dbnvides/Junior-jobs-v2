@@ -64,7 +64,8 @@ export const StyledJob = styled.li`
   gap: 26px;
   background-color: var(--white);
   margin-top: 20%;
-
+  cursor: pointer;
+  
   div {
     img {
       width: 80px;
