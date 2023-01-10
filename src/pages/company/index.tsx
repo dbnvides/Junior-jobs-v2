@@ -14,6 +14,8 @@ import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconEditar from "../../assets/img/icon-editar.svg";
 import iconVisualizar from "../../assets/img/icon-visu.svg";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { LoadPage } from "../../components/Loading";
 
 interface iUser {
   email: string;
@@ -39,10 +41,15 @@ interface iJobs {
 }
 
 export const Company = () => {
-  const { isVisible, setVisible } = useContext(authContext);
+  const { isVisible, setVisible, loadingInModal, setEditProfileCompany, user } =
+    useContext(authContext);
   const { modalViewer, setModalViewer, jobs, setJobs, setJobViewer } =
     useContext(CompanyContext);
-  const { user } = useContext(authContext);
+  const navigate = useNavigate();
+
+  if (user?.type === "Dev") {
+    navigate("/user");
+  }
 
   useEffect(() => {
     const loadJobs = async () => {
@@ -100,6 +107,7 @@ export const Company = () => {
     <>
       {isVisible ? <ModalAddJob /> : null}
       {modalViewer && <ModalViewer />}
+      {loadingInModal ? <LoadPage /> : null}
       <Header />
       <CompanyPageContainer>
         <div className="perfil">
@@ -111,7 +119,9 @@ export const Company = () => {
               <h2>{user?.name}</h2>
               <p>{user?.email}</p>
             </div>
-            <button>Editar Perfil</button>
+            <button onClick={() => setEditProfileCompany(true)}>
+              Editar Perfil
+            </button>
           </div>
         </div>
         <div className="">
