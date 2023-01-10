@@ -7,19 +7,26 @@ import { useContext, useEffect, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
+<<<<<<< HEAD
 import { IoLogOutOutline } from "react-icons/io5";
 import { api } from "../../services/api";
 import { IResponseProfile } from "./types";
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> b740bb6299168f7a12b98581325905f2add75345
 
 export const UserProfile = () => {
   const { user, isVisible, setVisible } = useContext(authContext);
+  const navigate = useNavigate()
 
   //Função para sair da vaga
   // const unapply = (id: number) => {
   //   const newArr = jobs.filter((item) => item.id === id);
   //   setMyJobs(newArr);
   // };
-
+  if(user?.type === "Company"){
+    navigate("/user")
+  }
   return (
     <>
       <ModalEditProfile />

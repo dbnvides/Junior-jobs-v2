@@ -1,5 +1,5 @@
 import { api } from "./api";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export interface iCreateJob {
     userId?: number;
@@ -20,9 +20,10 @@ export const createJob = async (data: iCreateJob) => {
                 authorization: `Bearer ${token}`,
             },
         });
-        // toast.success("Vaga adicionada com sucesso");
+        toast.success("Vaga adicionada com sucesso");
         return response.data;
     } catch (error) {
+        toast.error("Ops! Algo deu errado.");
         console.log(error);
     }
 };

@@ -1,54 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Input } from "../Input";
 import { Textarea } from "../Textarea";
 import { StyledModalAddJob } from "./styles";
-import * as yup from "yup";
+import { iFormSchemaModalAddJob } from "./types";
+import { formSchema } from "./addJobSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { createJob } from "../../services/createJob";
+import { authContext } from "../../contexts/authContext";
 
 export const ModalAddJob = () => {
-    interface iFormSchemaModalAddJob {
-        job_name: string;
-        period: string;
-        work_type: string;
-        description: string;
-        requirements: string;
-        responsabilities: string;
-    }
-
-    const formSchema = yup.object().shape({
-        job_name: yup
-            .string()
-            .required("Informe o titulo da vaga")
-            .min(2, "Título muito curto")
-            .max(100, "Título muito longo"),
-        period: yup
-            .string()
-            .required("Informe Integral ou Meio Peródo")
-            .min(2, "Muito curto")
-            .max(30, "Muito longo"),
-        work_type: yup
-            .string()
-            .required("Informe tipo de trabalho")
-            .min(2, "Muito curto")
-            .max(30, "Muito longo"),
-        description: yup
-            .string()
-            .required("Informe a descrição da vaga")
-            .min(2, "Descrição muito curta")
-            .max(1000, "Descrição muito longa"),
-        requirements: yup
-            .string()
-            .required("Informe os requerimentos para a vaga")
-            .min(2, "Descrição muito curta")
-            .max(1000, "Descrição muito longa"),
-        responsabilities: yup
-            .string()
-            .required("Informe as responsabilidades do desenvolvedor")
-            .min(2, "Descrição muito curta")
-            .max(1000, "Descrição muito longa"),
-    });
+    const { setVisible, setLoadingInModal } = useContext(authContext);
 
     const {
         register,
@@ -64,21 +26,22 @@ export const ModalAddJob = () => {
     ) => {
         const candidates = { candidates: [] };
         const localstorageId = localStorage.getItem("@ID");
-        const userId = Number(localstorageId);
-        const newData = { ...data, ...candidates, userId };
+        const usersId = Number(localstorageId);
+        const newData = { ...data, ...candidates, usersId };
 
+        setLoadingInModal(true);
         await createJob(newData);
-        /* setShowAddJobModal(false)} */
+        setVisible(false);
+        setLoadingInModal(false);
     };
 
     return (
         <StyledModalAddJob>
-            <div
-                className="modalAddJobContainer" /* onClick={() => setShowAddJobModal(false)} */
-            >
+            <div className="modalAddJobContainer">
                 <h3 className="modalAddJobTitle">Adicionar vaga</h3>
                 <button
-                    className="closeModalAddJobButton" /* onClick={() => setShowAddJobModal(false)} */
+                    className="closeModalAddJobButton"
+                    onClick={() => setVisible(false)}
                 >
                     X
                 </button>
@@ -94,23 +57,40 @@ export const ModalAddJob = () => {
                             {errors.job_name.message}
                         </span>
                     )}
-                    <Input
-                        label="Período"
-                        type="text"
-                        placeholder="Integral ou meio período"
+                    <label htmlFor="period" className="labelAddJobModal">
+                        Período
+                    </label>
+                    <select
+                        id="period"
+                        className="selectAddJobModal"
                         {...register("period")}
-                    />
+                    >
+                        <option value="" hidden>
+                            Informe o período de trabalho
+                        </option>
+                        <option value="Integral">Integral</option>
+                        <option value="Meio Período">Meio Período</option>
+                    </select>
                     {errors.period && (
                         <span className="errorMessage">
                             {errors.period.message}
                         </span>
                     )}
-                    <Input
-                        label="Tipo de trabalho"
-                        type="text"
-                        placeholder="Home-office, presencial ou híbrido"
+                    <label htmlFor="work_type" className="labelAddJobModal">
+                        Tipo de trabalho
+                    </label>
+                    <select
+                        id="work_type"
+                        className="selectAddJobModal"
                         {...register("work_type")}
-                    />
+                    >
+                        <option value="" hidden>
+                            Informe o tipo de trabalho
+                        </option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Híbrido">Híbrido</option>
+                        <option value="Home Office">Home Office</option>
+                    </select>
                     {errors.work_type && (
                         <span className="errorMessage">
                             {errors.work_type.message}
@@ -141,7 +121,7 @@ export const ModalAddJob = () => {
                     <Textarea
                         label="Papel do desenvolvedor"
                         placeholder="Descreva as atividades que o desenvolvedor vai desempenhar"
-                        id="jobDescription"
+                        id="responsabilities"
                         {...register("responsabilities")}
                     />
                     {errors.responsabilities && (
