@@ -28,7 +28,11 @@ export const Header = () => {
               <div className="boxMenu">
                 <div>
                   {user.avatar ? (
-                    <img className="imgProfile" src={user.avatar} alt="foto de perfil" />
+                    <img
+                      className="imgProfile"
+                      src={user.avatar}
+                      alt="foto de perfil"
+                    />
                   ) : (
                     <AiOutlineUser />
                   )}
