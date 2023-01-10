@@ -14,14 +14,20 @@ export const UserProfile = () => {
   const { user, isVisible, setVisible } = useContext(authContext);
   const navigate = useNavigate();
 
+  if (user?.type === "Company") {
+    navigate("/company");
+  }
+
+  const handleClick = () => {
+    navigate("/home");
+  };
+
   //Função para sair da vaga
   // const unapply = (id: number) => {
   //   const newArr = jobs.filter((item) => item.id !== id);
   //   setMyJobs(newArr);
   // };
-  if (user?.type === "Company") {
-    navigate("/user");
-  }
+
   return (
     <>
       <ModalEditProfile />
@@ -66,7 +72,9 @@ export const UserProfile = () => {
                   </CardCompany>
                 ))
               ) : (
-                <div>Sem vagas</div>
+                <li className="noWork" onClick={() => handleClick()}>
+                  <span>Nenhuma vaga aplicada :(</span>
+                </li>
               )}
             </ul>
           </section>

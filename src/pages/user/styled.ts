@@ -121,6 +121,32 @@ export const StyledMain = styled.main`
       font-size: var(--title-1);
       margin-bottom: 20px;
     }
-    min-height: 50vh;
+    ul {
+      min-height: 400px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .noWork {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--title-3);
+      font-weight: var(--semi-bold);
+      padding: 20px;
+      border-radius: var(--radius-2);
+      background-color: var(--grey-2);
+      width: 100%;
+      height: 100px;
+
+      &:hover {
+        border: 2px solid var(--color-primary);
+        cursor: pointer;
+      }
+    }
+
+    @media (min-width: 769px) {
+      height: 56.9vh;
+    }
   }
 `;
