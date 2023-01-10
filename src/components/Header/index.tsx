@@ -6,6 +6,7 @@ import { StyledHeader, StyledHeaderNoUser } from "./styled";
 import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { MenuBox } from "../MenuBox";
 
 export const Header = () => {
   const { user, loading, setUser } = useContext(authContext);
@@ -36,6 +37,7 @@ export const Header = () => {
                   <IoLogOutOutline />
                 </button>
               </div>
+              {/* <MenuBox /> */}
             </nav>
           </Container>
         </StyledHeader>
