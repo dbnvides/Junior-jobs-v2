@@ -1,3 +1,4 @@
+import { isVisible } from "@testing-library/user-event/dist/utils";
 import { AxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,6 +6,7 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { iLogin } from "../services/loginRequest";
 import { iRegister } from "../services/registerRequest";
+import { IJob } from "./UserContext/type";
 
 interface iChildren {
   children: React.ReactNode;
@@ -15,28 +17,34 @@ interface iContextValue {
   login: (body: iLogin) => Promise<void>;
   user: iUser | null;
   loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isVisible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
 }
-interface iUser {
+export interface iUser {
   email: string;
   name: string;
   password: string;
   documentation: string;
-  avatar: string | undefined;
+  avatar: string;
   type: string;
   id: number;
-  apply_jobs?: any;
+  apply_jobs?: IJob[];
 }
 export const authContext = createContext({} as iContextValue);
 
 export const AuthProvider = ({ children }: iChildren) => {
   const [user, setUser] = useState<iUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isVisible, setVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem("@TOKEN");
       const id = localStorage.getItem("@ID");
+      setLoading(true);
 
       if (!token) {
         setLoading(false);
@@ -87,14 +95,27 @@ export const AuthProvider = ({ children }: iChildren) => {
         } else {
           navigate("/company");
         }
+        setLoading(false);
       }, 2000);
     } catch (error) {
       toast.error("Email ou senha invalidos");
+      setLoading(false);
     }
   };
 
   return (
-    <authContext.Provider value={{ registerUser, login, user, loading }}>
+    <authContext.Provider
+      value={{
+        registerUser,
+        login,
+        user,
+        setUser,
+        loading,
+        setLoading,
+        isVisible,
+        setVisible,
+      }}
+    >
       {children}
     </authContext.Provider>
   );

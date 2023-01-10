@@ -17,10 +17,6 @@ export const ModalAddJob = () => {
         responsabilities: string;
     }
 
-    interface iCandidates {
-        candidates: [];
-    }
-
     const formSchema = yup.object().shape({
         job_name: yup
             .string()
@@ -69,17 +65,23 @@ export const ModalAddJob = () => {
         const candidates = { candidates: [] };
         const localstorageId = localStorage.getItem("@ID");
         const userId = Number(localstorageId);
-        console.log(userId);
-        console.log({ ...data, ...candidates, userId });
         const newData = { ...data, ...candidates, userId };
-        console.log(newData);
 
         await createJob(newData);
+        /* setShowAddJobModal(false)} */
     };
 
     return (
         <StyledModalAddJob>
-            <div className="modalAddJobContainer">
+            <div
+                className="modalAddJobContainer" /* onClick={() => setShowAddJobModal(false)} */
+            >
+                <h3 className="modalAddJobTitle">Adicionar vaga</h3>
+                <button
+                    className="closeModalAddJobButton" /* onClick={() => setShowAddJobModal(false)} */
+                >
+                    X
+                </button>
                 <form noValidate onSubmit={handleSubmit(onSubmitFunction)}>
                     <Input
                         label="Título"
@@ -147,7 +149,11 @@ export const ModalAddJob = () => {
                             {errors.responsabilities.message}
                         </span>
                     )}
-                    <button type="submit" disabled={!isDirty || !isValid}>
+                    <button
+                        className="addJobButton"
+                        type="submit"
+                        disabled={!isDirty || !isValid}
+                    >
                         Adicionar vaga
                     </button>
                 </form>

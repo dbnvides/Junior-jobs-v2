@@ -29,13 +29,17 @@ export const Register = () => {
         resolver: yupResolver(schema)
     })
     let types  = {
-        type: "Dev"
+        type: "Dev",
+        linkedin: "",
+		tecnology: "",
+		bio: ""
     }
     if(typed){
         types.type = "Company"
     }
     const onSubmit: SubmitHandler<iRegister> =( data )=> {
-        registerUser({...data,type : types.type})
+        registerUser({...data,...types})
+      
     } 
     return (
         <>

@@ -12,6 +12,7 @@ import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconEditar from "../../assets/img/icon-editar.svg";
 import iconVisualizar from "../../assets/img/icon-visu.svg";
 import { authContext } from "../../contexts/authContext";
+import { ModalAddJob } from "../../components/ModalAddJob";
 
 interface iUser {
   email: string;
@@ -73,10 +74,13 @@ export const Company = () => {
     setVisible(true);
   };
 
+  const [showAddJobModal, setShowAddJobModal] = useState(false);
+
   return (
     <>
       <Header />
       {isVisible && <ModalViewer />}
+      {showAddJobModal ? <ModalAddJob /> : null}
       <CompanyPageContainer>
         <div className="perfil">
           <div className="boxImg">
@@ -93,7 +97,9 @@ export const Company = () => {
         <div className="">
           <div className="boxTitle">
             <h1>Vagas</h1>
-            <button> Adicionar Vagas</button>
+            <button onClick={() => setShowAddJobModal(true)}>
+                            Adicionar Vagas
+                        </button>
           </div>
           <ul>
             {!!jobs.length &&
@@ -134,4 +140,4 @@ export const Company = () => {
       <StyledFooter />
     </>
   );
-};
+

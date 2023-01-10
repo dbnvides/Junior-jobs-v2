@@ -9,6 +9,7 @@ import { SpanErro } from "../register/style";
 import { StyleSection } from "./style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LoadPage } from "../../components/Loading";
 
 export const Login = () => {
   const schema = yup.object().shape({
@@ -18,7 +19,7 @@ export const Login = () => {
       .email("email invalido"),
     password: yup.string().required("A senha e obrigatoria"),
   });
-  const { login } = useContext(authContext);
+  const { login, setLoading, loading } = useContext(authContext);
   const {
     register,
     handleSubmit,
@@ -30,9 +31,12 @@ export const Login = () => {
   const onSubmit: SubmitHandler<iLogin> = (data) => {
     localStorage.clear();
     login(data);
+    setLoading(true);
   };
+
   return (
     <>
+      {loading && <LoadPage />}
       <Header />
       <StyleSection>
         <div>

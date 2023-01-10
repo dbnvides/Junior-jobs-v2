@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { authContext } from "../../contexts/authContext";
 import { StyleModalBase } from "./modaBase";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 export const ModalBase = ({ children, title }: Props) => {
-  const [isVisible, setVisible] = useState(false);
+  const { isVisible, setVisible } = useContext(authContext);
 
   if (isVisible) {
     return (

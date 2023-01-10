@@ -1,35 +1,51 @@
 import { Container } from "../Container";
-import { StyledHeader } from "./styled";
 import Logo from "../../assets/img/logo.png";
 import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
+import { StyledHeader, StyledHeaderNoUser } from "./styled";
+import { useContext } from "react";
+import { authContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
-  //Quando tiver o contexto e com dados user user como verificação
-  const user = false;
+  const { user, loading, setUser } = useContext(authContext);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
+    navigate("/");
+  };
 
   return (
-    <StyledHeader>
-      <Container>
-        <nav>
-          <img src={Logo} alt="Júnior Jobs" />
-
-          <div className="boxMenu">
-            {user ? (
-              <img src={"userImage"} alt="Foto de perfil" />
-            ) : (
-              <>
+    <>
+      {loading ? null : user ? (
+        <StyledHeader>
+          <Container>
+            <nav>
+              <img src={Logo} alt="Júnior Jobs" />
+              <div className="boxMenu">
                 <div>
                   <AiOutlineUser />
                 </div>
-                <button>
+                <button onClick={() => logout()}>
                   <IoLogOutOutline />
                 </button>
-              </>
-            )}
-          </div>
-        </nav>
-      </Container>
-    </StyledHeader>
+              </div>
+            </nav>
+          </Container>
+        </StyledHeader>
+      ) : (
+        <>
+          <StyledHeaderNoUser>
+            <Container>
+              <nav>
+                <img src={Logo} alt="Júnior Jobs" />
+              </nav>
+            </Container>
+          </StyledHeaderNoUser>
+        </>
+      )}
+    </>
   );
 };
