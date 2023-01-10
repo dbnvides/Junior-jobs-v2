@@ -1,24 +1,18 @@
 import styled from "styled-components";
 
 export const StyledModalAddJob = styled.div`
-    /* width: 350px; */
-    /* max-width: 100%; */
-    /* margin-top: 3rem; */
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* @media (min-width: 769px) {
-        width: 539px;
-    } */
 
     position: fixed;
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 15;
+    z-index: 1;
 
     .modalAddJobContainer {
         width: 90%;

@@ -6,13 +6,16 @@ import img from "../../assets/img/company.svg";
 import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
+import { LoadPage } from "../../components/Loading";
 
 export const Company = () => {
-    const { isVisible, setVisible } = useContext(authContext);
+    const { isVisible, setVisible, loadingInModal, setEditProfileCompany } =
+        useContext(authContext);
 
     return (
         <>
             {isVisible ? <ModalAddJob /> : null}
+            {loadingInModal ? <LoadPage /> : null}
             <Header />
             <CompanyPageContainer>
                 <div className="perfil">
@@ -24,7 +27,9 @@ export const Company = () => {
                             <h2>Scoot</h2>
                             <p>scoot.com</p>
                         </div>
-                        <button>Editar Perfil</button>
+                        <button onClick={() => setEditProfileCompany(true)}>
+                            Editar Perfil
+                        </button>
                     </div>
                 </div>
                 <div className="">
