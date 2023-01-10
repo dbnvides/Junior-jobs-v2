@@ -20,9 +20,7 @@ export const StyleTextArea = styled.fieldset`
         background-color: #e9e8e8;
         border-radius: var(--radius-1);
         border: none;
-
-        color: #9daec2;
-
+        color: var(--color-primary);
         padding: 10px;
     }
 `;
