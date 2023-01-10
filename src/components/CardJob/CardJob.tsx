@@ -4,8 +4,7 @@ import { api } from "../../services/api";
 
 export const CardJob = ({ elem }: any) => {
   const [user, setUser]: any = useState();
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdnZ2dnZ2dnZ2dnZ2dnZ2dnQGdtYWlsLmNvbSIsImlhdCI6MTY3MzI2ODQxMSwiZXhwIjoxNjczMjcyMDExLCJzdWIiOiI2In0.OoVoy2F83czJgshuCBlG2y98lp6nIwfD31BBo4Smukc";
+  const token = localStorage.getItem("@TOKEN");
 
   useEffect(() => {
     const getUsers = async () => {

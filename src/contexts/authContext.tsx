@@ -21,7 +21,7 @@ interface iContextValue {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
 }
-interface iUser {
+export interface iUser {
   email: string;
   name: string;
   password: string;
@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }: iChildren) => {
       toast.success("Login feito com sucesso");
       setTimeout(() => {
         if (userResponse.type === "Dev") {
-          navigate("/user");
+          navigate("/home");
         } else {
           navigate("/company");
         }

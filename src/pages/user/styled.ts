@@ -119,6 +119,6 @@ export const StyledMain = styled.main`
       font-size: var(--title-1);
       margin-bottom: 20px;
     }
-    min-height: 53vh;
+    min-height: 50vh;
   }
 `;

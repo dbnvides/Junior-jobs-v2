@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledCardCompanyContainer = styled.li`
-  height: 300px;
+  height: 250px;
   background-color: var(--white);
   width: 300px;
   margin: 0 auto;

@@ -3,13 +3,14 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
+import { api } from "../../services/api";
+import { IResponseProfile } from "./types";
 
 export const UserProfile = () => {
-  const [loading, setLoading] = useState(false);
   const { user, isVisible, setVisible } = useContext(authContext);
 
   //Função para sair da vaga

@@ -27,7 +27,11 @@ export const Header = () => {
 
               <div className="boxMenu">
                 <div>
-                  <AiOutlineUser />
+                  {user.avatar ? (
+                    <img className="imgProfile" src={user.avatar} alt="foto de perfil" />
+                  ) : (
+                    <AiOutlineUser />
+                  )}
                 </div>
                 <button onClick={() => logout()}>
                   <IoLogOutOutline />

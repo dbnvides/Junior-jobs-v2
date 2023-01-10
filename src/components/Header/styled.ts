@@ -38,12 +38,26 @@ export const StyledHeader = styled.header`
       align-items: center;
       justify-content: center;
 
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-2);
+      overflow: hidden;
 
       font-size: 30px;
       border-radius: var(--radius-2);
       background-color: var(--grey-2);
+      transition: 0.1s ease;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &:hover {
+        border: 2px solid var(--white);
+        cursor: pointer;
+      }
     }
 
     button {
@@ -52,5 +66,3 @@ export const StyledHeader = styled.header`
     }
   }
 `;
-
-
