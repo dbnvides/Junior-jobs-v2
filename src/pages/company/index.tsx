@@ -3,14 +3,16 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import img from "../../assets/img/company.svg";
-import { useState } from "react";
+import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
+import { authContext } from "../../contexts/authContext";
 
 export const Company = () => {
-    const [showAddJobModal, setShowAddJobModal] = useState(false);
+    const { isVisible, setVisible } = useContext(authContext);
+
     return (
         <>
-            {showAddJobModal ? <ModalAddJob /> : null}
+            {isVisible ? <ModalAddJob /> : null}
             <Header />
             <CompanyPageContainer>
                 <div className="perfil">
@@ -28,7 +30,7 @@ export const Company = () => {
                 <div className="">
                     <div className="boxTitle">
                         <h1>Vagas</h1>
-                        <button onClick={() => setShowAddJobModal(true)}>
+                        <button onClick={() => setVisible(true)}>
                             Adicionar Vagas
                         </button>
                     </div>
