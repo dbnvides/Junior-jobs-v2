@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }: iChildren) => {
           navigate("/company");
         }
         setLoading(false);
-      }, 2000);
+      }, );
     } catch (error) {
       toast.error("Email ou senha invalidos");
       setLoading(false);
