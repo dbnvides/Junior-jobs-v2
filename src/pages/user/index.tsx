@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
+import { IoLogOutOutline } from "react-icons/io5";
 import { api } from "../../services/api";
 import { IResponseProfile } from "./types";
 
@@ -56,7 +57,11 @@ export const UserProfile = () => {
                     job_name={job.job_name}
                     responsabilitys={job.responsabilitys}
                     work_type={job.work_type}
-                  />
+                  >
+                    <button className="outWork">
+                      <IoLogOutOutline />
+                    </button>
+                  </CardCompany>
                 ))
               ) : (
                 <div>Sem vagas</div>

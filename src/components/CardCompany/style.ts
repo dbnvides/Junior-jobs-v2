@@ -46,10 +46,94 @@ export const StyledCardCompanyContainer = styled.li`
     gap: 40px;
   }
 
-  .infCompany {
+  .outWork {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-1);
+    font-size: 20px;
+    background-color: var(--color-secondary-2);
+    color: var(--white);
     display: flex;
-    flex-direction: column;
-    gap: 40px;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--color-secondary);
+    }
+  }
+
+  @media (min-width: 769px) {
+    width: 95%;
+    max-width: 1000px;
+    height: 230px;
+    padding: 50px 20px 20px 20px;
+
+    .description {
+      display: flex;
+      width: 70%;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .boxButtons {
+      flex-direction: column;
+    }
+
+    .outWork {
+      position: absolute;
+      left: auto;
+      right: 30px;
+      bottom: auto;
+      top: 50px;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-1);
+      font-size: 25px;
+      background-color: var(--color-secondary-2);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: var(--color-secondary);
+      }
+    }
+  }
+`;
+
+export const StyledInfCompany = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .smallDetail {
+    width: max-content;
+    display: flex;
+    gap: 10px;
+    color: var(--grey-3);
+
+    p {
+      padding: 0 2px;
+      background-color: var(--grey-1);
+    }
+  }
+
+  .nameCompany {
+    color: var(--grey-3);
+  }
+  .titleJob {
+    color: var(--grey-0);
+  }
+
+  .locality {
+    margin-top: 10px;
   }
 
   .boxButtons {
@@ -66,27 +150,11 @@ export const StyledCardCompanyContainer = styled.li`
   }
 
   @media (min-width: 769px) {
-    width: 95%;
-    max-width: 1000px;
-    height: 250px;
-    padding: 50px 30px 30px 30px;
-
-    .description {
-      display: flex;
-      width: 60%;
-    }
-
-    > div {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .infCompany {
-      width: 40%;
-    }
-
-    .boxButtons {
-      flex-direction: column;
+    width: 40%;
+    .smallDetail {
+      gap: 10px;
+      color: var(--grey-3);
+      font-size: var(--title-5);
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { StyledCardCompanyContainer } from "./style";
+import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
@@ -53,15 +53,17 @@ export const CardCompany = ({
         </div>
       )}
       <div>
-        <div className="infCompany">
-          <div>
+        <StyledInfCompany>
+          <div className="smallDetail">
+            <p>{work_type}</p>
             <p>{period}</p>
-            <h1>{job_name}</h1>
-            <span>{nameCompany.name}</span>
           </div>
 
-          <p>{nameCompany.id}</p>
-        </div>
+          <h1 className="titleJob">{job_name}</h1>
+          <span className="nameCompany">{nameCompany.name}</span>
+          {/*Localidade da compania*/}
+          <p className="locality">{nameCompany.id}</p>
+        </StyledInfCompany>
 
         <div className="description">
           <p>{description}</p>

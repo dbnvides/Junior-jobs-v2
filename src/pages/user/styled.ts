@@ -32,7 +32,7 @@ export const StyledMain = styled.main`
       height: 50px;
       position: absolute;
       top: -25px;
-      border-radius: 4px 0 0 4px;
+      border-radius: 4px;
       overflow: hidden;
     }
 
@@ -49,6 +49,8 @@ export const StyledMain = styled.main`
         width: 140px;
         height: 140px;
         position: relative;
+        border-radius: 4px 0 0 4px;
+        overflow: hidden;
         top: 0;
       }
 
