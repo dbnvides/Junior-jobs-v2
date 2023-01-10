@@ -2,7 +2,7 @@ import { ModalViewerContainer } from "./style";
 import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconLink from "../../assets/img/link.svg";
 import { useContext, useState } from "react";
-import { CompanyContext } from "../../contexts/CompanyContext/CompanyContext";
+import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
 import { api } from "../../services/api";
 
 interface iUser {
@@ -21,7 +21,7 @@ interface iTeste {
 }
 
 export const ModalViewer = () => {
-  const { setVisible, jobViewer } = useContext(CompanyContext);
+  const { setModalViewer, jobViewer } = useContext(CompanyContext);
 
   const [filterCandidates, setFilterCandidates] = useState<iTeste>();
 
@@ -62,7 +62,7 @@ export const ModalViewer = () => {
         <div className="ModalHeader">
           <div>
             <h1>Candidatos a vaga </h1>
-            <button onClick={() => setVisible(false)}> X </button>
+            <button onClick={() => setModalViewer(false)}> X </button>
           </div>
         </div>
         <div className="bar"></div>
