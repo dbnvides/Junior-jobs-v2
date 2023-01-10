@@ -9,6 +9,8 @@ interface iCompanyProviderProps {
 interface iCompanyContext {
   modalViewer: boolean;
   setModalViewer: React.Dispatch<React.SetStateAction<boolean>>;
+  modalEditCompany: boolean;
+  setModalEditCompany: React.Dispatch<React.SetStateAction<boolean>>;
   setJobs: React.Dispatch<React.SetStateAction<iJobs[]>>;
   jobs: iJobs[];
   setJobViewer: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
@@ -44,6 +46,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
   const [modalViewer, setModalViewer] = useState(false);
   const [jobs, setJobs] = useState<iJobs[]>([]);
   const [jobViewer, setJobViewer] = useState<iJobs>();
+  const [modalEditCompany, setModalEditCompany] = useState(false);
 
   return (
     <CompanyContext.Provider
@@ -54,6 +57,8 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
         setJobs,
         jobViewer,
         setJobViewer,
+        modalEditCompany,
+        setModalEditCompany,
       }}
     >
       {children}

@@ -16,6 +16,8 @@ import iconVisualizar from "../../assets/img/icon-visu.svg";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { LoadPage } from "../../components/Loading";
+import ModalEditProfile from "../user/modalEditProfile";
+import { ModalEditCompany } from "../../components/ModalEditCompany";
 
 interface iUser {
   email: string;
@@ -43,8 +45,16 @@ interface iJobs {
 export const Company = () => {
   const { isVisible, setVisible, loadingInModal, setEditProfileCompany, user } =
     useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobs, setJobViewer } =
-    useContext(CompanyContext);
+  const {
+    modalViewer,
+    setModalViewer,
+    jobs,
+    setJobs,
+    setJobViewer,
+    setModalEditCompany,
+    modalEditCompany,
+  } = useContext(CompanyContext);
+
   const navigate = useNavigate();
 
   if (user?.type === "Dev") {
@@ -105,6 +115,7 @@ export const Company = () => {
 
   return (
     <>
+      {modalEditCompany && <ModalEditCompany />}
       {isVisible ? <ModalAddJob /> : null}
       {modalViewer && <ModalViewer />}
       {loadingInModal ? <LoadPage /> : null}
@@ -119,7 +130,7 @@ export const Company = () => {
               <h2>{user?.name}</h2>
               <p>{user?.email}</p>
             </div>
-            <button onClick={() => setEditProfileCompany(true)}>
+            <button onClick={() => setModalEditCompany(true)}>
               Editar Perfil
             </button>
           </div>
