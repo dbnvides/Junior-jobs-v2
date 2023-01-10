@@ -10,7 +10,7 @@ import { createJob } from "../../services/createJob";
 import { authContext } from "../../contexts/authContext";
 
 export const ModalAddJob = () => {
-    const { setVisible } = useContext(authContext);
+    const { setVisible, setLoadingInModal } = useContext(authContext);
 
     const {
         register,
@@ -29,8 +29,10 @@ export const ModalAddJob = () => {
         const usersId = Number(localstorageId);
         const newData = { ...data, ...candidates, usersId };
 
+        setLoadingInModal(true);
         await createJob(newData);
         setVisible(false);
+        setLoadingInModal(false);
     };
 
     return (
@@ -119,7 +121,7 @@ export const ModalAddJob = () => {
                     <Textarea
                         label="Papel do desenvolvedor"
                         placeholder="Descreva as atividades que o desenvolvedor vai desempenhar"
-                        id="jobDescription"
+                        id="responsabilities"
                         {...register("responsabilities")}
                     />
                     {errors.responsabilities && (

@@ -3,21 +3,25 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export const UserProfile = () => {
-  const [loading, setLoading] = useState(false);
   const { user, isVisible, setVisible } = useContext(authContext);
+  const navigate = useNavigate();
 
   //Função para sair da vaga
   // const unapply = (id: number) => {
-  //   const newArr = jobs.filter((item) => item.id === id);
+  //   const newArr = jobs.filter((item) => item.id !== id);
   //   setMyJobs(newArr);
   // };
-
+  if (user?.type === "Company") {
+    navigate("/user");
+  }
   return (
     <>
       <ModalEditProfile />
@@ -55,7 +59,11 @@ export const UserProfile = () => {
                     job_name={job.job_name}
                     responsabilitys={job.responsabilitys}
                     work_type={job.work_type}
-                  />
+                  >
+                    <button className="outWork">
+                      <IoLogOutOutline />
+                    </button>
+                  </CardCompany>
                 ))
               ) : (
                 <div>Sem vagas</div>

@@ -6,6 +6,7 @@ import { StyledHeader, StyledHeaderNoUser } from "./styled";
 import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { MenuBox } from "../MenuBox";
 
 export const Header = () => {
   const { user, loading, setUser } = useContext(authContext);
@@ -26,12 +27,21 @@ export const Header = () => {
               <img src={Logo} alt="Júnior Jobs" />
               <div className="boxMenu">
                 <div>
-                  <AiOutlineUser />
+                  {user.avatar ? (
+                    <img
+                      className="imgProfile"
+                      src={user.avatar}
+                      alt="foto de perfil"
+                    />
+                  ) : (
+                    <AiOutlineUser />
+                  )}
                 </div>
                 <button onClick={() => logout()}>
                   <IoLogOutOutline />
                 </button>
               </div>
+              {/* <MenuBox /> */}
             </nav>
           </Container>
         </StyledHeader>

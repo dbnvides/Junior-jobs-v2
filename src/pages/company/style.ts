@@ -3,7 +3,13 @@ import styled from "styled-components";
 export const CompanyPageContainer = styled.div`
   width: 95%;
   margin: 0 auto;
-  height: 100vh;
+  height: 110vh;
+
+  ul {
+    height: 600px;
+    overflow: auto;
+    padding: 20px 0;
+  }
 
   .perfil {
     height: 200px;
@@ -17,7 +23,7 @@ export const CompanyPageContainer = styled.div`
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     .boxImg {
-      width: 100%;
+      width: 50px;
       height: 100%;
       position: absolute;
       margin-top: -75px;
@@ -103,8 +109,8 @@ export const CompanyPageContainer = styled.div`
       padding: 0 30px 0 0;
 
       .boxImg {
-        max-width: 20%;
-        max-height: 100%;
+        width: 20%;
+        height: 100%;
         position: static;
         margin: 0px;
 
