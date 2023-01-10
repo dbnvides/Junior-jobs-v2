@@ -1,8 +1,4 @@
 import { StyledCardCompanyContainer } from "./style";
-import img from "../../assets/img/company.svg";
-import iconExcluir from "../../assets/img/icon-excluir.svg";
-import iconEditar from "../../assets/img/icon-editar.svg";
-import iconVisualizar from "../../assets/img/icon-visu.svg";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
 
@@ -45,18 +41,7 @@ export const CardCompany = ({
           <p>{responsabilitys}</p>
         </div>
 
-        <div className="boxButtons">
-          {children}
-          {/* <button>
-            <img src={iconEditar} alt="Editar" />
-          </button>
-          <button>
-            <img src={iconExcluir} alt="Excluir" />
-          </button>
-          <button>
-            <img src={iconVisualizar} alt="Visualizar" />
-          </button> */}
-        </div>
+        <div className="boxButtons">{children}</div>
       </div>
     </StyledCardCompanyContainer>
   );

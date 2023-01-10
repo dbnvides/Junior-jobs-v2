@@ -19,11 +19,19 @@ export const ModalViewerContainer = styled.div`
     overflow: auto;
     border-radius: 5px;
 
+    .noCandidates {
+      width: 100%;
+      height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .ModalHeader {
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-      padding: 30px 20px 0 10px;
+      padding: 20px 30px 0 30px;
 
       h1 {
         font-size: var(--title-3);

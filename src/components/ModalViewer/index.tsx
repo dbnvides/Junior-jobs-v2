@@ -1,58 +1,111 @@
 import { ModalViewerContainer } from "./style";
 import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconLink from "../../assets/img/link.svg";
-import img from "../../assets/img/company.svg";
+import { useContext, useState } from "react";
+import { CompanyContext } from "../../contexts/CompanyContext/CompanyContext";
+import { api } from "../../services/api";
+
+interface iUser {
+  email?: string;
+  name?: string;
+  password?: string;
+  documentation?: string;
+  avatar?: string | undefined;
+  type?: string;
+  id?: number;
+  apply_jobs?: any;
+}
+
+interface iTeste {
+  candidates: iUser[] | undefined;
+}
 
 export const ModalViewer = () => {
+  const { setVisible, jobViewer } = useContext(CompanyContext);
+
+  const [filterCandidates, setFilterCandidates] = useState<iTeste>();
+
+  const updateCandidates = async (
+    data: iTeste | undefined,
+    id: number | undefined
+  ) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await api.patch(`jobs/${id}`, data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeCandidate = (candidate: iUser) => {
+    const filterCandidate = jobViewer?.candidates.filter((element) => {
+      return candidate.id !== element.id;
+    });
+
+    const candidates: iTeste = {
+      candidates: filterCandidate,
+    };
+
+    setFilterCandidates(candidates);
+
+    updateCandidates(filterCandidates, candidate.id);
+    console.log(filterCandidate);
+  };
+
   return (
     <ModalViewerContainer>
       <div className="Modal">
         <div className="ModalHeader">
           <div>
             <h1>Candidatos a vaga </h1>
-            <button> X </button>
+            <button onClick={() => setVisible(false)}> X </button>
           </div>
         </div>
         <div className="bar"></div>
         <div className="ModalBody">
-          <ul>
-            <li className="user">
-              <img src={img} alt="img" />
-              <div>
-                <div className="infCompany">
-                  <div>
-                    <p>Integral</p>
-                    <h1>Front-End Júnior</h1>
-                    <span>Scoot</span>
-                  </div>
+          {jobViewer?.candidates ? (
+            <ul>
+              {jobViewer.candidates.map((element, index) => {
+                return (
+                  <li className="user" key={index}>
+                    <img src={element.avatar} alt="img" />
+                    <div>
+                      <div className="infCompany">
+                        <div>
+                          <p>{element.name}</p>
+                          <h1>{element.email}</h1>
+                          <span>{element.type}</span>
+                        </div>
 
-                  <p>Recife</p>
-                </div>
+                        <p>Recife</p>
+                      </div>
 
-                <div className="description">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In
-                    nisi neque, aliquet vel, dapibus id, mattis vel, nisi. ,est.
-                    Sed lectus. Praesent elementum hendrerit tortor. Sed semper
-                    lorem at felis. Vestibulum volutpat, lacus a ultrices
-                    sagittis, mi neque euismod dui, eu pulvinar nunc sapien
-                    ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et,
-                    dapibus sed, urna.
-                  </p>
-                </div>
+                      <div className="description">
+                        <p>{}</p>
+                      </div>
 
-                <div className="boxButtons">
-                  <button>
-                    <img src={iconExcluir} alt="Excluir" />
-                  </button>
-                  <button>
-                    <img src={iconLink} alt="Editar" />
-                  </button>
-                </div>
-              </div>
-            </li>
-          </ul>
+                      <div className="boxButtons">
+                        <button onClick={() => removeCandidate(element)}>
+                          <img src={iconExcluir} alt="Excluir" />
+                        </button>
+                        <button>
+                          <img src={iconLink} alt="Linkedin" />
+                        </button>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <div className="noCandidates">
+              <h1>Ainda não há candidatos !</h1>
+            </div>
+          )}
         </div>
       </div>
     </ModalViewerContainer>

@@ -4,12 +4,12 @@ export interface IPropCard {
   period: string;
   job_name: string;
   work_type: string;
-  avatar?: string;
+  avatar?: string | null;
   description: string;
   requirements: string;
   responsabilitys: string;
   id: number;
-  nameCompany: string;
+  nameCompany?: string | null;
   locality: string;
   children: React.ReactNode;
 }
