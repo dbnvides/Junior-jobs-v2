@@ -3,17 +3,14 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import img from "../../assets/img/company.svg";
-import { useContext, useContext } from "react";
+import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
-import { authContext } from "../../contexts/authContext";
 import { LoadPage } from "../../components/Loading";
-
 export const Company = () => {
-    const { isVisible, setVisible, loadingInModal, setEditProfileCompany } =
+    const { user, isVisible, setVisible, loadingInModal, setEditProfileCompany } =
         useContext(authContext);
-    const { user } = useContext(authContext)
     const navigate = useNavigate()
 
     if(user?.type === "Dev"){
