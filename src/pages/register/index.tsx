@@ -32,7 +32,8 @@ export const Register = () => {
         type: "Dev",
         linkedin: "",
 		tecnology: "",
-		bio: ""
+		bio: "",
+        locality: ""
     }
     if(typed){
         types.type = "Company"
@@ -59,7 +60,7 @@ export const Register = () => {
                     {errors.email?.message && <SpanErro>{errors.email.message}</SpanErro>}
                     <Input label={typed ? "CNPJ" : "CPF"} type="text" placeholder={typed ? "Digite seu cnpj" : "Digite seu cpf"} {...register("documentation")} />
                     {errors.documentation?.message && <SpanErro>{errors.documentation.message}</SpanErro>}
-                    <Input label="Avatar" type="text" placeholder={typed ? "Logo da empresa" : "Foto de perfil"} {...register("avatar")}/>
+                    <Input label="Avatar" type="url" placeholder={typed ? "Logo da empresa" : "Foto de perfil"} {...register("avatar")}/>
                     {errors.avatar?.message && <SpanErro>{errors.avatar.message}</SpanErro>}
                     <Input label="Senha" type="password" placeholder="Digite sua senha"  {...register("password")} />
                     {errors.password?.message && <SpanErro>{errors.password.message}</SpanErro>}

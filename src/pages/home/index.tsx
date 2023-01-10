@@ -14,11 +14,6 @@ import { authContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
-  const { user } = useContext(authContext);
-  const navigate = useNavigate();
-
-  user?.type !== "Dev" && navigate(`/company`);
-
   const {
     jobsList,
     setJobsList,
@@ -34,7 +29,8 @@ export const Home = () => {
     const getJobs = async () => {
       try {
         const response = await api.get("jobs");
-        setJobsList(response.data);
+
+        setJobsList(() => [...response.data]);
       } catch (error) {
         console.log(error);
       }
@@ -42,38 +38,27 @@ export const Home = () => {
     getJobs();
   }, []);
 
+  console.log(jobsList);
   const renderAllJobs = () => {
-    if (jobsList) {
-      return jobsList.map((elem: any, index: any) => {
-        return (
-          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-        );
-      });
-    }
+    return jobsList.map((elem: any, index: any) => {
+      return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
   };
   const renderTitleFilter = () => {
-    if (jobsList) {
-      const filteredJobs = jobsList.filter((elem: any) => {
-        return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
-      });
-      return filteredJobs.map((elem: any, index: any) => {
-        return (
-          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-        );
-      });
-    }
+    const filteredJobs = jobsList.filter((elem: any) => {
+      return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
+    });
+    return filteredJobs.map((elem: any, index: any) => {
+      return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
   };
   const renderFullTime = () => {
-    if (jobsList) {
-      const filteredJobs = jobsList.filter((elem: any) => {
-        return elem.period === "integral";
-      });
-      return filteredJobs.map((elem: any, index: any) => {
-        return (
-          index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
-        );
-      });
-    }
+    const filteredJobs = jobsList.filter((elem: any) => {
+      return elem.period === "integral";
+    });
+    return filteredJobs.map((elem: any, index: any) => {
+      return index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
   };
 
   return (
@@ -106,18 +91,13 @@ export const Home = () => {
                   <input
                     type="checkbox"
                     checked={check}
-                    onChange={() =>
-                      check === false ? setCheck(true) : setCheck(false)
-                    }
+                    onChange={() => (check === false ? setCheck(true) : setCheck(false))}
                   />
                   Apenas Integral
                 </label>
               </div>
               <img src={funnelIcon} alt="" />
-              <button
-                className="mobileSearch"
-                onClick={() => renderTitleFilter()}
-              >
+              <button className="mobileSearch" onClick={() => renderTitleFilter()}>
                 <img src={searchIcon} alt="" />
               </button>
               <button onClick={() => renderTitleFilter()}>Procurar</button>
@@ -132,9 +112,7 @@ export const Home = () => {
           </StyledJobsList>
         </Container>
         <StyledViewMoreContainer>
-          <button onClick={() => setPageCounter(pageCounter + 12)}>
-            Carregar Mais
-          </button>
+          <button onClick={() => setPageCounter(pageCounter + 12)}>Carregar Mais</button>
         </StyledViewMoreContainer>
         <StyledFooter />
       </StyledHome>

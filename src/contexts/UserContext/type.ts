@@ -1,12 +1,14 @@
+import { iUser } from "../authContext";
+
 export interface IJobContext {
-  jobById(id: number, userId: number): Promise<void>;
   job: IJob;
   company: ICompany;
   addJob(job : IJob): void;
+  loading: boolean
 }
 
 export interface IJob {
-  userId?: number;
+  usersId?: number;
   job_name?: string;
   period?: string;
   work_type?: string;
@@ -25,6 +27,7 @@ export interface ICompany {
   avatar?: string;
   type?: string;
   id?: number;
+  candidates?: iUser[];
 }
 
 export interface IResponseProfile {

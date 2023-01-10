@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Container } from "../../components/Container";
 import { StyledFooter } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { LoadPage } from "../../components/Loading";
+import { authContext } from "../../contexts/authContext";
 import { jobContext } from "../../contexts/UserContext/userContext";
 import { StyledMain } from "./style";
 
@@ -10,11 +12,12 @@ export const Job = () => {
   const {job ,
     job: { job_name, period, work_type, description, requirements, responsabilitys },
     company: { name, avatar },
-    addJob
+    addJob, loading
   } = useContext(jobContext);
 
   return (
     <>
+    {loading && <LoadPage />}
       <Header />
       <Container>
         <StyledMain>

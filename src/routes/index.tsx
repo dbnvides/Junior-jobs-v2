@@ -15,11 +15,11 @@ export const MainRoutes = () => {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectRoutes />}>
-        <Route element={<MyHomeContext />}>
-          <Route path="/home" element={<Home />} />
-        </Route>
         <Route path="/company" element={<Company />} />
         <Route element={<MyUserContext />}>
+          <Route element={<MyHomeContext />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
           <Route path="/user" element={<UserProfile />} />
           <Route path="/job/:name" element={<Job />} />
         </Route>
