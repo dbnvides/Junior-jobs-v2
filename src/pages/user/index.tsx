@@ -1,7 +1,7 @@
 import { Container } from "../../components/Container";
 import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
-import { StyledMain } from "./styled";
+import { StyledMain, StyledMainContent } from "./styled";
 import { StyledFooter } from "../../components/Footer";
 import { useContext } from "react";
 import { CardCompany } from "../../components/CardCompany";
@@ -30,56 +30,58 @@ export const UserProfile = () => {
 
   return (
     <>
-      <ModalEditProfile />
-      <Header />
-      <Container>
-        <StyledMain>
-          <section className="sectionProfile">
-            {user?.avatar ? (
-              <div className="avatarProfile">
-                <img src={user.avatar} alt="foto de perfil" />
-              </div>
-            ) : (
-              <div className="avatarDefault">
-                <FaUser />
-              </div>
-            )}
-
-            <div className="contentProfile">
-              <h2>{user?.name}</h2>
-              <p>{user?.documentation}</p>
-              <span>{user?.email}</span>
-            </div>
-            <button onClick={() => setVisible(true)}>Editar Perfil</button>
-          </section>
-
-          <section className="sectionJob">
-            <h2>Vagas</h2>
-            <ul>
-              {user?.apply_jobs ? (
-                user?.apply_jobs!.map((job, id) => (
-                  <CardCompany
-                    id={job.id}
-                    key={id}
-                    period={job.period}
-                    job_name={job.job_name}
-                    responsabilitys={job.responsabilitys}
-                    work_type={job.work_type}
-                  >
-                    <button className="outWork">
-                      <IoLogOutOutline />
-                    </button>
-                  </CardCompany>
-                ))
+      <StyledMainContent>
+        <ModalEditProfile />
+        <Header />
+        <Container>
+          <StyledMain>
+            <section className="sectionProfile">
+              {user?.avatar ? (
+                <div className="avatarProfile">
+                  <img src={user.avatar} alt="foto de perfil" />
+                </div>
               ) : (
-                <li className="noWork" onClick={() => handleClick()}>
-                  <span>Nenhuma vaga aplicada :(</span>
-                </li>
+                <div className="avatarDefault">
+                  <FaUser />
+                </div>
               )}
-            </ul>
-          </section>
-        </StyledMain>
-      </Container>
+
+              <div className="contentProfile">
+                <h2>{user?.name}</h2>
+                <p>{user?.documentation}</p>
+                <span>{user?.email}</span>
+              </div>
+              <button onClick={() => setVisible(true)}>Editar Perfil</button>
+            </section>
+
+            <section className="sectionJob">
+              <h2>Vagas</h2>
+              <ul>
+                {user?.apply_jobs ? (
+                  user?.apply_jobs!.map((job, id) => (
+                    <CardCompany
+                      id={job.id}
+                      key={id}
+                      period={job.period}
+                      job_name={job.job_name}
+                      responsabilitys={job.responsabilitys}
+                      work_type={job.work_type}
+                    >
+                      <button className="outWork">
+                        <IoLogOutOutline />
+                      </button>
+                    </CardCompany>
+                  ))
+                ) : (
+                  <li className="noWork" onClick={() => handleClick()}>
+                    <span>Nenhuma vaga aplicada :(</span>
+                  </li>
+                )}
+              </ul>
+            </section>
+          </StyledMain>
+        </Container>
+      </StyledMainContent>
       <StyledFooter />
     </>
   );

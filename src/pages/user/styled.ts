@@ -122,9 +122,19 @@ export const StyledMain = styled.main`
       margin-bottom: 20px;
     }
     ul {
-      min-height: 400px;
+      width: 100%;
+      height: 300px;
       display: flex;
+      padding: 0 10px;
       flex-direction: row;
+      gap: 20px;
+      overflow: auto;
+      margin-bottom: 20px;
+
+      @media (min-width: 769px) {
+        flex-direction: column;
+        height: 800px;
+      }
     }
 
     .noWork {
@@ -146,7 +156,10 @@ export const StyledMain = styled.main`
     }
 
     @media (min-width: 769px) {
-      height: 56.9vh;
     }
   }
+`;
+
+export const StyledMainContent = styled.div`
+  min-height: 100vh;
 `;

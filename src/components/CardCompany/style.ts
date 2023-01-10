@@ -48,8 +48,8 @@ export const StyledCardCompanyContainer = styled.li`
 
   .outWork {
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    right: 30px;
+    bottom: 40px;
     width: 30px;
     height: 30px;
     border-radius: var(--radius-1);
