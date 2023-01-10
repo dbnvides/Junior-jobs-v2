@@ -3,11 +3,19 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import img from "../../assets/img/company.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
+import { authContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router-dom";
 
 export const Company = () => {
     const [showAddJobModal, setShowAddJobModal] = useState(false);
+    const { user } = useContext(authContext)
+    const navigate = useNavigate()
+
+    if(user?.type === "Dev"){
+        navigate("/user")
+    }
     return (
         <>
             {showAddJobModal ? <ModalAddJob /> : null}
