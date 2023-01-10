@@ -7,8 +7,8 @@ interface iCompanyProviderProps {
 }
 
 interface iCompanyContext {
-  modalViewer: boolean;
-  setModalViewer: React.Dispatch<React.SetStateAction<boolean>>;
+  isVisible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   setJobs: React.Dispatch<React.SetStateAction<iJobs[]>>;
   jobs: iJobs[];
   setJobViewer: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
@@ -41,20 +41,13 @@ interface iJobs {
 export const CompanyContext = createContext({} as iCompanyContext);
 
 export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
-  const [modalViewer, setModalViewer] = useState(false);
+  const [isVisible, setVisible] = useState(false);
   const [jobs, setJobs] = useState<iJobs[]>([]);
   const [jobViewer, setJobViewer] = useState<iJobs>();
 
   return (
     <CompanyContext.Provider
-      value={{
-        modalViewer,
-        setModalViewer,
-        jobs,
-        setJobs,
-        jobViewer,
-        setJobViewer,
-      }}
+      value={{ isVisible, setVisible, jobs, setJobs, jobViewer, setJobViewer }}
     >
       {children}
     </CompanyContext.Provider>
