@@ -22,38 +22,44 @@ interface iTeste {
 
 export const ModalViewer = () => {
   const { setModalViewer, jobViewer } = useContext(CompanyContext);
-
-  const [filterCandidates, setFilterCandidates] = useState<iTeste>();
+  const teste = jobViewer?.candidates;
+  const teste2: iTeste = {
+    candidates: teste,
+  };
+  const [filterCandidates, setFilterCandidates] = useState<iTeste>(teste2);
 
   const updateCandidates = async (
     data: iTeste | undefined,
     id: number | undefined
   ) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("@TOKEN");
+    console.log(data);
     try {
-      const response = await api.patch(`jobs/${id}`, data, {
+      const response = await api.patch(`jobs/1`, data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   const removeCandidate = (candidate: iUser) => {
-    const filterCandidate = jobViewer?.candidates.filter((element) => {
+    const filter = jobViewer?.candidates.filter((element) => {
       return candidate.id !== element.id;
     });
 
     const candidates: iTeste = {
-      candidates: filterCandidate,
+      candidates: filter,
     };
 
     setFilterCandidates(candidates);
 
+    console.log(filter);
+
     updateCandidates(filterCandidates, candidate.id);
-    console.log(filterCandidate);
   };
 
   return (
@@ -69,7 +75,7 @@ export const ModalViewer = () => {
         <div className="ModalBody">
           {jobViewer?.candidates ? (
             <ul>
-              {jobViewer.candidates.map((element, index) => {
+              {filterCandidates.candidates?.map((element, index) => {
                 return (
                   <li className="user" key={index}>
                     <img src={element.avatar} alt="img" />
