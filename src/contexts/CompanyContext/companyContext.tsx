@@ -71,7 +71,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
 
   useEffect(() => {
     loadJobs();
-  }, []);
+  }, [jobs]);
 
   return (
     <CompanyContext.Provider
