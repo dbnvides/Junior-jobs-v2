@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const StyledHome = styled.div`
   width: 100%;
@@ -54,7 +55,7 @@ export const StyledViewMoreContainer = styled.div`
   }
 `;
 
-export const StyledJob = styled.li`
+export const StyledJob = styled(motion.li)`
   position: relative;
   border-radius: var(--radius-2);
   width: 100%;
@@ -65,7 +66,7 @@ export const StyledJob = styled.li`
   background-color: var(--white);
   margin-top: 20%;
   cursor: pointer;
-  
+
   div {
     img {
       width: 80px;

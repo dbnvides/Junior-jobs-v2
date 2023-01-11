@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StyledJob } from "../../pages/home/style";
 import { api } from "../../services/api";
+import { motion } from "framer-motion";
+import {
+  slideRightVariants,
+  slideDownVariants,
+  slideLeftVariants,
+} from "../../pages/home/motion";
 
 export const CardJob = ({ elem }: any) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
 
@@ -25,17 +31,43 @@ export const CardJob = ({ elem }: any) => {
   }, []);
 
   return (
-    <StyledJob onClick={()=>{
-      localStorage.setItem("@JOBID", elem.id)
-      localStorage.setItem("@COMPANYID", elem.usersId)
-      navigate(`/job/${elem.job_name}`)}}>
-
-      <div>
-        <img src={user?.avatar} alt="logo da empresa" />
+    <StyledJob
+      variants={slideRightVariants}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ delay: 0.13 * elem.id }}
+      onClick={() => {
+        localStorage.setItem("@JOBID", elem.id);
+        localStorage.setItem("@COMPANYID", elem.usersId);
+        navigate(`/job/${elem.job_name}`);
+      }}
+    >
+      <div
+      // animate={{ x: [-50, 0] }}
+      // transition={{ delay: 0.13 * elem.id }}
+      >
+        <motion.img
+          variants={slideDownVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ delay: 0.13 * elem.id }}
+          src={user?.avatar}
+          alt="logo da empresa"
+        />
         <p>
           1m atrás • <span>{elem.period}</span>
         </p>
-        <h2>{elem.job_name}</h2>
+        <motion.h2
+          variants={slideLeftVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ delay: 0.13 * elem.id }}
+        >
+          {elem.job_name}
+        </motion.h2>
         <p>{elem.description}</p>
       </div>
       <h4>Busca cidade ai</h4>
