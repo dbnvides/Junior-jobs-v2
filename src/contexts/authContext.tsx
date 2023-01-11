@@ -3,9 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { iLogin } from "../services/loginRequest";
-import { iRegister } from "../services/registerRequest";
-import { iContextValue, iChildren, iUser } from "./types";
+import { iContextValue, iChildren, iUser, iRegister, iLogin } from "./types";
 
 export const authContext = createContext({} as iContextValue);
 
@@ -15,6 +13,8 @@ export const AuthProvider = ({ children }: iChildren) => {
   const [isVisible, setVisible] = useState(false);
   const [editProfileCompany, setEditProfileCompany] = useState(false);
   const [loadingInModal, setLoadingInModal] = useState(false);
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }: iChildren) => {
         setEditProfileCompany,
         loadingInModal,
         setLoadingInModal,
+        
       }}
     >
       {children}
