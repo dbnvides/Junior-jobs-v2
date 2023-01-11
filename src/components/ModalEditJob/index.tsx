@@ -6,12 +6,11 @@ import { iFormSchemaModalEditJob } from "./types";
 import { formSchema } from "./editJobSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { createJob } from "../../services/createJob";
+import { editJob } from "../../services/editJob";
 import { authContext } from "../../contexts/authContext";
 
 export const ModalEditJob = () => {
-    const { setVisible, setLoadingInModal, setEditJobModal } =
-        useContext(authContext);
+    const { setLoadingInModal, setEditJobModal } = useContext(authContext);
 
     const {
         register,
@@ -31,7 +30,7 @@ export const ModalEditJob = () => {
         const newData = { ...data, ...candidates, usersId };
 
         setLoadingInModal(true);
-        createJob(newData);
+        editJob(newData);
         setEditJobModal(false);
         setLoadingInModal(false);
     };
