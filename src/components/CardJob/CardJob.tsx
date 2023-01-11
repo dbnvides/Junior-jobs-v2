@@ -8,15 +8,27 @@ import {
   slideDownVariants,
   slideLeftVariants,
 } from "../../pages/home/motion";
+import { IJob } from "../../pages/home/types";
 
-export const CardJob = ({ elem }: any) => {
+export const CardJob = ({
+  candidates,
+  description,
+  id,
+  job_name,
+  locality,
+  period,
+  requirements,
+  responsability,
+  usersId,
+  work_type,
+}: IJob) => {
   const navigate = useNavigate();
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const userObtained = await api.get(`users/${elem.usersId}`, {
+        const userObtained = await api.get(`users/${usersId}`, {
           headers: {
             authorization: `Bearer ${token}`,
           },
@@ -35,11 +47,11 @@ export const CardJob = ({ elem }: any) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ delay: 0.13 * elem.id }}
+      transition={{ delay: 0.13 * id }}
       onClick={() => {
-        localStorage.setItem("@JOBID", elem.id);
-        localStorage.setItem("@COMPANYID", elem.usersId);
-        navigate(`/job/${elem.job_name}`);
+        localStorage.setItem("@JOBID", `${id}`);
+        localStorage.setItem("@COMPANYID", `${usersId}`);
+        navigate(`/job/${job_name}`);
       }}
     >
       <div>
@@ -48,25 +60,25 @@ export const CardJob = ({ elem }: any) => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ delay: 0.13 * elem.id }}
+          transition={{ delay: 0.13 * id }}
           src={user?.avatar}
           alt="logo da empresa"
         />
         <p>
-          <span>{elem.period}</span>
+          <span>{period}</span>
         </p>
         <motion.h2
           variants={slideLeftVariants}
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ delay: 0.13 * elem.id }}
+          transition={{ delay: 0.13 * id }}
         >
-          {elem.job_name}
+          {job_name}
         </motion.h2>
-        <p className="description">{elem.description}</p>
+        <p className="description">{description}</p>
       </div>
-      <h4>{elem.locality}</h4>
+      <h4>{locality}</h4>
     </StyledJob>
   );
 };

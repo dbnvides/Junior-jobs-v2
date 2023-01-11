@@ -68,6 +68,10 @@ export const StyledJob = styled(motion.li)`
   margin-top: 30%;
   cursor: pointer;
 
+  @media only screen and (max-width: 768px) {
+    margin-top: 15%;
+  }
+
   div {
     img {
       object-fit: contain;
