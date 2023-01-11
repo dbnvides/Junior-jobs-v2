@@ -6,6 +6,11 @@ export const formSchema = yup.object().shape({
         .required("Informe o titulo da vaga")
         .min(2, "Título muito curto")
         .max(100, "Título muito longo"),
+    locality: yup
+        .string()
+        .required("Informe o titulo da vaga")
+        .min(2, "Título muito curto")
+        .max(50, "Título muito longo"),
     period: yup
         .string()
         .required("Informe Integral ou Meio Peródo")
