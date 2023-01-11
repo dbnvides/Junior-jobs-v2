@@ -43,39 +43,14 @@ interface iJobs {
 export const Company = () => {
   const { isVisible, setVisible, loadingInModal, setEditProfileCompany, user } =
     useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobs, setJobViewer } =
+  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId } =
     useContext(CompanyContext);
+
   const navigate = useNavigate();
 
   if (user?.type === "Dev") {
     navigate("/user");
   }
-
-  useEffect(() => {
-    const loadJobs = async () => {
-      const token = localStorage.getItem("@TOKEN");
-
-      if (!token) {
-        return null;
-      }
-      try {
-        const { data } = await api.get(`jobs`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const filterData = data.filter((element: iJobs) => {
-          return element.usersId === user?.id;
-        });
-
-        setJobs([...filterData]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    loadJobs();
-  }, []);
 
   const deleteJob = async (job: iJobs) => {
     const token = localStorage.getItem("@TOKEN");
@@ -97,7 +72,7 @@ export const Company = () => {
     }
   };
 
-  const setViewerJob = (job: iJobs) => {
+  const openViewerJob = (job: iUser[]) => {
     setJobViewer(job);
 
     setModalViewer(true);
@@ -154,7 +129,8 @@ export const Company = () => {
                     </button>
                     <button
                       onClick={() => {
-                        setViewerJob(element);
+                        openViewerJob(element.candidates);
+                        setJobId(element.id);
                       }}
                     >
                       <img src={iconVisualizar} alt="Visualizar" />
