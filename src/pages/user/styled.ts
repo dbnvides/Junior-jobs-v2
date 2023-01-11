@@ -4,6 +4,7 @@ export const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-height: 100vh;
 
   .sectionProfile {
     display: flex;

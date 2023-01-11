@@ -21,7 +21,7 @@ export const UserProfile = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("@TOKEN");
 
-  if (user?.type === "Company") {
+  if (user?.type === "Company" || user?.type === "company") {
     navigate("/company");
   }
 
@@ -41,7 +41,6 @@ export const UserProfile = () => {
           authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
