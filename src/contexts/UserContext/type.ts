@@ -5,6 +5,7 @@ export interface IJobContext {
   company: ICompany;
   addJob(job: IJob): void;
   loading: boolean;
+  find: false | IJob
 }
 
 export interface IJob {

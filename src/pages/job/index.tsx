@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { Container } from "../../components/Container";
 import { StyledFooter } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -8,7 +7,7 @@ import { jobContext } from "../../contexts/UserContext/userContext";
 import { StyledMain } from "./style";
 
 export const Job = () => {
-  const { job, company, addJob, loading } = useContext(jobContext);
+  const { job, company, addJob, loading , find} = useContext(jobContext);
 
   return (
     <>
@@ -38,7 +37,7 @@ export const Job = () => {
                 addJob(job);
               }}
             >
-              Candidatar
+             {find ? "Já Candidatado" : "Candidatar"}
             </button>
             <p className="text">{job?.description}</p>
             <h3>Requerimentos</h3>

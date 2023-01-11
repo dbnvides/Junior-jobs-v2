@@ -43,9 +43,11 @@ export const CardCompany = ({
 
   return (
     <StyledCardCompanyContainer>
-      {nameCompany.avatar ? (
+      {nameCompany.avatar !== undefined ? (
         <img
-          src={user?.type === "company" ? user.avatar : nameCompany.avatar}
+          src={
+            user?.type === "company" || user?.type === "Company" ? user.avatar : nameCompany.avatar
+          }
           alt="img"
         />
       ) : (
@@ -64,8 +66,7 @@ export const CardCompany = ({
           <span className="nameCompany">
             {user?.type === "company" ? user.name : nameCompany.name}
           </span>
-          {/*Localidade da compania*/}
-          <p className="locality">{id}</p>
+          <p className="locality">{nameCompany.locality}</p>
         </StyledInfCompany>
 
         <div className="description">

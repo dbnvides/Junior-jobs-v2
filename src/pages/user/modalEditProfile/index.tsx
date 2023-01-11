@@ -24,8 +24,8 @@ export const ModalEditProfile = () => {
     defaultValues: {
       name: user?.name,
       email: user?.email,
-      // linkedin: user?.linkedin,
-      // tecnology: user?.tecnology,
+      linkedin: user?.linkedin,
+      tecnology: user?.tecnology,
       avatar: user?.avatar,
     },
   });

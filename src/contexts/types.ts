@@ -13,15 +13,14 @@ export interface iRegister {
   confirPass: string;
   documentation: string;
   avatar: string;
-  locality:string;
-  site:string;
+  locality: string;
+  site: string;
   types?: {
-    type :string;
+    type: string;
     linkedin: string;
     tecnology: string;
     bio: string;
-    
-  }
+  };
 }
 
 export interface IContextChildren {
@@ -45,7 +44,6 @@ export interface iContextValue {
   setEditProfileCompany: React.Dispatch<React.SetStateAction<boolean>>;
   loadingInModal: boolean;
   setLoadingInModal: React.Dispatch<React.SetStateAction<boolean>>;
-  
 }
 export interface iUser {
   email: string;
@@ -55,5 +53,8 @@ export interface iUser {
   avatar: string | undefined;
   type: string;
   id: number;
+  linkedin?: string;
+  tecnology?: string;
+  bio?: string;
   apply_jobs?: IJob[] | [];
 }
