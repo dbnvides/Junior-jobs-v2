@@ -41,9 +41,9 @@ export const Job = () => {
            {find ? "Já Candidatado" : "Candidatar"}
           </button> }
             
-            <p className="text">{job?.description}</p>
+            <p className="margin">{job?.description}</p>
             <h3>Requerimentos</h3>
-            <p className="text">{job?.requirements}</p>
+            <p className="margin">{job?.requirements}</p>
             <h3>O que você irá fazer</h3>
             <p>{job?.responsabilitys}</p>
           </div>

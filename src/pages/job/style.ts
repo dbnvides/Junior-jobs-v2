@@ -116,9 +116,7 @@ export const StyledMain = styled.main`
 
     p{
       width: 80%;
-      white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     button {
@@ -137,7 +135,7 @@ export const StyledMain = styled.main`
       margin: 32px 0 16px;
     }
 
-    .text {
+    .margin {
       margin-bottom: 40px;
     }
   }
