@@ -69,6 +69,10 @@ export const StyledJob = styled(motion.li)`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 
+  @media only screen and (max-width: 768px) {
+    margin-top: 15%;
+  }
+
   div {
     img {
       object-fit: contain;

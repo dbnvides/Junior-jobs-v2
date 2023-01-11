@@ -1,4 +1,4 @@
-export interface IResponseProfile {
+export interface IResponseProfile { 
   //   email: string;
   //   name: string;
   //   documentation: string;

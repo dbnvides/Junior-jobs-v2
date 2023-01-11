@@ -1,11 +1,14 @@
 import { createContext, useState } from "react";
+import { IJob } from "../../pages/home/types";
+import { IContextChildren } from "../types";
+import { IContextHome } from "./types";
 
-export const HomeContext: any = createContext({});
+export const HomeContext = createContext({} as IContextHome);
 
-export const ContextoProvider = ({ children }: any) => {
-  const [jobsList, setJobsList] = useState([]);
-  const [searchTitle, setSearchTitle] = useState("");
-  const [searchLocal, setSearchLocal] = useState("");
+export const ContextoProvider = ({ children }: IContextChildren) => {
+  const [jobsList, setJobsList] = useState<IJob[]>([]);
+  const [searchTitle, setSearchTitle] = useState<string>("");
+  const [searchLocal, setSearchLocal] = useState<string>("");
   return (
     <HomeContext.Provider
       value={{
