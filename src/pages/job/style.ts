@@ -14,12 +14,14 @@ export const StyledMain = styled.main`
     color: var(--grey-3);
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
+  h1,h2,h3,h4,h5 {
     color: var(--grey-4);
+  }
+
+  .text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .card {
@@ -41,8 +43,10 @@ export const StyledMain = styled.main`
     position: relative;
 
     div {
-      width: 50px;
-      height: 50px;
+      min-width: 50px;
+      min-height: 50px;
+      max-width: 50px;
+      max-height: 50px;
 
       background-color: orange;
       border-radius: var(--radius-2);
@@ -59,9 +63,14 @@ export const StyledMain = styled.main`
     }
 
     span {
+      max-width: 40%;
       text-align: center;
+
       p {
         margin: 16px 0 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -98,6 +107,18 @@ export const StyledMain = styled.main`
     background-color: var(--white);
     border-radius: var(--radius-2);
 
+    h3{
+      width: 60%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    p{
+      width: 80%;
+      overflow: hidden;
+    }
+
     button {
       display: flex;
       align-items: center;
@@ -114,7 +135,7 @@ export const StyledMain = styled.main`
       margin: 32px 0 16px;
     }
 
-    .text {
+    .margin {
       margin-bottom: 40px;
     }
   }
@@ -137,8 +158,8 @@ export const StyledMain = styled.main`
         align-items: center;
         justify-content: center;
 
-        width: 140px;
-        height: 140px;
+        min-width: 140px;
+        min-height: 140px;
 
         position: relative;
         top: 0;
