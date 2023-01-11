@@ -23,11 +23,6 @@ interface iTeste {
 export const ModalViewer = () => {
   const { setModalViewer, jobViewer, loadJobs, setJobViewer, jobId } =
     useContext(CompanyContext);
-  const teste = jobViewer;
-  const teste2: iTeste = {
-    candidates: teste,
-  };
-  const [filterCandidates, setFilterCandidates] = useState<iTeste>(teste2);
 
   const updateCandidates = async (
     data: iTeste | undefined,
@@ -42,7 +37,6 @@ export const ModalViewer = () => {
         },
       });
       loadJobs();
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -52,19 +46,14 @@ export const ModalViewer = () => {
     const filter = jobViewer.filter((element) => {
       return candidate.id !== element.id;
     });
-    const removeList = setJobViewer(
-      jobViewer.filter((user) => user.id !== candidate.id)
-    );
 
     const candidates: iTeste = {
       candidates: filter,
     };
 
-    console.log(candidate);
-
     updateCandidates(candidates, jobId);
   };
-  console.log(jobViewer);
+
   if (jobViewer.length > 0) {
     return (
       <ModalViewerContainer>

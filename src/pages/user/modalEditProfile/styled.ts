@@ -20,6 +20,7 @@ export const StyledModalEditProfile = styled.div`
     max-height: 400px;
     overflow-y: scroll;
     scrollbar-width: 0;
+
     @media (min-width: 769px) {
       max-height: 600px;
     }
@@ -39,7 +40,7 @@ export const StyledModalEditProfile = styled.div`
       width: 100%;
       height: 48px;
       background-color: var(--color-primary);
-      color: var(--white);
+      color: white;
       border-radius: var(--radius-1);
       margin-bottom: 2rem;
       transition: 0.2s ease;

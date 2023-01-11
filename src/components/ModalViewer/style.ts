@@ -14,10 +14,12 @@ export const ModalViewerContainer = styled.div`
 
   .Modal {
     width: 95%;
+    max-width: 800px;
     height: 800px;
     background-color: var(--white);
     overflow: auto;
     border-radius: 5px;
+    z-index: 1000;
 
     .noCandidates {
       width: 100%;
@@ -65,6 +67,7 @@ export const ModalViewerContainer = styled.div`
       margin-top: 30px;
       padding: 50px 20px 30px 20px;
       border-radius: 5px;
+      background-color: var(--color-primary-3);
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
       > img {
@@ -98,7 +101,8 @@ export const ModalViewerContainer = styled.div`
         > button {
           width: 50px;
           height: 50px;
-          background-color: var(--grey-1);
+          background-color: var(--grey-3);
+
           border-radius: 5px;
           cursor: pointer;
         }
