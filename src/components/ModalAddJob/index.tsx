@@ -111,12 +111,12 @@ export const ModalAddJob = () => {
           <Textarea
             label="Papel do desenvolvedor"
             placeholder="Descreva as atividades que o desenvolvedor vai desempenhar"
-            id="responsabilities"
-            {...register("responsabilities")}
+            id="responsabilitys"
+            {...register("responsabilitys")}
           />
-          {errors.responsabilities && (
+          {errors.responsabilitys && (
             <span className="errorMessage">
-              {errors.responsabilities.message}
+              {errors.responsabilitys.message}
             </span>
           )}
           <button
