@@ -103,7 +103,7 @@ export const StyledMain = styled.main`
       align-items: center;
       justify-content: center;
 
-      height: 48px;
+      min-height: 48px;
 
       background-color: var(--color-primary);
       border-radius: var(--radius-1);

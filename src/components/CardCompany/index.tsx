@@ -1,10 +1,8 @@
 import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
-import { ICompany } from "../../contexts/UserContext/type";
+import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
-import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { slideRightVariants } from "../../pages/home/motion";
@@ -35,11 +33,7 @@ export const CardCompany = ({
     >
       {avatar !== undefined ? (
         <img
-          src={
-            user?.type === "company" || user?.type === "Company"
-              ? user.avatar
-              : avatar
-          }
+          src={user?.type === "company" || user?.type === "Company" ? user.avatar : avatar}
           alt="img"
         />
       ) : (
@@ -61,9 +55,7 @@ export const CardCompany = ({
           </div>
 
           <h1 className="titleJob">{job_name}</h1>
-          <span className="nameCompany">
-            {user?.type === "company" ? user.name : nameCompany}
-          </span>
+          <span className="nameCompany">{user?.type === "company" ? user.name : nameCompany}</span>
           <p className="locality">{locality}</p>
         </StyledInfCompany>
 

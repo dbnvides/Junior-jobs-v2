@@ -9,14 +9,17 @@ import { MyUserContext } from "../components/ProtectRoutes/MyUserContext";
 import { Home } from "../pages/home";
 import { MyHomeContext } from "../components/ProtectRoutes/MyHomeContext";
 import { NotFound } from "../components/NotFound";
+import { MyCompanyContext } from "../components/ProtectRoutes/MyCompanyContext";
 
-export const MainRoutes = () => { 
+export const MainRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectRoutes />}>
-        <Route path="/company" element={<Company />} />
+        <Route element={<MyCompanyContext />}>
+          <Route path="/company" element={<Company />} />
+        </Route>
         <Route element={<MyUserContext />}>
           <Route element={<MyHomeContext />}>
             <Route path="/home" element={<Home />} />
@@ -25,7 +28,7 @@ export const MainRoutes = () => {
           <Route path="/job/:name" element={<Job />} />
         </Route>
       </Route>
-      <Route path="not Found" element={<NotFound/>}/>
+      <Route path="not Found" element={<NotFound />} />
     </Routes>
   );
 };
