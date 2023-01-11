@@ -3,11 +3,13 @@ import { Container } from "../../components/Container";
 import { StyledFooter } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { LoadPage } from "../../components/Loading";
+import { authContext } from "../../contexts/authContext";
 import { jobContext } from "../../contexts/UserContext/userContext";
 import { StyledMain } from "./style";
 
 export const Job = () => {
   const { job, company, addJob, loading , find} = useContext(jobContext);
+  const { user } = useContext(authContext);
 
   return (
     <>
@@ -31,14 +33,14 @@ export const Job = () => {
             </p>
             <h3>{job?.job_name}</h3>
             <h5>{company?.locality }</h5>
-            <button
-              type="button"
-              onClick={() => {
-                addJob(job);
-              }}
-            >
-             {find ? "Já Candidatado" : "Candidatar"}
-            </button>
+            {user?.type === "Dev" &&
+            <button type="button" onClick={() => {
+              addJob(job);
+            }}
+          >
+           {find ? "Já Candidatado" : "Candidatar"}
+          </button> }
+            
             <p className="text">{job?.description}</p>
             <h3>Requerimentos</h3>
             <p className="text">{job?.requirements}</p>
