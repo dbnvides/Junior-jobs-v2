@@ -21,7 +21,7 @@ export const StyleSection = styled.section`
 
     font-size: var(--title-2);
     font-weight: var(--bold);
-    color: var(--color-primary);
+    color: var(--grey-5);
   }
   && form {
     width: 90%;
@@ -39,7 +39,7 @@ export const StyleSection = styled.section`
     font-size: var(--title-5);
     font-weight: var(--bold);
     background-color: var(--color-primary);
-    color: var(--white);
+    color: var(--grey-5);
     border-radius: var(--radius-1);
     margin-top: 10px;
   }

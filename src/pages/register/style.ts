@@ -33,7 +33,7 @@ export const StyleSectionRe = styled.section`
 
     font-size: var(--title-2);
     font-weight: var(--bold);
-    color: var(--color-primary);
+    color: var(--grey-5);
   }
   && form {
     width: 90%;
@@ -49,7 +49,7 @@ export const StyleSectionRe = styled.section`
     width: 100%;
     height: 48px;
     background-color: var(--color-primary);
-    color: var(--white);
+    color: var(--grey-5);
     border-radius: var(--radius-1);
     margin-top: 10px;
   }
@@ -86,12 +86,12 @@ export const StyleDiv = styled.div`
     border-radius: var(--radius-1);
     font-size: var(--title-4);
     font-weight: var(--bold);
-    color: var(--color-primary);
+    color: var(--grey-5);
   }
 
   && button:focus {
     background-color: var(--color-primary);
-    color: var(--white);
+    color: white;
   }
 `;
 export const SpanErro = styled.p`

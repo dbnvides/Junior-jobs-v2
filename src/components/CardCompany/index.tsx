@@ -6,6 +6,8 @@ import { ICompany } from "../../contexts/UserContext/type";
 import { authContext } from "../../contexts/authContext";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { slideRightVariants } from "../../pages/home/motion";
 
 export const CardCompany = ({
   period,
@@ -24,7 +26,13 @@ export const CardCompany = ({
   const navigate = useNavigate();
 
   return (
-    <StyledCardCompanyContainer>
+    <StyledCardCompanyContainer
+      variants={slideRightVariants}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: false, amount: 0.25 }}
+      transition={{ delay: 0.4 }}
+    >
       {avatar !== undefined ? (
         <img
           src={

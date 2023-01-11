@@ -14,6 +14,7 @@ export const MenuContainer = () => {
 
   const logout = () => {
     localStorage.clear();
+
     setUser(null);
     navigate("/");
   };

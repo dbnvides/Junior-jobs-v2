@@ -35,7 +35,7 @@ export const CardJob = ({ elem }: any) => {
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ delay: 0.13 * elem.id }}
+      transition={{ delay: 0.15 * elem.id }}
       onClick={() => {
         localStorage.setItem("@JOBID", elem.id);
         localStorage.setItem("@COMPANYID", elem.usersId);
@@ -48,7 +48,7 @@ export const CardJob = ({ elem }: any) => {
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ delay: 0.13 * elem.id }}
+          transition={{ delay: 1 }}
           src={user?.avatar}
           alt="logo da empresa"
         />
