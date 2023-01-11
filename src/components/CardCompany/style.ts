@@ -18,6 +18,9 @@ export const StyledCardCompanyContainer = styled.li`
     width: 50px;
     height: 50px;
     border-radius: 10px;
+    object-fit: contain;
+    background-color: var(--white);
+    border: 2px solid var(--grey-3);
   }
 
   .avatarDefault {
@@ -48,8 +51,8 @@ export const StyledCardCompanyContainer = styled.li`
 
   .outWork {
     position: absolute;
-    left: 20px;
-    bottom: 20px;
+    right: 30px;
+    bottom: 40px;
     width: 30px;
     height: 30px;
     border-radius: var(--radius-1);

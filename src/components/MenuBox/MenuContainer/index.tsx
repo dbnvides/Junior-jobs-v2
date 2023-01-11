@@ -11,7 +11,7 @@ import { DarkModeContainer } from "../DarkMode";
 export const MenuContainer = () => {
   const { user, setUser } = useContext(authContext);
   const navigate = useNavigate();
-  console.log(user);
+
   const logout = () => {
     localStorage.clear();
     setUser(null);
