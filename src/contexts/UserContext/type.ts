@@ -28,6 +28,8 @@ export interface ICompany {
   type?: string;
   id?: number;
   candidates?: iUser[];
+  locality?: string;
+  site?: string;
 }
 
 export interface IResponseProfile {
