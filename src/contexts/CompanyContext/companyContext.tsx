@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { api } from "../../services/api";
 
 interface iCompanyProviderProps {
   children: React.ReactNode;
@@ -11,8 +12,11 @@ interface iCompanyContext {
   setModalViewer: React.Dispatch<React.SetStateAction<boolean>>;
   setJobs: React.Dispatch<React.SetStateAction<iJobs[]>>;
   jobs: iJobs[];
-  setJobViewer: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
-  jobViewer: iJobs | undefined;
+  setJobViewer: React.Dispatch<React.SetStateAction<iUser[]>>;
+  jobViewer: iUser[];
+  loadJobs: () => void;
+  jobId: number | undefined;
+  setJobId: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
 interface iUser {
@@ -43,7 +47,30 @@ export const CompanyContext = createContext({} as iCompanyContext);
 export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
   const [modalViewer, setModalViewer] = useState(false);
   const [jobs, setJobs] = useState<iJobs[]>([]);
-  const [jobViewer, setJobViewer] = useState<iJobs>();
+  const [jobViewer, setJobViewer] = useState<iUser[]>([]);
+  const [jobId, setJobId] = useState<number>();
+
+  const loadJobs = async () => {
+    const token = localStorage.getItem("@TOKEN");
+    const id = localStorage.getItem("@ID");
+    if (!token) {
+      return null;
+    }
+    try {
+      const { data } = await api.get(`jobs?usersId=${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setJobs(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    loadJobs();
+  }, []);
 
   return (
     <CompanyContext.Provider
@@ -54,6 +81,9 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
         setJobs,
         jobViewer,
         setJobViewer,
+        loadJobs,
+        jobId,
+        setJobId,
       }}
     >
       {children}

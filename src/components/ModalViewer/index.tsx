@@ -21,8 +21,9 @@ interface iTeste {
 }
 
 export const ModalViewer = () => {
-  const { setModalViewer, jobViewer } = useContext(CompanyContext);
-  const teste = jobViewer?.candidates;
+  const { setModalViewer, jobViewer, loadJobs, setJobViewer, jobId } =
+    useContext(CompanyContext);
+  const teste = jobViewer;
   const teste2: iTeste = {
     candidates: teste,
   };
@@ -33,13 +34,14 @@ export const ModalViewer = () => {
     id: number | undefined
   ) => {
     const token = localStorage.getItem("@TOKEN");
-    console.log(data);
+
     try {
-      const response = await api.patch(`jobs/1`, data, {
+      const response = await api.patch(`jobs/${id}`, data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
+      loadJobs();
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -47,35 +49,36 @@ export const ModalViewer = () => {
   };
 
   const removeCandidate = (candidate: iUser) => {
-    const filter = jobViewer?.candidates.filter((element) => {
+    const filter = jobViewer.filter((element) => {
       return candidate.id !== element.id;
     });
+    const removeList = setJobViewer(
+      jobViewer.filter((user) => user.id !== candidate.id)
+    );
 
     const candidates: iTeste = {
       candidates: filter,
     };
 
-    setFilterCandidates(candidates);
+    console.log(candidate);
 
-    console.log(filter);
-
-    updateCandidates(filterCandidates, candidate.id);
+    updateCandidates(candidates, jobId);
   };
-
-  return (
-    <ModalViewerContainer>
-      <div className="Modal">
-        <div className="ModalHeader">
-          <div>
-            <h1>Candidatos a vaga </h1>
-            <button onClick={() => setModalViewer(false)}> X </button>
+  console.log(jobViewer);
+  if (jobViewer.length > 0) {
+    return (
+      <ModalViewerContainer>
+        <div className="Modal">
+          <div className="ModalHeader">
+            <div>
+              <h1>Candidatos a vaga </h1>
+              <button onClick={() => setModalViewer(false)}> X </button>
+            </div>
           </div>
-        </div>
-        <div className="bar"></div>
-        <div className="ModalBody">
-          {jobViewer?.candidates ? (
+          <div className="bar"></div>
+          <div className="ModalBody">
             <ul>
-              {filterCandidates.candidates?.map((element, index) => {
+              {jobViewer?.map((element, index) => {
                 return (
                   <li className="user" key={index}>
                     <img src={element.avatar} alt="img" />
@@ -107,13 +110,25 @@ export const ModalViewer = () => {
                 );
               })}
             </ul>
-          ) : (
-            <div className="noCandidates">
-              <h1>Ainda não há candidatos !</h1>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
-    </ModalViewerContainer>
-  );
+      </ModalViewerContainer>
+    );
+  } else {
+    return (
+      <ModalViewerContainer>
+        <div className="Modal">
+          <div className="ModalHeader">
+            <div>
+              <h1>Candidatos a vaga </h1>
+              <button onClick={() => setModalViewer(false)}> X </button>
+            </div>
+          </div>
+          <div className="noCandidates">
+            <h1>Ainda não há candidatos !</h1>
+          </div>
+        </div>
+      </ModalViewerContainer>
+    );
+  }
 };

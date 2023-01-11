@@ -3,12 +3,10 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import { ModalViewer } from "../../components/ModalViewer";
-import img from "../../assets/img/company.svg";
 import { useContext } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
 import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
-import { useEffect } from "react";
 import { api } from "../../services/api";
 import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconEditar from "../../assets/img/icon-editar.svg";
@@ -43,39 +41,13 @@ interface iJobs {
 export const Company = () => {
   const { isVisible, setVisible, loadingInModal, setEditProfileCompany, user } =
     useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobs, setJobViewer } =
-    useContext(CompanyContext);
+  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId } = useContext(CompanyContext);
+
   const navigate = useNavigate();
 
   if (user?.type === "Dev") {
     navigate("/user");
   }
-
-  useEffect(() => {
-    const loadJobs = async () => {
-      const token = localStorage.getItem("@TOKEN");
-
-      if (!token) {
-        return null;
-      }
-      try {
-        const { data } = await api.get(`jobs`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const filterData = data.filter((element: iJobs) => {
-          return element.usersId === user?.id;
-        });
-
-        setJobs([...filterData]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    loadJobs();
-  }, []);
 
   const deleteJob = async (job: iJobs) => {
     const token = localStorage.getItem("@TOKEN");
@@ -97,7 +69,7 @@ export const Company = () => {
     }
   };
 
-  const setViewerJob = (job: iJobs) => {
+  const openViewerJob = (job: iUser[]) => {
     setJobViewer(job);
 
     setModalViewer(true);
@@ -119,9 +91,7 @@ export const Company = () => {
               <h2>{user?.name}</h2>
               <p>{user?.email}</p>
             </div>
-            <button onClick={() => setEditProfileCompany(true)}>
-              Editar Perfil
-            </button>
+            <button onClick={() => setEditProfileCompany(true)}>Editar Perfil</button>
           </div>
         </div>
         <div className="">
@@ -154,7 +124,8 @@ export const Company = () => {
                     </button>
                     <button
                       onClick={() => {
-                        setViewerJob(element);
+                        openViewerJob(element.candidates);
+                        setJobId(element.id);
                       }}
                     >
                       <img src={iconVisualizar} alt="Visualizar" />

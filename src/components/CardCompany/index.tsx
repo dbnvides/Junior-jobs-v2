@@ -2,20 +2,14 @@ import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
-import {
-  ICompany,
-  IJob,
-  IResponseProfile,
-} from "../../contexts/UserContext/type";
+import { ICompany } from "../../contexts/UserContext/type";
 import { authContext } from "../../contexts/authContext";
 import { api } from "../../services/api";
-import { IJobUser } from "../../pages/user/types";
 
 export const CardCompany = ({
   period,
   job_name,
   work_type,
-  avatar,
   description,
   id,
   children,
@@ -49,8 +43,8 @@ export const CardCompany = ({
 
   return (
     <StyledCardCompanyContainer>
-      {avatar ? (
-        <img src={avatar} alt="img" />
+      {nameCompany.avatar ? (
+        <img src={nameCompany.avatar} alt="img" />
       ) : (
         <div className="avatarDefault">
           <FaUser />
@@ -66,7 +60,7 @@ export const CardCompany = ({
           <h1 className="titleJob">{job_name}</h1>
           <span className="nameCompany">{nameCompany.name}</span>
           {/*Localidade da compania*/}
-          <p className="locality">{nameCompany.id}</p>
+          <p className="locality">{id}</p>
         </StyledInfCompany>
 
         <div className="description">

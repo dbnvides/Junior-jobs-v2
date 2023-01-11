@@ -3,8 +3,8 @@ import { iUser } from "../authContext";
 export interface IJobContext {
   job: IJob;
   company: ICompany;
-  addJob(job : IJob): void;
-  loading: boolean
+  addJob(job: IJob): void;
+  loading: boolean;
 }
 
 export interface IJob {
@@ -16,7 +16,7 @@ export interface IJob {
   requirements?: string;
   responsabilitys?: string;
   id?: number;
-  candidates?: number[];
+  candidates?: iUser[];
 }
 
 export interface ICompany {
