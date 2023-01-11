@@ -1,7 +1,7 @@
 import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
-import { HtmlHTMLAttributes, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ICompany } from "../../contexts/UserContext/type";
 import { authContext } from "../../contexts/authContext";
 import { api } from "../../services/api";
@@ -19,15 +19,6 @@ export const CardCompany = ({
   const [loading, setLoading] = useState(false);
   const { user } = useContext(authContext);
   const navigate = useNavigate();
-
-  const stopAction = (e: any) => {
-    console.log(e);
-    if (e.target.tagName !== "svg") {
-      localStorage.setItem("@JOBID", `${id}`);
-      localStorage.setItem("@COMPANYID", `${nameCompany.id}`);
-      navigate(`/job/${job_name}`);
-    }
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -53,11 +44,7 @@ export const CardCompany = ({
   }, []);
 
   return (
-    <StyledCardCompanyContainer
-      onClick={(e) => {
-        stopAction(e);
-      }}
-    >
+    <StyledCardCompanyContainer>
       {nameCompany.avatar !== undefined ? (
         <img
           src={
@@ -71,7 +58,13 @@ export const CardCompany = ({
         </div>
       )}
       <div>
-        <StyledInfCompany>
+        <StyledInfCompany
+          onClick={() => {
+            localStorage.setItem("@JOBID", `${id}`);
+            localStorage.setItem("@COMPANYID", `${nameCompany.id}`);
+            navigate(`/job/${job_name}`);
+          }}
+        >
           <div className="smallDetail">
             <p>{work_type}</p>
             <p>{period}</p>
