@@ -22,8 +22,8 @@ export const Job = () => {
               <img src={company?.avatar} alt={company?.name} />
             </div>
             <span>
-              <h3>{company?.name}</h3>
-              <p>{company?.site?.replace("https://", "").replace("/", "")}</p>
+              <h3 className="text">{company?.name}</h3>
+              <p className="text">{company?.site?.replace("https://", "").replace("/", "")}</p>
             </span>
             <a href={company?.site || "/not Found"}>Site da empresa</a>
           </div>
