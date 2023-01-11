@@ -18,6 +18,9 @@ export const StyledCardCompanyContainer = styled.li`
     width: 50px;
     height: 50px;
     border-radius: 10px;
+    object-fit: contain;
+    background-color: var(--white);
+    border: 2px solid var(--grey-3);
   }
 
   .avatarDefault {

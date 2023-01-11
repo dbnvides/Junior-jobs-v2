@@ -25,14 +25,10 @@ export const Header = () => {
           <Container>
             <nav>
               <img src={Logo} alt="Júnior Jobs" />
-              <div className="boxMenu">
+              {/* <div className="boxMenu">
                 <div>
                   {user.avatar ? (
-                    <img
-                      className="imgProfile"
-                      src={user.avatar}
-                      alt="foto de perfil"
-                    />
+                    <img className="imgProfile" src={user.avatar} alt="foto de perfil" />
                   ) : (
                     <AiOutlineUser />
                   )}
@@ -40,8 +36,8 @@ export const Header = () => {
                 <button onClick={() => logout()}>
                   <IoLogOutOutline />
                 </button>
-              </div>
-              {/* <MenuBox /> */}
+              </div> */}
+              <MenuBox />
             </nav>
           </Container>
         </StyledHeader>

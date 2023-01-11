@@ -159,7 +159,3 @@ export const StyledMain = styled.main`
     }
   }
 `;
-
-export const StyledMainContent = styled.div`
-  min-height: 100vh;
-`;
