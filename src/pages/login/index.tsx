@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { authContext } from "../../contexts/authContext";
-import { iLogin } from "../../services/loginRequest";
 import { SpanErro } from "../register/style";
 import { StyleSection } from "./style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadPage } from "../../components/Loading";
+import { iLogin } from "../../contexts/types";
 
 export const Login = () => {
   const schema = yup.object().shape({

@@ -1,7 +1,28 @@
 import React from "react";
-import { iLogin } from "../services/loginRequest";
-import { iRegister } from "../services/registerRequest";
+
 import { IJob } from "./UserContext/type";
+
+export interface iLogin {
+  email: string;
+  password: string;
+}
+export interface iRegister {
+  name: string;
+  email: string;
+  password: string;
+  confirPass: string;
+  documentation: string;
+  avatar: string;
+  locality:string;
+  site:string;
+  types?: {
+    type :string;
+    linkedin: string;
+    tecnology: string;
+    bio: string;
+    
+  }
+}
 
 export interface IContextChildren {
   children: React.ReactNode;
@@ -24,6 +45,7 @@ export interface iContextValue {
   setEditProfileCompany: React.Dispatch<React.SetStateAction<boolean>>;
   loadingInModal: boolean;
   setLoadingInModal: React.Dispatch<React.SetStateAction<boolean>>;
+  
 }
 export interface iUser {
   email: string;
