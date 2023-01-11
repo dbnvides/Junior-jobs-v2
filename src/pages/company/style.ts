@@ -13,7 +13,7 @@ export const CompanyPageContainer = styled.div`
 
   .perfil {
     height: 200px;
-    background-color: var(--white);
+    background-color: var(--color-primary-3);
     width: 300px;
     margin: 0 auto;
     position: relative;
@@ -54,7 +54,7 @@ export const CompanyPageContainer = styled.div`
 
       button {
         background-color: var(--grey-2);
-        color: var(--color-primary);
+        color: var(--grey-primary);
         padding: 15px;
         border-radius: 5px;
         font-size: var(--text);
@@ -81,7 +81,7 @@ export const CompanyPageContainer = styled.div`
 
     > button {
       background-color: var(--color-primary);
-      color: var(--white);
+      color: white;
       padding: 15px;
       border-radius: 5px;
       font-size: var(--text);

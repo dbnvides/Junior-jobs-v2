@@ -7,7 +7,7 @@ export const StyledHome = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--grey-1);
+  background-color: var(--white);
 
   > * {
     :nth-child(2) {
@@ -46,8 +46,8 @@ export const StyledViewMoreContainer = styled.div`
     width: 15%;
     height: 60px;
     border-radius: var(--radius-1);
-    background-color: var(--color-primary);
-    color: var(--white);
+    background-color: var(--color-primary-3);
+    color: var(--grey-4);
 
     @media only screen and (max-width: 1300px) {
       width: 95%;
@@ -64,8 +64,9 @@ export const StyledJob = styled(motion.li)`
   flex-direction: column;
   justify-content: space-between;
   gap: 26px;
-  background-color: var(--white);
+  background-color: var(--color-primary-3);
   margin-top: 30%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
 
   div {
@@ -112,6 +113,7 @@ export const FilterBar = styled.div`
   width: 100%;
   max-width: 1000px;
   background-color: var(--white);
+  border: 3px solid var(--color-primary-3);
   border-radius: var(--radius-2);
   display: flex;
   flex-direction: column;

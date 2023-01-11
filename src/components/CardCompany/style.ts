@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const StyledCardCompanyContainer = styled.li`
+export const StyledCardCompanyContainer = styled(motion.li)`
   height: 260px;
-  background-color: var(--white);
+  background-color: var(--color-primary-3);
   width: 300px;
   margin: 0 auto;
   position: relative;
@@ -54,6 +55,7 @@ export const StyledCardCompanyContainer = styled.li`
     justify-content: flex-end;
     gap: 10px;
     button {
+      color: var(--grey-4);
       font-size: 25px;
     }
   }
@@ -146,8 +148,8 @@ export const StyledInfCompany = styled.div`
     color: var(--grey-3);
 
     p {
-      padding: 0 2px;
-      background-color: var(--grey-1);
+      padding: 0 3px;
+      background-color: var(--grey-2);
     }
   }
 
