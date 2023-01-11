@@ -12,6 +12,8 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
   const [jobs, setJobs] = useState<iJobs[]>([]);
   const [jobViewer, setJobViewer] = useState<iUser[]>([]);
   const [jobId, setJobId] = useState<number>();
+  const [jobEdit, setJobEdit] = useState<iJobs>();
+  const [loading, setLoading] = useState(false);
 
   const loadJobs = async () => {
     const token = localStorage.getItem("@TOKEN");
@@ -27,6 +29,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
       });
 
       setJobs(data);
+      console.log("ola");
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +37,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
 
   useEffect(() => {
     loadJobs();
-  }, []);
+  }, [loading]);
 
   return (
     <CompanyContext.Provider
@@ -48,6 +51,9 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
         loadJobs,
         jobId,
         setJobId,
+        jobEdit,
+        setJobEdit,
+        setLoading,
       }}
     >
       {children}
