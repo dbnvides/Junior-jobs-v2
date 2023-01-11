@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const StyledHome = styled.div`
   width: 100%;
@@ -54,8 +55,7 @@ export const StyledViewMoreContainer = styled.div`
   }
 `;
 
-export const StyledJob = styled.li`
-  cursor: pointer;
+export const StyledJob = styled(motion.li)`
   position: relative;
   border-radius: var(--radius-2);
   width: 100%;

@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { StyledJob } from "../../pages/home/style";
 import { api } from "../../services/api";
+import { motion } from "framer-motion";
+import {
+  slideRightVariants,
+  slideDownVariants,
+  slideLeftVariants,
+} from "../../pages/home/motion";
 
 export const CardJob = ({ elem }: any) => {
   const navigate = useNavigate();
@@ -25,6 +31,11 @@ export const CardJob = ({ elem }: any) => {
 
   return (
     <StyledJob
+      variants={slideRightVariants}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ delay: 0.13 * elem.id }}
       onClick={() => {
         localStorage.setItem("@JOBID", elem.id);
         localStorage.setItem("@COMPANYID", elem.usersId);
@@ -32,12 +43,28 @@ export const CardJob = ({ elem }: any) => {
       }}
     >
       <div>
-        <img src={user?.avatar} alt="logo da empresa" />
+        <motion.img
+          variants={slideDownVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ delay: 0.13 * elem.id }}
+          src={user?.avatar}
+          alt="logo da empresa"
+        />
         <p>
           <span>{elem.period}</span>
         </p>
-        <h2>{elem.job_name}</h2>
-        <p className="description">{elem.description}</p>
+        <motion.h2
+          variants={slideLeftVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ delay: 0.13 * elem.id }}
+        >
+          {elem.job_name}
+        </motion.h2>
+        <p>{elem.description}</p>
       </div>
       <h4>{elem.locality}</h4>
     </StyledJob>
