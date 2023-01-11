@@ -10,8 +10,6 @@ import { StyledMain } from "./style";
 export const Job = () => {
   const { job, company, addJob, loading } = useContext(jobContext);
 
-  console.log(job)
-
   return (
     <>
       {loading && <LoadPage />}
