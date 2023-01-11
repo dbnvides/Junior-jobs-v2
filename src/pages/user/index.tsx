@@ -16,9 +16,11 @@ import { iUser } from "../../contexts/types";
 import { motion } from "framer-motion";
 import { slideRightVariants, slideLeftVariants } from "../home/motion";
 import { CardUserJob } from "../../components/CardUserJob";
+import { jobContext } from "../../contexts/UserContext/userContext";
 
 export const UserProfile = () => {
   const { user, setUser, setVisible } = useContext(authContext);
+  const { setApplyed } = useContext(jobContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("@TOKEN");
@@ -38,11 +40,13 @@ export const UserProfile = () => {
     };
 
     try {
-      await api.patch(`jobs/${id}`, newArrCand, {
+      const response = await api.patch(`jobs/${id}`, newArrCand, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
+      setApplyed(response.data.apply_jobs || [])
+
     } catch (error) {
       console.log(error);
     }

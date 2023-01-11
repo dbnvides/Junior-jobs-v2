@@ -42,12 +42,14 @@ body{
     --white: ${(props) => props.theme.colors.white};
     --color-primary: ${(props) => props.theme.colors.primary};
     --color-primary-2: ${(props) => props.theme.colors.primary2};
+    --color-primary-3: ${(props) => props.theme.colors.primary3};
     --color-secondary: ${(props) => props.theme.colors.secondary};
     --color-secondary-2: ${(props) => props.theme.colors.secondary2};
     --grey-1: ${(props) => props.theme.colors.grey1};
     --grey-2: ${(props) => props.theme.colors.grey2};
     --grey-3:${(props) => props.theme.colors.grey3};
     --grey-4: ${(props) => props.theme.colors.grey4};
+    --grey-5: ${(props) => props.theme.colors.grey5}
     --negative:${(props) => props.theme.colors.negative};
     --warning: ${(props) => props.theme.colors.warning};
     --sucess: ${(props) => props.theme.colors.sucess};
