@@ -1,4 +1,4 @@
-import { iUser } from "../authContext";
+import { iUser } from "../types";
 
 export interface IJobContext {
   job: IJob;
@@ -28,6 +28,8 @@ export interface ICompany {
   type?: string;
   id?: number;
   candidates?: iUser[];
+  locality?: string;
+  site?: string;
 }
 
 export interface IResponseProfile {
@@ -37,5 +39,11 @@ export interface IResponseProfile {
   avatar: string;
   type: "dev" | "company";
   id: number;
+  apply_jobs?: IJob[];
+}
+
+export interface IUpdateUser {
+  name?: string;
+  avatar?: string;
   apply_jobs?: IJob[];
 }

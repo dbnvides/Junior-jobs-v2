@@ -26,7 +26,7 @@ export const formSchema = yup.object().shape({
         .required("Informe os requerimentos para a vaga")
         .min(2, "Descrição muito curta")
         .max(1000, "Descrição muito longa"),
-    responsabilities: yup
+    responsabilitys: yup
         .string()
         .required("Informe as responsabilidades do desenvolvedor")
         .min(2, "Descrição muito curta")

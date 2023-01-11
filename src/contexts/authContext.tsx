@@ -3,38 +3,8 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { iLogin } from "../services/loginRequest";
-import { iRegister } from "../services/registerRequest";
-import { IJob } from "./UserContext/type";
+import { iContextValue, iChildren, iUser, iRegister, iLogin } from "./types";
 
-interface iChildren {
-  children: React.ReactNode;
-}
-
-interface iContextValue {
-  registerUser: (body: iRegister) => Promise<void>;
-  login: (body: iLogin) => Promise<void>;
-  user: iUser | null;
-  loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isVisible: boolean;
-  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  setUser: React.Dispatch<React.SetStateAction<iUser | null>>;
-  editProfileCompany: boolean;
-  setEditProfileCompany: React.Dispatch<React.SetStateAction<boolean>>;
-  loadingInModal: boolean;
-  setLoadingInModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-export interface iUser {
-  email: string;
-  name: string;
-  password: string;
-  documentation: string;
-  avatar: string;
-  type: string;
-  id: number;
-  apply_jobs?: IJob[] | [];
-}
 export const authContext = createContext({} as iContextValue);
 
 export const AuthProvider = ({ children }: iChildren) => {
@@ -43,6 +13,8 @@ export const AuthProvider = ({ children }: iChildren) => {
   const [isVisible, setVisible] = useState(false);
   const [editProfileCompany, setEditProfileCompany] = useState(false);
   const [loadingInModal, setLoadingInModal] = useState(false);
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -123,6 +95,7 @@ export const AuthProvider = ({ children }: iChildren) => {
         setEditProfileCompany,
         loadingInModal,
         setLoadingInModal,
+        
       }}
     >
       {children}

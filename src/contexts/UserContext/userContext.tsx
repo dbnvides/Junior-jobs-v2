@@ -1,15 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { IContextChildren } from "../../contexts/types";
+import { IContextChildren, iUser } from "../../contexts/types";
 import { api } from "../../services/api";
-import { iUpdateUser, updateUser } from "../../services/updateUserRequest";
-import { authContext, iUser } from "../authContext";
-import { ICompany, IJob, IJobContext } from "./type";
+import { authContext } from "../authContext";
+import { ICompany, IJob, IJobContext, IUpdateUser} from "./type";
 
 export const jobContext = createContext({} as IJobContext);
 
 export const JobProvider = ({ children }: IContextChildren) => {
-  const { user, setUser } = useContext(authContext)
+  const { user, setUser } = useContext(authContext);
 
   const [job, setJob] = useState<IJob>({});
   const [company, setCompany] = useState<ICompany>({});
@@ -23,7 +22,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
   const companyId = Number(localStorage.getItem("@COMPANYID"));
 
   const jobById = async (): Promise<void> => {
-    setLoading(true)
+    setLoading(true);
     try {
       const jobs = await api.get(`jobs`, {
         headers: {
@@ -41,47 +40,61 @@ export const JobProvider = ({ children }: IContextChildren) => {
       setCompany(users.data.find((company: ICompany) => company.id === companyId));
       setUser(users.data.find((user: iUser) => user.id === userId));
       setApplyed(users.data.find((user: iUser) => user.id === userId).apply_jobs || []);
-      
-      setLoading(false)
 
+      setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
-  const applyJob: iUpdateUser = {
+  const applyJob: IUpdateUser = {
     apply_jobs: applyed,
   };
 
   const addJob = (job: IJob): void => {
-  const find = user?.apply_jobs?.find((item: IJob) => item.id === job.id) || false
+    const find = user?.apply_jobs?.find((item: IJob) => item.id === job.id) || false;
     if (!find && !applying) {
       setApplying(true);
       setApplyed([...applyed, job]);
       toast.success("Candidatura enviada com sucesso", {
-        toastId: "yes"
-      })
+        toastId: "yes",
+      });
     } else {
       toast.warn("Candidatura já enviada", {
-        toastId: "yes"
-      })
+        toastId: "yes",
+      });
     }
   };
 
   useEffect(() => {
-    jobById()
-  }, [jobId, companyId])
+    jobById();
+    setApplying(false);
+  }, [jobId, companyId]);
 
   useEffect(() => {
     if (applying) {
-      updateUser(applyJob, userId);
+    const updateUser = async (data: IUpdateUser, id: number) : Promise<void> => {
+    try {
+      setLoading(true)
+      const response = await api.patch(`users/${id}`, data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data)
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+  };
+  updateUser(applyJob, userId)
     }
   }, [applyed]);
 
   return (
-    <jobContext.Provider value={{ job, company, addJob, loading }}>
-      {children}
-    </jobContext.Provider>
+    <jobContext.Provider value={{ job, company, addJob, loading }}>{children}</jobContext.Provider>
   );
 };

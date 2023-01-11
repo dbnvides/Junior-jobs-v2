@@ -62,9 +62,10 @@ export const StyledJob = styled.li`
   padding: 45px 25px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 26px;
   background-color: var(--white);
-  margin-top: 20%;
+  margin-top: 30%;
   cursor: pointer;
 
   div {
@@ -81,18 +82,20 @@ export const StyledJob = styled.li`
     gap: 8px;
 
     h2 {
-      min-height: 90px;
-      max-height: 90px;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       color: var(--grey-4);
     }
     .description {
-      width: 100%;
-      min-height: 105px;
-      max-height: 105px;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+
       color: var(--grey-3);
     }
   }

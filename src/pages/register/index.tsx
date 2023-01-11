@@ -3,11 +3,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { iRegister } from "../../services/registerRequest";
 import { SpanErro, StyleDiv, StyleSectionRe } from "./style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authContext } from "../../contexts/authContext";
+import { iRegister } from "../../contexts/types";
 
 export const Register = () => {
   const [typed, setTyped] = useState(false);
@@ -43,6 +43,8 @@ export const Register = () => {
       .string()
       .required("Confirmação da senha e obrigatoria")
       .oneOf([yup.ref("password")], "As senhas devem ser a mesma "),
+    locality: yup.string().required("Localizacão obrigatoria"),
+    site: yup.string().required("Site obrigatorio"),
   });
   const {
     register,
@@ -56,7 +58,6 @@ export const Register = () => {
     linkedin: "",
     tecnology: "",
     bio: "",
-    locality: "",
   };
   if (typed) {
     types.type = "Company";
@@ -126,6 +127,26 @@ export const Register = () => {
           {errors.confirPass?.message && (
             <SpanErro>{errors.confirPass.message}</SpanErro>
           )}
+          {typed && (
+            <Input
+              label="Localidade"
+              type="text"
+              placeholder="Digite sua cidade"
+              {...register("locality")}
+            />
+          )}
+          {errors.locality?.message && (
+            <SpanErro>{errors.locality.message}</SpanErro>
+          )}
+          {typed && (
+            <Input
+              label="Site"
+              type="url"
+              placeholder="Digite seu site"
+              {...register("site")}
+            />
+          )}
+          {errors.site?.message && <SpanErro>{errors.site.message}</SpanErro>}
           <button type="submit">Cadastrar</button>
           <span>Ou</span>
           <Link to={"/"}>Voltar</Link>

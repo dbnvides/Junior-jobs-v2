@@ -31,7 +31,6 @@ export const Home = () => {
     const getJobs = async () => {
       try {
         const response = await api.get("jobs");
-
         setJobsList(() => [...response.data]);
       } catch (error) {
         console.log(error);
@@ -40,7 +39,6 @@ export const Home = () => {
     getJobs();
   }, []);
 
-  console.log(jobsList);
   const renderAllJobs = () => {
     return jobsList.map((elem: any, index: any) => {
       return (
@@ -58,6 +56,29 @@ export const Home = () => {
       );
     });
   };
+
+  const renderLocalityFilter = () => {
+    const filteredJobs = jobsList.filter((elem: any) => {
+      return elem.locality.toLowerCase().includes(searchLocal.toLowerCase());
+    });
+    return filteredJobs.map((elem: any, index: any) => {
+      index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
+  };
+
+  const renderLocalNTitle = () => {
+    const filteredTitle = jobsList.filter((elem: any) => {
+      elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
+    });
+    const filteredLocality = jobsList.filter((elem: any) => {
+      return elem.locality.toLowerCase().includes(searchLocal.toLowerCase());
+    });
+    const allJobs = [...filteredTitle, ...filteredLocality];
+    return allJobs.map((elem: any, index: any) => {
+      index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+    });
+  };
+
   const renderFullTime = () => {
     const filteredJobs = jobsList.filter((elem: any) => {
       return elem.period === "Integral";
@@ -158,7 +179,11 @@ export const Home = () => {
               ? renderFullTime()
               : searchTitle === "" && searchLocal === ""
               ? renderAllJobs()
-              : renderTitleFilter()}
+              : searchTitle !== "" && searchLocal !== ""
+              ? renderLocalNTitle()
+              : searchTitle !== "" && searchLocal === ""
+              ? renderTitleFilter()
+              : renderLocalityFilter()}
           </StyledJobsList>
         </Container>
         <StyledViewMoreContainer>

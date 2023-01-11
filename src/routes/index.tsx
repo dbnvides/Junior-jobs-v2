@@ -8,6 +8,7 @@ import { Job } from "../pages/job";
 import { MyUserContext } from "../components/ProtectRoutes/MyUserContext";
 import { Home } from "../pages/home";
 import { MyHomeContext } from "../components/ProtectRoutes/MyHomeContext";
+import { NotFound } from "../components/NotFound";
 
 export const MainRoutes = () => { 
   return (
@@ -24,6 +25,7 @@ export const MainRoutes = () => {
           <Route path="/job/:name" element={<Job />} />
         </Route>
       </Route>
+      <Route path="not Found" element={<NotFound/>}/>
     </Routes>
   );
 };

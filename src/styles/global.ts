@@ -34,23 +34,24 @@ textarea:focus, input:focus, select:focus {
 }
 
 body{
-    background: var(--grey-1);
+    background: var(--white);
+    color:var(--grey-4) ;
 }
 
 :root{
-    --white: rgb(255, 255, 255);
-    --color-primary: rgb(31, 23, 23);
-    --color-primary-2: rgba(31, 23, 23, 0.75);
-    --color-secondary: rgba(255, 0, 0, 0.9);
-    --color-secondary-2: rgba(255, 0, 0, 0.6);
-    --grey-1: rgb(244, 246, 248);
-    --grey-2: rgb(201, 201, 201);
-    --grey-3: rgb(110, 128, 152);
-    --grey-4: rgb(25, 32, 45);
-    --negative: rgb(230, 0, 0);
-    --warning: rgb(255, 205, 7);
-    --sucess: rgb(22, 136, 33);
-    --information: rgb(21, 91, 203);
+    --white: ${(props) => props.theme.colors.white};
+    --color-primary: ${(props) => props.theme.colors.primary};
+    --color-primary-2: ${(props) => props.theme.colors.primary2};
+    --color-secondary: ${(props) => props.theme.colors.secondary};
+    --color-secondary-2: ${(props) => props.theme.colors.secondary2};
+    --grey-1: ${(props) => props.theme.colors.grey1};
+    --grey-2: ${(props) => props.theme.colors.grey2};
+    --grey-3:${(props) => props.theme.colors.grey3};
+    --grey-4: ${(props) => props.theme.colors.grey4};
+    --negative:${(props) => props.theme.colors.negative};
+    --warning: ${(props) => props.theme.colors.warning};
+    --sucess: ${(props) => props.theme.colors.sucess};
+    --information: ${(props) => props.theme.colors.information};
  
     --title-1: 34px;
     --title-2: 28px;

@@ -7,7 +7,6 @@ export const CardJob = ({ elem }: any) => {
   const navigate = useNavigate();
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
-  console.log(user);
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -35,12 +34,12 @@ export const CardJob = ({ elem }: any) => {
       <div>
         <img src={user?.avatar} alt="logo da empresa" />
         <p>
-          1m atrás • <span>{elem.period}</span>
+          <span>{elem.period}</span>
         </p>
         <h2>{elem.job_name}</h2>
         <p className="description">{elem.description}</p>
       </div>
-      <h4>Busca cidade ai</h4>
+      <h4>{elem.locality}</h4>
     </StyledJob>
   );
 };
