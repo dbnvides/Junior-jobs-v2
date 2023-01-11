@@ -1,4 +1,4 @@
-import { iUser } from "../authContext";
+import { iUser } from "../types";
 
 export interface IJobContext {
   job: IJob;
