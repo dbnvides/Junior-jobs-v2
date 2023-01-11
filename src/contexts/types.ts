@@ -13,8 +13,8 @@ export interface iRegister {
   confirPass: string;
   documentation: string;
   avatar: string;
-  locality?: string;
-  site?: string;
+  locality: string;
+  site: string;
   types?: {
     type: string;
     linkedin: string;
