@@ -1,10 +1,11 @@
 import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+import { HtmlHTMLAttributes, useContext, useEffect, useState } from "react";
 import { ICompany } from "../../contexts/UserContext/type";
 import { authContext } from "../../contexts/authContext";
 import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 export const CardCompany = ({
   period,
@@ -17,6 +18,16 @@ export const CardCompany = ({
   const [nameCompany, setNameCompany] = useState<ICompany>({});
   const [loading, setLoading] = useState(false);
   const { user } = useContext(authContext);
+  const navigate = useNavigate();
+
+  const stopAction = (e: any) => {
+    console.log(e);
+    if (e.target.tagName !== "svg") {
+      localStorage.setItem("@JOBID", `${id}`);
+      localStorage.setItem("@COMPANYID", `${nameCompany.id}`);
+      navigate(`/job/${job_name}`);
+    }
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -42,7 +53,11 @@ export const CardCompany = ({
   }, []);
 
   return (
-    <StyledCardCompanyContainer>
+    <StyledCardCompanyContainer
+      onClick={(e) => {
+        stopAction(e);
+      }}
+    >
       {nameCompany.avatar !== undefined ? (
         <img
           src={
