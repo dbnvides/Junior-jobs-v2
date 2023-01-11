@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { IContextChildren, iUser } from "../../contexts/types";
 import { api } from "../../services/api";
 import { authContext } from "../authContext";
-import { ICompany, IJob, IJobContext, IUpdateUser} from "./type";
+import { ICompany, IJob, IJobContext, IUpdateUser } from "./type";
 
 export const jobContext = createContext({} as IJobContext);
 
@@ -15,6 +15,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
   const [applyed, setApplyed] = useState<IJob[]>([]);
   const [applying, setApplying] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [candJob, setCandJon] = useState<iUser[]>([]);
 
   const userId = Number(localStorage.getItem("@ID"));
   const token = localStorage.getItem("@TOKEN");
@@ -68,7 +69,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
         toastId: "yes",
       });
     }
-    
   };
 
   useEffect(() => {
@@ -76,29 +76,41 @@ export const JobProvider = ({ children }: IContextChildren) => {
     setApplying(false);
   }, [jobId, companyId]);
 
+  const newArrCand = {
+    candidates: candJob,
+  };
   useEffect(() => {
     if (applying) {
-    const updateUser = async (data: IUpdateUser, id: number) : Promise<void> => {
-    try {
-      setLoading(true)
-      const response = await api.patch(`users/${id}`, data, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data)
-    } catch (error) {
-      setLoading(false)
-      console.log(error);
-    } finally {
-      setLoading(false)
-    }
-  };
-  updateUser(applyJob, userId)
+      const updateUser = async (data: IUpdateUser, id: number): Promise<void> => {
+        try {
+          setLoading(true);
+          const response = await api.patch(`users/${id}`, data, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+          setCandJon([...candJob, response.data]);
+
+          await api.patch(`jobs/${job.id}`, newArrCand, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          });
+        } catch (error) {
+          setLoading(false);
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      updateUser(applyJob, userId);
     }
   }, [applyed]);
 
   return (
-    <jobContext.Provider value={{ job, company, addJob, loading, find }}>{children}</jobContext.Provider>
+    <jobContext.Provider value={{ job, company, addJob, loading, find }}>
+      {children}
+    </jobContext.Provider>
   );
 };

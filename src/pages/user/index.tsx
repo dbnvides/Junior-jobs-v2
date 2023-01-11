@@ -36,7 +36,7 @@ export const UserProfile = () => {
     };
 
     try {
-      const response = await api.patch(`jobs/${id}`, newArrCand, {
+      await api.patch(`jobs/${id}`, newArrCand, {
         headers: {
           authorization: `Bearer ${token}`,
         },
