@@ -89,6 +89,7 @@ export const StyledJob = styled(motion.li)`
     gap: 8px;
 
     h2 {
+      height: 60px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;

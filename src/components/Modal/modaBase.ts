@@ -5,7 +5,7 @@ export const StyleModalBase = styled.section`
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 10;
+  z-index: 1000;
 
   width: 100%;
   height: 100vh;
@@ -14,15 +14,18 @@ export const StyleModalBase = styled.section`
 
   .modalClose {
     font-size: 25px;
+    color: var(--grey-5);
     position: absolute;
     right: 10px;
     top: 0;
   }
 
   .container {
-    background-color: white;
+    max-width: 600px;
+    background-color: var(--color-primary-3);
     border-radius: var(--radius-1);
     padding: 10px;
+    backdrop-filter: blur(2px);
   }
 
   .modalHeader {

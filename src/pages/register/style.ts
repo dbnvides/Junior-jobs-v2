@@ -49,7 +49,7 @@ export const StyleSectionRe = styled.section`
     width: 100%;
     height: 48px;
     background-color: var(--color-primary);
-    color: var(--grey-5);
+    color: white;
     border-radius: var(--radius-1);
     margin-top: 10px;
   }
