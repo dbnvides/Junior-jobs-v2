@@ -13,7 +13,7 @@ export const StyleField = styled.fieldset`
   && label {
     font-size: 20px;
     font-weight: var(--bold);
-    color: var(--color-primary);
+    color: var(--grey-5);
   }
 
   && input {

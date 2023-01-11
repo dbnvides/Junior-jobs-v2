@@ -17,7 +17,6 @@ export const CardJob = ({
   locality,
   period,
   usersId,
-  work_type,
 }: IJob) => {
   const navigate = useNavigate();
   const [user, setUser]: any = useState();
@@ -44,7 +43,7 @@ export const CardJob = ({
       initial="hidden"
       whileInView={"show"}
       viewport={{ once: true, amount: 0.25 }}
-      transition={{ delay: 0.13 * id }}
+      transition={{ delay: 0.15 * id }}
       onClick={() => {
         localStorage.setItem("@JOBID", `${id}`);
         localStorage.setItem("@COMPANYID", `${usersId}`);
@@ -57,7 +56,7 @@ export const CardJob = ({
           initial="hidden"
           whileInView={"show"}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ delay: 0.13 * id }}
+          transition={{ delay: 1 }}
           src={user?.avatar}
           alt="logo da empresa"
         />
