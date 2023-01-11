@@ -11,14 +11,11 @@ import {
 import { IJob } from "../../pages/home/types";
 
 export const CardJob = ({
-  candidates,
   description,
   id,
   job_name,
   locality,
   period,
-  requirements,
-  responsability,
   usersId,
   work_type,
 }: IJob) => {
