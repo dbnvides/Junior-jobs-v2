@@ -1,5 +1,5 @@
 import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
-import { IPropCard } from "./types";
+import { IPropCard } from "../CardCompany/types";
 import { FaUser } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { ICompany } from "../../contexts/UserContext/type";

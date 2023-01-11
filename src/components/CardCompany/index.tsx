@@ -1,10 +1,8 @@
 import { StyledCardCompanyContainer, StyledInfCompany } from "./style";
 import { IPropCard } from "./types";
 import { FaUser } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
-import { ICompany } from "../../contexts/UserContext/type";
+import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
-import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
 export const CardCompany = ({

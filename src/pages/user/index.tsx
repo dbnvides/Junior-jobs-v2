@@ -15,6 +15,7 @@ import { LoadPage } from "../../components/Loading";
 import { iUser } from "../../contexts/types";
 import { motion } from "framer-motion";
 import { slideRightVariants, slideLeftVariants } from "../home/motion";
+import { CardUserJob } from "../../components/CardUserJob";
 
 export const UserProfile = () => {
   const { user, setUser, setVisible } = useContext(authContext);

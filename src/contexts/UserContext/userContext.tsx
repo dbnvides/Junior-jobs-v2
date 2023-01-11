@@ -73,7 +73,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
 
   useEffect(() => {
     jobById();
-    setApplying(false);
   }, [jobId, companyId]);
 
   const newArrCand = {
