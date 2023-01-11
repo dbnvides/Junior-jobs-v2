@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledCardCompanyContainer = styled.li`
-  height: 260px;
+  height: 250px;
   background-color: var(--white);
   width: 300px;
   margin: 0 auto;
@@ -49,15 +49,6 @@ export const StyledCardCompanyContainer = styled.li`
     gap: 40px;
   }
 
-  .boxButtons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    button {
-      font-size: 25px;
-    }
-  }
-
   .outWork {
     position: absolute;
     right: 30px;
@@ -102,13 +93,7 @@ export const StyledCardCompanyContainer = styled.li`
     }
 
     .boxButtons {
-      display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 5px;
-      button {
-        font-size: 25px;
-      }
     }
 
     .outWork {
@@ -172,7 +157,7 @@ export const StyledInfCompany = styled.div`
   .boxButtons {
     display: flex;
     gap: 10px;
-    background-color: aqua;
+    flex-direction: column;
 
     > button {
       width: 50px;
@@ -185,7 +170,6 @@ export const StyledInfCompany = styled.div`
 
   @media (min-width: 769px) {
     width: 30%;
-
     .smallDetail {
       gap: 10px;
       color: var(--grey-3);
