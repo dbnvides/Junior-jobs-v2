@@ -60,10 +60,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
     apply_jobs: applyed,
   };
 
-  const candidates: IJob = {
-    candidates: candidatesJob,
-  };
-
   const addJob = (job: IJob): void => {
     const find = user?.apply_jobs?.find((item: IJob) => item.id === job.id) || false;
 
@@ -83,11 +79,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
 
   useEffect(() => {
     if (applying) {
-      const updateUser = async (
-        dataJob: IUpdateUser,
-        dataCandidates: any,
-        id: number
-      ): Promise<void> => {
+      const updateUser = async (dataJob: IUpdateUser, id: number): Promise<void> => {
         try {
           setLoading(true);
           const response = await api.patch(`users/${id}`, dataJob, {
@@ -98,11 +90,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
           setUser(response.data);
           setCandidatesJob([...candidatesJob, response.data]);
 
-          await api.patch(`jobs/${jobId}`, dataCandidates, {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          });
         } catch (error) {
           setLoading(false);
           console.log(error);
@@ -111,11 +98,16 @@ export const JobProvider = ({ children }: IContextChildren) => {
         }
       };
 
-      updateUser(applyJob, candidates, userId);
+      updateUser(applyJob, userId);
     }
   }, [applyed]);
 
   useEffect(() => {
+
+    const candidates: IJob = {
+      candidates: candidatesJob,
+    };
+
     if (applying) {
       const updateJob = async (dataCandidates: any): Promise<void> => {
         try {
@@ -135,10 +127,10 @@ export const JobProvider = ({ children }: IContextChildren) => {
 
       updateJob(candidates);
     }
-  }, [candidates]);
+  }, [candidatesJob]);
 
   return (
-    <jobContext.Provider value={{ job, company, addJob, loading, find }}>
+    <jobContext.Provider value={{ job, company, addJob, loading, find, setApplyed }}>
       {children}
     </jobContext.Provider>
   );
