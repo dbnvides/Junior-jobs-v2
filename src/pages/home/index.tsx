@@ -62,20 +62,26 @@ export const Home = () => {
       return elem.locality.toLowerCase().includes(searchLocal.toLowerCase());
     });
     return filteredJobs.map((elem: any, index: any) => {
-      index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+      return (
+        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+      );
     });
   };
 
   const renderLocalNTitle = () => {
     const filteredTitle = jobsList.filter((elem: any) => {
-      elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
+      return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
     });
     const filteredLocality = jobsList.filter((elem: any) => {
       return elem.locality.toLowerCase().includes(searchLocal.toLowerCase());
     });
-    const allJobs = [...filteredTitle, ...filteredLocality];
+    const allJobs = filteredLocality.filter((elem: any) => {
+      return filteredTitle.includes(elem);
+    });
     return allJobs.map((elem: any, index: any) => {
-      index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />;
+      return (
+        index + 1 <= pageCounter && <CardJob elem={elem} key={elem["id"]} />
+      );
     });
   };
 
