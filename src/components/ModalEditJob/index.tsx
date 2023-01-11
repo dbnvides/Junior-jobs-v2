@@ -1,27 +1,28 @@
 import React, { useContext } from "react";
 import { Input } from "../Input";
 import { Textarea } from "../Textarea";
-import { StyledModalAddJob } from "./styles";
-import { iFormSchemaModalAddJob } from "./types";
-import { formSchema } from "./addJobSchema";
+import { StyledModalEditJob } from "./styles";
+import { iFormSchemaModalEditJob } from "./types";
+import { formSchema } from "./editJobSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { createJob } from "../../services/createJob";
 import { authContext } from "../../contexts/authContext";
 
-export const ModalAddJob = () => {
-    const { setVisible, setLoadingInModal } = useContext(authContext);
+export const ModalEditJob = () => {
+    const { setVisible, setLoadingInModal, setEditJobModal } =
+        useContext(authContext);
 
     const {
         register,
         handleSubmit,
         formState: { errors, isDirty, isValid },
-    } = useForm<iFormSchemaModalAddJob>({
+    } = useForm<iFormSchemaModalEditJob>({
         mode: "onChange",
         resolver: yupResolver(formSchema),
     });
 
-    const onSubmitFunction: SubmitHandler<iFormSchemaModalAddJob> = async (
+    const onSubmitFunction: SubmitHandler<iFormSchemaModalEditJob> = async (
         data
     ) => {
         const candidates = { candidates: [] };
@@ -31,17 +32,17 @@ export const ModalAddJob = () => {
 
         setLoadingInModal(true);
         createJob(newData);
-        setVisible(false);
+        setEditJobModal(false);
         setLoadingInModal(false);
     };
 
     return (
-        <StyledModalAddJob>
-            <div className="modalAddJobContainer">
-                <h3 className="modalAddJobTitle">Adicionar vaga</h3>
+        <StyledModalEditJob>
+            <div className="modalEditJobContainer">
+                <h3 className="modalEditJobTitle">Editar vaga</h3>
                 <button
-                    className="closeModalAddJobButton"
-                    onClick={() => setVisible(false)}
+                    className="closeModalEditJobButton"
+                    onClick={() => setEditJobModal(false)}
                 >
                     X
                 </button>
@@ -68,12 +69,12 @@ export const ModalAddJob = () => {
                             {errors.locality.message}
                         </span>
                     )}
-                    <label htmlFor="period" className="labelAddJobModal">
+                    <label htmlFor="period" className="labelEditJobModal">
                         Período
                     </label>
                     <select
                         id="period"
-                        className="selectAddJobModal"
+                        className="selectEditJobModal"
                         {...register("period")}
                     >
                         <option value="" hidden>
@@ -92,7 +93,7 @@ export const ModalAddJob = () => {
                     </label>
                     <select
                         id="work_type"
-                        className="selectAddJobModal"
+                        className="selectEditJobModal"
                         {...register("work_type")}
                     >
                         <option value="" hidden>
@@ -141,7 +142,7 @@ export const ModalAddJob = () => {
                         </span>
                     )}
                     <button
-                        className="addJobButton"
+                        className="editJobButton"
                         type="submit"
                         disabled={!isDirty || !isValid}
                     >
@@ -149,6 +150,6 @@ export const ModalAddJob = () => {
                     </button>
                 </form>
             </div>
-        </StyledModalAddJob>
+        </StyledModalEditJob>
     );
 };
