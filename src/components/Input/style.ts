@@ -19,6 +19,7 @@ export const StyleField = styled.fieldset`
   && input {
     width: 100%;
     height: 50px;
+    font-size: var(--title-5);
     background-color: #e9e8e8;
     border-radius: var(--radius-1);
     border: 1px solid black;

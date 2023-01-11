@@ -6,19 +6,22 @@ import { StyledFooter } from "../../components/Footer";
 import { useContext, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
-import { authContext, iUser } from "../../contexts/authContext";
+import { authContext } from "../../contexts/authContext";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { IJob } from "../../contexts/UserContext/type";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { LoadPage } from "../../components/Loading";
+import { iUser } from "../../contexts/types";
 
 export const UserProfile = () => {
-  const { user, setUser, isVisible, setVisible } = useContext(authContext);
+  const { user, setUser, setVisible } = useContext(authContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("@TOKEN");
+
+  console.log(user?.apply_jobs);
 
   if (user?.type === "Company") {
     navigate("/company");
@@ -29,16 +32,18 @@ export const UserProfile = () => {
   };
 
   const filterCandidates = async (cand: iUser[], id: number | undefined) => {
-    const filterDev = cand.filter((dev) => dev.id === user?.id);
+    const filterDev = cand.filter((dev) => dev.id !== user?.id);
     const newArrCand = {
       candidates: filterDev,
     };
+
     try {
       const response = await api.patch(`jobs/${id}`, newArrCand, {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -114,7 +119,7 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {user?.apply_jobs?.length !== 0 ? (
+              {user?.apply_jobs?.length! > 0 ? (
                 user?.apply_jobs!.map((job, id) => (
                   <CardCompany
                     id={job.id}
@@ -123,6 +128,7 @@ export const UserProfile = () => {
                     job_name={job.job_name}
                     responsabilitys={job.responsabilitys}
                     work_type={job.work_type}
+                    description={job.description}
                   >
                     <button className="outWork" onClick={() => unapply(job.id)}>
                       <IoLogOutOutline />
