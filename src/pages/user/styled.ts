@@ -121,6 +121,41 @@ export const StyledMain = styled.main`
       font-size: var(--title-1);
       margin-bottom: 20px;
     }
-    min-height: 50vh;
+    ul {
+      width: 100%;
+      height: 300px;
+      display: flex;
+      padding: 0 10px;
+      flex-direction: row;
+      gap: 20px;
+      overflow: auto;
+      margin-bottom: 20px;
+
+      @media (min-width: 769px) {
+        flex-direction: column;
+        height: 800px;
+      }
+    }
+
+    .noWork {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--title-3);
+      font-weight: var(--semi-bold);
+      padding: 20px;
+      border-radius: var(--radius-2);
+      background-color: var(--grey-2);
+      width: 100%;
+      height: 100px;
+
+      &:hover {
+        border: 2px solid var(--color-primary);
+        cursor: pointer;
+      }
+    }
+
+    @media (min-width: 769px) {
+    }
   }
 `;

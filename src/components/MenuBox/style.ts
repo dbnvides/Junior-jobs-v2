@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const StyledMenu = styled.div`
   background-color: white;
   position: relative;
+  border-radius: var(--radius-2);
 
   .menuButton {
     display: flex;
@@ -11,9 +12,9 @@ export const StyledMenu = styled.div`
     flex-direction: column;
     gap: 13%;
     color: #090909;
-    width: 80px;
+    width: 50px;
     height: 50px;
-    border-radius: 4px;
+    border-radius: var(--radius-1);
     background: #e8e8e8;
     border: 1px solid #e8e8e8;
     transition: all 0.3s;
@@ -21,6 +22,7 @@ export const StyledMenu = styled.div`
 
   .menuButton:hover {
     border: 1px solid white;
+    cursor: pointer;
   }
 
   .menuButton:active {

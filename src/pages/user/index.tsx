@@ -3,27 +3,96 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { IJob } from "../../contexts/UserContext/type";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
+import { LoadPage } from "../../components/Loading";
+import { iUser } from "../../contexts/types";
 
 export const UserProfile = () => {
-  const { user, isVisible, setVisible } = useContext(authContext);
+  const { user, setUser, setVisible } = useContext(authContext);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("@TOKEN");
 
-  //Função para sair da vaga
-  // const unapply = (id: number) => {
-  //   const newArr = jobs.filter((item) => item.id !== id);
-  //   setMyJobs(newArr);
-  // };
+  console.log(user?.apply_jobs);
+
   if (user?.type === "Company") {
-    navigate("/user");
+    navigate("/company");
   }
+
+  const handleClick = () => {
+    navigate("/home");
+  };
+
+  const filterCandidates = async (cand: iUser[], id: number | undefined) => {
+    const filterDev = cand.filter((dev) => dev.id !== user?.id);
+    const newArrCand = {
+      candidates: filterDev,
+    };
+
+    try {
+      const response = await api.patch(`jobs/${id}`, newArrCand, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const filterApplyJob = async (id: number | undefined) => {
+    const filterJob = user?.apply_jobs!.filter((job: IJob) => job.id !== id);
+    const newArrJob = {
+      apply_jobs: filterJob,
+    };
+    try {
+      setLoading(true);
+      const response = await api.patch(`users/${user?.id}`, newArrJob, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+      toast.warn("Não foi possível fazer a descandidatura!");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const unapply = async (id: number | undefined) => {
+    try {
+      setLoading(true);
+      const job = await api.get(`jobs/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      await filterCandidates(job.data.candidates, id);
+      await filterApplyJob(id);
+      toast.success("Descandidatura realizada com sucesso!");
+    } catch (error) {
+      toast.error("Não foi possível encontrar essa vaga");
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
+      {loading && <LoadPage />}
       <ModalEditProfile />
       <Header />
       <Container>
@@ -31,7 +100,7 @@ export const UserProfile = () => {
           <section className="sectionProfile">
             {user?.avatar ? (
               <div className="avatarProfile">
-                <img src={user.avatar} alt="foto de perfil" />
+                <img src={user?.avatar} alt="foto de perfil" />
               </div>
             ) : (
               <div className="avatarDefault">
@@ -50,23 +119,26 @@ export const UserProfile = () => {
           <section className="sectionJob">
             <h2>Vagas</h2>
             <ul>
-              {user?.apply_jobs ? (
+              {user?.apply_jobs?.length! > 0 ? (
                 user?.apply_jobs!.map((job, id) => (
                   <CardCompany
                     id={job.id}
-                    key={id}
+                    key={job.id}
                     period={job.period}
                     job_name={job.job_name}
                     responsabilitys={job.responsabilitys}
                     work_type={job.work_type}
+                    description={job.description}
                   >
-                    <button className="outWork">
+                    <button className="outWork" onClick={() => unapply(job.id)}>
                       <IoLogOutOutline />
                     </button>
                   </CardCompany>
                 ))
               ) : (
-                <div>Sem vagas</div>
+                <li className="noWork" onClick={() => handleClick()}>
+                  <span>Não aplicou em nenhuma vaga :(</span>
+                </li>
               )}
             </ul>
           </section>
