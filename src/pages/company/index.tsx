@@ -41,7 +41,10 @@ interface iJobs {
 export const Company = () => {
   const { isVisible, setVisible, loadingInModal, setEditProfileCompany, user } =
     useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId } = useContext(CompanyContext);
+  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId } =
+    useContext(CompanyContext);
+
+  const company = user;
 
   const navigate = useNavigate();
 
@@ -51,8 +54,6 @@ export const Company = () => {
 
   const deleteJob = async (job: iJobs) => {
     const token = localStorage.getItem("@TOKEN");
-
-    console.log(job);
 
     if (!token) {
       return null;
@@ -74,7 +75,7 @@ export const Company = () => {
 
     setModalViewer(true);
   };
-
+  console.log(company);
   return (
     <>
       {isVisible ? <ModalAddJob /> : null}
@@ -91,7 +92,9 @@ export const Company = () => {
               <h2>{user?.name}</h2>
               <p>{user?.email}</p>
             </div>
-            <button onClick={() => setEditProfileCompany(true)}>Editar Perfil</button>
+            <button onClick={() => setEditProfileCompany(true)}>
+              Editar Perfil
+            </button>
           </div>
         </div>
         <div className="">
@@ -107,12 +110,12 @@ export const Company = () => {
                     period={element.period}
                     job_name={element.job_name}
                     work_type={element.work_type}
-                    avatar={user?.avatar}
+                    avatar={company?.avatar}
                     description={element.description}
                     requirements={element.requirements}
                     responsabilitys={element.responsabilitys}
                     id={element.id}
-                    nameCompany={user?.name}
+                    nameCompany={company?.name}
                     locality="Brasil"
                     key={index}
                   >
