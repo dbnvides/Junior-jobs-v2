@@ -15,6 +15,8 @@ import { ModalEditCompany } from "../../components/ModalEditCompany";
 import { ModalEditJob } from "../../components/ModalEditJob";
 import { AiOutlineEye } from "react-icons/ai";
 import { BsTrash, BsPencilSquare } from "react-icons/bs";
+import { motion } from "framer-motion";
+import { slideRightVariants, slideLeftVariants } from "../home/motion";
 
 interface iUser {
   email: string;
@@ -111,7 +113,19 @@ export const Company = () => {
       {loadingInModal && <LoadPage />}
       <Header />
       <CompanyPageContainer>
-        <div className="perfil">
+        <motion.div
+          variants={slideRightVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            delay: 0.4,
+            damping: 40,
+          }}
+          className="perfil"
+        >
           <div className="boxImg">
             <img src={user?.avatar} alt="img" />
           </div>
@@ -124,8 +138,20 @@ export const Company = () => {
               Editar Perfil
             </button>
           </div>
-        </div>
-        <div className="">
+        </motion.div>
+        <motion.div
+          variants={slideLeftVariants}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{
+            type: "spring",
+            stiffness: 100,
+            delay: 0.4,
+            damping: 40,
+          }}
+          className=""
+        >
           <div className="boxTitle">
             <h1>Vagas</h1>
             <button onClick={() => setVisible(true)}>Adicionar Vagas</button>
@@ -165,7 +191,7 @@ export const Company = () => {
                 );
               })}
           </ul>
-        </div>
+        </motion.div>
       </CompanyPageContainer>
       <StyledFooter />
     </>

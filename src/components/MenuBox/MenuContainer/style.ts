@@ -21,7 +21,7 @@ export const StyleMenuContainer = styled.div`
   padding: 10px;
   gap: 4px;
 
-  background-color: var(--white);
+  background-color: var(--color-primary-3);
   border: 2px solid var(--grey-4);
   animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 

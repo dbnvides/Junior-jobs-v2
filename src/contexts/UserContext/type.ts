@@ -6,6 +6,7 @@ export interface IJobContext {
   addJob(job: IJob): void;
   loading: boolean;
   find: false | IJob
+  setApplyed: React.Dispatch<React.SetStateAction<IJob[]>>
 }
 
 export interface IJob {
