@@ -13,10 +13,7 @@ import { LoadPage } from "../../components/Loading";
 
 export const Login = () => {
   const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required("O email e obrigatorio")
-      .email("email invalido"),
+    email: yup.string().required("O email e obrigatorio").email("email invalido"),
     password: yup.string().required("A senha e obrigatoria"),
   });
   const { login, setLoading, loading } = useContext(authContext);
@@ -36,19 +33,14 @@ export const Login = () => {
 
   return (
     <>
-      {loading && <LoadPage />}
       <Header />
+      {loading && <LoadPage />}
       <StyleSection>
         <div>
           <h2>Login</h2>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Email"
-            type="email"
-            placeholder="Digite seu email"
-            {...register("email")}
-          />
+          <Input label="Email" type="email" placeholder="Digite seu email" {...register("email")} />
           {errors.email?.message && <SpanErro>{errors.email.message}</SpanErro>}
           <Input
             label="Senha"
@@ -56,9 +48,7 @@ export const Login = () => {
             placeholder="Digite sua senha"
             {...register("password")}
           />
-          {errors.password?.message && (
-            <SpanErro>{errors.password.message}</SpanErro>
-          )}
+          {errors.password?.message && <SpanErro>{errors.password.message}</SpanErro>}
           <button type="submit">Entrar</button>
           <span>Ou</span>
           <Link to={"/register"}>Cadastrar</Link>

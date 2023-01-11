@@ -21,8 +21,6 @@ export const UserProfile = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("@TOKEN");
 
-  console.log(user?.apply_jobs);
-
   if (user?.type === "Company") {
     navigate("/company");
   }
