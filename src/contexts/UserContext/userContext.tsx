@@ -48,12 +48,15 @@ export const JobProvider = ({ children }: IContextChildren) => {
     }
   };
 
+  const find = user?.apply_jobs?.find((item: IJob) => item.id === job?.id) || false;
+
   const applyJob: IUpdateUser = {
     apply_jobs: applyed,
   };
 
   const addJob = (job: IJob): void => {
     const find = user?.apply_jobs?.find((item: IJob) => item.id === job.id) || false;
+
     if (!find && !applying) {
       setApplying(true);
       setApplyed([...applyed, job]);
@@ -65,6 +68,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
         toastId: "yes",
       });
     }
+    
   };
 
   useEffect(() => {
@@ -95,6 +99,6 @@ export const JobProvider = ({ children }: IContextChildren) => {
   }, [applyed]);
 
   return (
-    <jobContext.Provider value={{ job, company, addJob, loading }}>{children}</jobContext.Provider>
+    <jobContext.Provider value={{ job, company, addJob, loading, find }}>{children}</jobContext.Provider>
   );
 };
