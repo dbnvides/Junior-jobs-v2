@@ -64,7 +64,7 @@ export const CardJob = ({ elem }: any) => {
         >
           {elem.job_name}
         </motion.h2>
-        <p>{elem.description}</p>
+        <p className="description">{elem.description}</p>
       </div>
       <h4>{elem.locality}</h4>
     </StyledJob>
