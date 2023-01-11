@@ -30,7 +30,7 @@ export interface iUser {
   name: string;
   password: string;
   documentation: string;
-  avatar: string;
+  avatar: string | undefined;
   type: string;
   id: number;
   apply_jobs?: IJob[] | [];

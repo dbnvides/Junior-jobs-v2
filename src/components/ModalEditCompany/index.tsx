@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
+import { toast } from "react-toastify";
 import { ContainerModalCompany } from "./style";
 import { Input } from "../Input";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -13,18 +13,20 @@ interface iEditData {
 }
 
 export const ModalEditCompany = () => {
-  const { setEditProfileCompany } = useContext(authContext);
+  const { setEditProfileCompany, setUser } = useContext(authContext);
   const { user } = useContext(authContext);
 
   const { register, handleSubmit } = useForm<iEditData>({
     mode: "onBlur",
+    defaultValues: {
+      name: user?.name,
+      email: user?.email,
+      avatar: user?.avatar,
+    },
   });
-
-  console.log(user);
 
   const updateUser = async (data: iEditData) => {
     const token = localStorage.getItem("@TOKEN");
-    console.log(data);
     try {
       const response = await api.patch(`users/${user?.id}`, data, {
         headers: {
@@ -32,13 +34,14 @@ export const ModalEditCompany = () => {
         },
       });
       setEditProfileCompany(false);
+      toast.success("Perfil atualizado com sucesso !");
+      setUser(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const submit: SubmitHandler<iEditData> = (data) => {
-    console.log(data);
     updateUser(data);
   };
 
