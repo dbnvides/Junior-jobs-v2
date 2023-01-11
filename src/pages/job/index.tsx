@@ -24,7 +24,7 @@ export const Job = () => {
               <h3>{company?.name}</h3>
               <p>{company?.site?.replace("https://", "").replace("/", "")}</p>
             </span>
-            <a href={company?.site}>Site da empresa</a>
+            <a href={company?.site || "/not Found"}>Site da empresa</a>
           </div>
           <div className="description">
             <p>
