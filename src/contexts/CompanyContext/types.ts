@@ -12,6 +12,9 @@ export interface iCompanyContext {
   loadJobs: () => void;
   jobId: number | undefined;
   setJobId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  jobEdit: iJobs | undefined;
+  setJobEdit: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface iUser {
@@ -35,4 +38,5 @@ export interface iJobs {
   usersId: number;
   work_type: string;
   candidates: iUser[];
+  locality?: string;
 }

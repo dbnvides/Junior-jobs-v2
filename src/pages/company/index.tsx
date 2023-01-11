@@ -50,8 +50,15 @@ export const Company = () => {
     editJobModal,
     setEditJobModal,
   } = useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId } =
-    useContext(CompanyContext);
+  const {
+    modalViewer,
+    setModalViewer,
+    jobs,
+    setJobViewer,
+    setJobId,
+    setJobEdit,
+    setLoading,
+  } = useContext(CompanyContext);
 
   const company = user;
 
@@ -68,6 +75,7 @@ export const Company = () => {
       return null;
     }
     try {
+      setLoading(true);
       const { data } = await api.delete(`jobs/${job.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -75,7 +83,10 @@ export const Company = () => {
       });
       toast.success("Job deletado com sucesso !");
     } catch (error) {
+      setLoading(false);
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +95,13 @@ export const Company = () => {
 
     setModalViewer(true);
   };
-  console.log(company?.avatar);
+
+  const openEditJob = (job: iJobs) => {
+    setJobEdit(job);
+
+    setEditJobModal(true);
+  };
+
   return (
     <>
       {editProfileCompany && <ModalEditCompany />}
@@ -130,7 +147,7 @@ export const Company = () => {
                     locality="Brasil"
                     key={index}
                   >
-                    <button onClick={() => setEditJobModal(true)}>
+                    <button onClick={() => openEditJob(element)}>
                       <BsPencilSquare />
                     </button>
                     <button onClick={() => deleteJob(element)}>

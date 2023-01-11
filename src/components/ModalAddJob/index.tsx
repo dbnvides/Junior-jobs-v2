@@ -6,11 +6,46 @@ import { iFormSchemaModalAddJob } from "./types";
 import { formSchema } from "./addJobSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { createJob } from "../../services/createJob";
+import { api } from "../../services/api";
 import { authContext } from "../../contexts/authContext";
+import { toast } from "react-toastify";
+import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
+
+interface iCreateJob {
+  userId?: number;
+  job_name?: string;
+  period?: string;
+  work_type?: string;
+  description?: string;
+  requirements?: string;
+  responsabilitys?: string;
+  candidate?: [];
+}
 
 export const ModalAddJob = () => {
   const { setVisible, setLoadingInModal } = useContext(authContext);
+  const { setLoading } = useContext(CompanyContext);
+
+  const createJob = async (data: iCreateJob) => {
+    const token = localStorage.getItem("@TOKEN");
+    try {
+      setLoading(true);
+      const response = await api.post<iCreateJob>("jobs/", data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(data);
+      toast.success("Vaga adicionada com sucesso");
+      return response.data;
+    } catch (error) {
+      setLoading(false);
+      toast.error("Ops! Algo deu errado.");
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const {
     register,

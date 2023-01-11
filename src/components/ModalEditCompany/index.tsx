@@ -5,6 +5,7 @@ import { Input } from "../Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { api } from "../../services/api";
 import { authContext } from "../../contexts/authContext";
+import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
 
 interface iEditData {
   name: string;
@@ -38,6 +39,7 @@ export const ModalEditCompany = () => {
       setUser(response.data);
     } catch (error) {
       console.log(error);
+      toast.error("Ops! Algo deu errado.");
     }
   };
 
