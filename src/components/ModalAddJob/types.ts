@@ -1,4 +1,4 @@
-export interface iFormSchemaModalAddJob {
+export interface IFormSchemaModalAddJob {
     job_name: string;
     period: string;
     work_type: string;
