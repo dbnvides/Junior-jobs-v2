@@ -4,7 +4,7 @@ export interface IPropCard {
   period?: string;
   job_name?: string;
   work_type?: string;
-  avatar?: string;
+  avatar?: string | undefined;
   description?: string;
   requirements?: string;
   responsabilitys?: string;
