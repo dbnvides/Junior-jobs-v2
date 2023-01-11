@@ -23,7 +23,7 @@ export const StyleMenuContainer = styled.div`
 
   background-color: var(--white);
   border: 2px solid var(--grey-4);
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
   div {
     width: 60px;
@@ -63,7 +63,12 @@ export const StyleMenuContainer = styled.div`
       transform: translateY(-1000px);
       opacity: 0;
     }
-
+    50% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0.5;
+    }
     100% {
       transform: translateY(0);
       opacity: 1;

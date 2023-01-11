@@ -13,7 +13,8 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { LoadPage } from "../../components/Loading";
 import { iUser } from "../../contexts/types";
-import { CardUserJob } from "../../components/CardUserJob";
+import { motion } from "framer-motion";
+import { slideRightVariants, slideLeftVariants } from "../home/motion";
 
 export const UserProfile = () => {
   const { user, setUser, setVisible } = useContext(authContext);
@@ -94,7 +95,19 @@ export const UserProfile = () => {
       <Header />
       <Container>
         <StyledMain>
-          <section className="sectionProfile">
+          <motion.section
+            variants={slideRightVariants}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              delay: 0.8,
+              damping: 40,
+            }}
+            className="sectionProfile"
+          >
             {user?.avatar ? (
               <div className="avatarProfile">
                 <img src={user?.avatar} alt="foto de perfil" />
@@ -111,9 +124,21 @@ export const UserProfile = () => {
               <span>{user?.email}</span>
             </div>
             <button onClick={() => setVisible(true)}>Editar Perfil</button>
-          </section>
+          </motion.section>
 
-          <section className="sectionJob">
+          <motion.section
+            variants={slideLeftVariants}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              delay: 0.8,
+              damping: 40,
+            }}
+            className="sectionJob"
+          >
             <h2>Vagas</h2>
             <ul>
               {user?.apply_jobs?.length! > 0 ? (
@@ -138,7 +163,7 @@ export const UserProfile = () => {
                 </li>
               )}
             </ul>
-          </section>
+          </motion.section>
         </StyledMain>
       </Container>
       <StyledFooter />
