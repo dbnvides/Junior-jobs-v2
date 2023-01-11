@@ -43,8 +43,13 @@ export const CardCompany = ({
 
   return (
     <StyledCardCompanyContainer>
-      {nameCompany.avatar ? (
-        <img src={user?.type === "company" ? user.avatar : nameCompany.avatar} alt="img" />
+      {nameCompany.avatar !== undefined ? (
+        <img
+          src={
+            user?.type === "company" || user?.type === "Company" ? user.avatar : nameCompany.avatar
+          }
+          alt="img"
+        />
       ) : (
         <div className="avatarDefault">
           <FaUser />
