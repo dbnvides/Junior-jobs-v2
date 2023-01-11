@@ -2,6 +2,7 @@ import { MainRoutes as Routes } from "./routes/index";
 import { Global } from "./styles/global";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { CustomThemeProvider } from "./contexts/DarkModeContext";
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
         pauseOnHover
         theme="colored"
       />
-      <Global />
-      <Routes />
+      <CustomThemeProvider>
+        <Global />
+        <Routes />
+      </CustomThemeProvider>
     </>
   );
 }
