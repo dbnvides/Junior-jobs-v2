@@ -71,12 +71,20 @@ export const StyledCardCompanyContainer = styled.li`
   @media (min-width: 769px) {
     width: 95%;
     max-width: 1000px;
-    height: 230px;
+    height: 200px;
     padding: 50px 20px 20px 20px;
 
     .description {
       display: flex;
       width: 70%;
+      overflow: hidden;
+    }
+    .description p {
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-height: normal;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
     }
 
     > div {
@@ -131,8 +139,15 @@ export const StyledInfCompany = styled.div`
   .nameCompany {
     color: var(--grey-3);
   }
+
   .titleJob {
     color: var(--grey-0);
+    overflow: hidden;
+    font-size: var(--title-3);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   .locality {
@@ -142,6 +157,7 @@ export const StyledInfCompany = styled.div`
   .boxButtons {
     display: flex;
     gap: 10px;
+    flex-direction: column;
 
     > button {
       width: 50px;
@@ -153,7 +169,7 @@ export const StyledInfCompany = styled.div`
   }
 
   @media (min-width: 769px) {
-    width: 40%;
+    width: 30%;
     .smallDetail {
       gap: 10px;
       color: var(--grey-3);
