@@ -13,7 +13,6 @@ export const CardJob = ({ elem }: any) => {
   const navigate = useNavigate();
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");
-
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -43,10 +42,7 @@ export const CardJob = ({ elem }: any) => {
         navigate(`/job/${elem.job_name}`);
       }}
     >
-      <div
-      // animate={{ x: [-50, 0] }}
-      // transition={{ delay: 0.13 * elem.id }}
-      >
+      <div>
         <motion.img
           variants={slideDownVariants}
           initial="hidden"
@@ -57,7 +53,7 @@ export const CardJob = ({ elem }: any) => {
           alt="logo da empresa"
         />
         <p>
-          1m atrás • <span>{elem.period}</span>
+          <span>{elem.period}</span>
         </p>
         <motion.h2
           variants={slideLeftVariants}
@@ -70,7 +66,7 @@ export const CardJob = ({ elem }: any) => {
         </motion.h2>
         <p>{elem.description}</p>
       </div>
-      <h4>Busca cidade ai</h4>
+      <h4>{elem.locality}</h4>
     </StyledJob>
   );
 };

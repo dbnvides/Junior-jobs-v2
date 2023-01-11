@@ -10,7 +10,7 @@ import { Home } from "../pages/home";
 import { MyHomeContext } from "../components/ProtectRoutes/MyHomeContext";
 import { NotFound } from "../components/NotFound";
 
-export const MainRoutes = () => {
+export const MainRoutes = () => { 
   return (
     <Routes>
       <Route path="/" element={<Login />} />
