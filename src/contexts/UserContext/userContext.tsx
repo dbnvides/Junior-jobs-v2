@@ -2,9 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { IContextChildren, iUser } from "../../contexts/types";
 import { api } from "../../services/api";
-import { iUpdateUser, updateUser } from "../../services/updateUserRequest";
 import { authContext } from "../authContext";
-import { ICompany, IJob, IJobContext } from "./type";
+import { ICompany, IJob, IJobContext, IUpdateUser} from "./type";
 
 export const jobContext = createContext({} as IJobContext);
 
@@ -49,7 +48,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
     }
   };
 
-  const applyJob: iUpdateUser = {
+  const applyJob: IUpdateUser = {
     apply_jobs: applyed,
   };
 
@@ -70,11 +69,28 @@ export const JobProvider = ({ children }: IContextChildren) => {
 
   useEffect(() => {
     jobById();
+    setApplying(false);
   }, [jobId, companyId]);
 
   useEffect(() => {
     if (applying) {
-      updateUser(applyJob, userId);
+    const updateUser = async (data: IUpdateUser, id: number) : Promise<void> => {
+    try {
+      setLoading(true)
+      const response = await api.patch(`users/${id}`, data, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(response.data)
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+  };
+  updateUser(applyJob, userId)
     }
   }, [applyed]);
 

@@ -4,5 +4,5 @@ export interface iFormSchemaModalAddJob {
     work_type: string;
     description: string;
     requirements: string;
-    responsabilities: string;
+    responsabilitys: string;
 }

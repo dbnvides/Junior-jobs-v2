@@ -16,6 +16,7 @@ export const updateUser = async (data: iUpdateUser, id: number) => {
         authorization: `Bearer ${token}`,
       },
     });
+    return response
   } catch (error) {
     console.log(error);
   }

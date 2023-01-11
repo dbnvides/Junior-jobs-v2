@@ -68,6 +68,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     loadJobs();
   }, [jobs]);

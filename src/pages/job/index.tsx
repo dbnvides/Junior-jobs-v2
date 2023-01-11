@@ -10,8 +10,6 @@ import { StyledMain } from "./style";
 export const Job = () => {
   const { job, company, addJob, loading } = useContext(jobContext);
 
-  console.log(job)
-
   return (
     <>
       {loading && <LoadPage />}
@@ -24,16 +22,16 @@ export const Job = () => {
             </div>
             <span>
               <h3>{company?.name}</h3>
-              <p>scoot.com</p>
+              <p>{company?.site?.replace("https://", "").replace("/", "")}</p>
             </span>
-            <Link to={""}>Site da empresa</Link>
+            <a href={company?.site || "/not Found"}>Site da empresa</a>
           </div>
           <div className="description">
             <p>
               {job?.work_type} - {job?.period}
             </p>
             <h3>{job?.job_name}</h3>
-            <h5>Rio de janeiro</h5>
+            <h5>{company?.locality }</h5>
             <button
               type="button"
               onClick={() => {
