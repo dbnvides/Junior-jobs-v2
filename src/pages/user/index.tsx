@@ -4,7 +4,6 @@ import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
 import { useContext, useState } from "react";
-import { CardCompany } from "../../components/CardCompany";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -14,6 +13,7 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { LoadPage } from "../../components/Loading";
 import { iUser } from "../../contexts/types";
+import { CardUserJob } from "../../components/CardUserJob";
 
 export const UserProfile = () => {
   const { user, setUser, setVisible } = useContext(authContext);
@@ -118,7 +118,7 @@ export const UserProfile = () => {
             <ul>
               {user?.apply_jobs?.length! > 0 ? (
                 user?.apply_jobs!.map((job, id) => (
-                  <CardCompany
+                  <CardUserJob
                     id={job.id}
                     key={job.id}
                     period={job.period}
@@ -130,7 +130,7 @@ export const UserProfile = () => {
                     <button className="outWork" onClick={() => unapply(job.id)}>
                       <IoLogOutOutline />
                     </button>
-                  </CardCompany>
+                  </CardUserJob>
                 ))
               ) : (
                 <li className="noWork" onClick={() => handleClick()}>

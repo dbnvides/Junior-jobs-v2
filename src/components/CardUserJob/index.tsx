@@ -7,7 +7,7 @@ import { authContext } from "../../contexts/authContext";
 import { api } from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
-export const CardCompany = ({
+export const CardUserJob = ({
   period,
   job_name,
   work_type,
