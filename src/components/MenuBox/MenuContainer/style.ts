@@ -16,21 +16,21 @@ export const StyleMenuContainer = styled.div`
 
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--grey-4);
 
   padding: 10px;
   gap: 4px;
 
-  background-color: white;
-  border: 2px solid var(--color-primary);
+  background-color: var(--white);
+  border: 2px solid var(--grey-4);
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
   div {
     width: 60px;
     height: 60px;
-    background-color: black;
+    background-color: none;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 2px solid var(--grey-4);
   }
 
   img {
@@ -55,7 +55,7 @@ export const StyleMenuContainer = styled.div`
     left: 7px;
 
     font-size: 40px;
-    color: var(--color-primary);
+    color: var(--grey-4);
   }
 
   @keyframes slide-in-top {
