@@ -37,8 +37,8 @@ export const Register = () => {
       .string()
       .required("Confirmação da senha e obrigatoria")
       .oneOf([yup.ref("password")], "As senhas devem ser a mesma "),
-    locality: yup.string().required("Localizacão obrigatoria"),
-    site: yup.string().required("Site obrigatorio")  
+    locality:yup.string(),
+    site: yup.string()
   });
   const {
     register,
