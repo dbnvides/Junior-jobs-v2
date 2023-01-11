@@ -11,8 +11,6 @@ import { FilterBar } from "./style";
 import { HomeContext } from "../../contexts/HomeContext";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
-import { authContext } from "../../contexts/authContext";
-import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const {
@@ -56,7 +54,6 @@ export const Home = () => {
       );
     });
   };
-
   const renderLocalityFilter = () => {
     const filteredJobs = jobsList.filter((elem: any) => {
       return elem.locality.toLowerCase().includes(searchLocal.toLowerCase());
@@ -67,7 +64,6 @@ export const Home = () => {
       );
     });
   };
-
   const renderLocalNTitle = () => {
     const filteredTitle = jobsList.filter((elem: any) => {
       return elem.job_name.toLowerCase().includes(searchTitle.toLowerCase());
@@ -84,7 +80,6 @@ export const Home = () => {
       );
     });
   };
-
   const renderFullTime = () => {
     const filteredJobs = jobsList.filter((elem: any) => {
       return elem.period === "Integral";

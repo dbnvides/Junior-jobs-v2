@@ -70,12 +70,14 @@ export const StyledJob = styled.li`
 
   div {
     img {
+      object-fit: contain;
       width: 80px;
       height: 80px;
       top: -15%;
       background-color: var(--grey-1);
       position: absolute;
-      border-radius: 28px;
+      border-radius: var(--radius-2);
+      border: 2px solid var(--grey-3);
     }
     display: flex;
     flex-direction: column;
