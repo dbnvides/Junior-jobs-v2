@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { authContext } from "../../contexts/authContext";
@@ -16,7 +16,8 @@ export const Login = () => {
     email: yup.string().required("O email e obrigatorio").email("email invalido"),
     password: yup.string().required("A senha e obrigatoria"),
   });
-  const { login, setLoading, loading } = useContext(authContext);
+  const { login, setLoading, loading, user } = useContext(authContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,6 +31,20 @@ export const Login = () => {
     login(data);
     setLoading(true);
   };
+
+  useEffect(() => {
+    setLoading(true);
+
+    const validation = () => {
+      if (user?.type === "Company" || user?.type === "company") {
+        navigate("/company");
+      } else {
+        navigate("/home");
+      }
+      setLoading(false);
+    };
+    validation();
+  }, []);
 
   return (
     <>

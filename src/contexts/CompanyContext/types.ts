@@ -1,3 +1,5 @@
+import { IJob } from "../UserContext/type";
+
 export interface iCompanyProviderProps {
   children: React.ReactNode;
 }
@@ -25,7 +27,7 @@ export interface iUser {
   avatar: string | undefined;
   type: string;
   id: number;
-  apply_jobs?: any;
+  apply_jobs?: IJob[];
 }
 
 export interface iJobs {

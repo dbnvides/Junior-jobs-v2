@@ -1,10 +1,7 @@
 import { StyleMenuContainer } from "./style";
-import Logo from "../../../assets/img/logo.png";
 import { useContext } from "react";
 import { authContext } from "../../../contexts/authContext";
-
 import { IoLogOutOutline } from "react-icons/io5";
-import { AiOutlineUser } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContainer } from "../DarkMode";
 
@@ -24,8 +21,14 @@ export const MenuContainer = () => {
       <div className="imgContainer">
         <img src={user?.avatar} alt="" />
       </div>
-      <Link to={"/home"}>Home</Link>
-      <Link to={"/user"}>Perfil</Link>
+      {user?.type !== "Company" ? (
+        <>
+          <Link to={"/home"}>Home</Link>
+          <Link to={"/user"}>Perfil</Link>
+        </>
+      ) : (
+        <Link to={"/company"}>Home</Link>
+      )}
       <hr></hr>
       <button onClick={() => logout()}>
         <IoLogOutOutline />

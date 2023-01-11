@@ -29,7 +29,6 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
       });
 
       setJobs(data);
-      console.log("ola");
     } catch (error) {
       console.error(error);
     }
