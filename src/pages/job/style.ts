@@ -5,9 +5,10 @@ display: flex;
 flex-direction: column;
 
 padding: 16px;
-gap: 16px;   
+gap: 32px;   
 
 height: 100vh;
+margin-top: 16px;
 
 p{
     color: var(--grey-3);
@@ -34,7 +35,7 @@ h1 , h2 , h3 , h4 , h5 {
     border-radius: var(--radius-2);
 
     position: relative;
-    bottom: 32px;
+    
     
     div{
         width: 50px;
@@ -43,6 +44,7 @@ h1 , h2 , h3 , h4 , h5 {
         background-color: orange;
         border-radius: var(--radius-2);
 
+        overflow: hidden;
         position: absolute;
         top: -25px;
 

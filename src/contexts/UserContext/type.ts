@@ -39,3 +39,9 @@ export interface IResponseProfile {
   id: number;
   apply_jobs?: IJob[];
 }
+
+export interface IUpdateUser {
+  name?: string;
+  avatar?: string;
+  apply_jobs?: IJob[];
+}
