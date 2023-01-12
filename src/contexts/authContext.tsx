@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }: iChildren) => {
     const [isVisible, setVisible] = useState(false);
     const [editProfileCompany, setEditProfileCompany] = useState(false);
     const [editJobModal, setEditJobModal] = useState(false);
-    const [loadingInModal, setLoadingInModal] = useState(false);
 
     const navigate = useNavigate();
 
@@ -95,8 +94,6 @@ export const AuthProvider = ({ children }: iChildren) => {
                 setEditProfileCompany,
                 editJobModal,
                 setEditJobModal,
-                loadingInModal,
-                setLoadingInModal,
             }}
         >
             {children}
