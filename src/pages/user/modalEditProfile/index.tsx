@@ -27,6 +27,7 @@ export const ModalEditProfile = () => {
       linkedin: user?.linkedin,
       tecnology: user?.tecnology,
       avatar: user?.avatar,
+      bio: user?.bio
     },
   });
 
