@@ -18,6 +18,7 @@ import { BsTrash, BsPencilSquare } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { slideRightVariants, slideLeftVariants } from "../home/motion";
 import { iJobs, iUser } from "./types";
+import { Container } from "../../components/Container";
 
 export const Company = () => {
   const {
@@ -91,83 +92,92 @@ export const Company = () => {
       {loading && <LoadPage />}
       <Header />
       <CompanyPageContainer>
-        <motion.div
-          variants={slideRightVariants}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            delay: 0.4,
-            damping: 40,
-          }}
-          className="perfil"
-        >
-          <div className="boxImg">
-            <img src={user?.avatar} alt="img" />
-          </div>
-          <div className="infPerfil">
-            <div>
-              <h2>{user?.name}</h2>
-              <p>{user?.email}</p>
+        <Container>
+          <motion.div
+            variants={slideRightVariants}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              delay: 0.4,
+              damping: 40,
+            }}
+            className="perfil"
+          >
+            <div className="boxImg">
+              <img src={user?.avatar} alt="img" />
             </div>
-            <button onClick={() => setEditProfileCompany(true)}>Editar Perfil</button>
-          </div>
-        </motion.div>
-        <motion.div
-          variants={slideLeftVariants}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            delay: 0.4,
-            damping: 40,
-          }}
-          className=""
-        >
-          <div className="boxTitle">
-            <h1>Vagas</h1>
-            <button onClick={() => setVisible(true)}>Adicionar Vagas</button>
-          </div>
-          <ul>
-            {!!jobs.length &&
-              jobs.map((element, index) => {
-                return (
-                  <CardCompany
-                    period={element.period}
-                    job_name={element.job_name}
-                    work_type={element.work_type}
-                    avatar={company?.avatar}
-                    description={element.description}
-                    requirements={element.requirements}
-                    responsabilitys={element.responsabilitys}
-                    id={element.id}
-                    nameCompany={company?.name}
-                    locality="Brasil"
-                    key={index}
-                  >
-                    <button onClick={() => openEditJob(element)}>
-                      <BsPencilSquare />
-                    </button>
-                    <button onClick={() => deleteJob(element)}>
-                      <BsTrash />
-                    </button>
-                    <button
-                      onClick={() => {
-                        openViewerJob(element.candidates);
-                        setJobId(element.id);
-                      }}
+            <div className="infPerfil">
+              <div>
+                <h2>{user?.name}</h2>
+                <p>{user?.email}</p>
+              </div>
+              <button onClick={() => setEditProfileCompany(true)}>
+                Editar Perfil
+              </button>
+            </div>
+          </motion.div>
+          <motion.div
+            variants={slideLeftVariants}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              delay: 0.4,
+              damping: 40,
+            }}
+            className=""
+          >
+            <div className="boxTitle">
+              <h1>Vagas</h1>
+              <button onClick={() => setVisible(true)}>Adicionar Vagas</button>
+            </div>
+            <ul>
+              {!!jobs.length ? (
+                jobs.map((element, index) => {
+                  return (
+                    <CardCompany
+                      period={element.period}
+                      job_name={element.job_name}
+                      work_type={element.work_type}
+                      avatar={company?.avatar}
+                      description={element.description}
+                      requirements={element.requirements}
+                      responsabilitys={element.responsabilitys}
+                      id={element.id}
+                      nameCompany={company?.name}
+                      locality="Brasil"
+                      key={index}
                     >
-                      <AiOutlineEye />
-                    </button>
-                  </CardCompany>
-                );
-              })}
-          </ul>
-        </motion.div>
+                      <button onClick={() => openEditJob(element)}>
+                        <BsPencilSquare />
+                      </button>
+                      <button onClick={() => deleteJob(element)}>
+                        <BsTrash />
+                      </button>
+                      <button
+                        onClick={() => {
+                          openViewerJob(element.candidates);
+                          setJobId(element.id);
+                        }}
+                      >
+                        <AiOutlineEye />
+                      </button>
+                    </CardCompany>
+                  );
+                })
+              ) : (
+                <li className="noWork">
+                  <span>Não cadastrou nenhuma vaga :(</span>
+                </li>
+              )}
+            </ul>
+          </motion.div>
+        </Container>
       </CompanyPageContainer>
       <StyledFooter />
     </>

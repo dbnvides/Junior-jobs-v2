@@ -9,6 +9,17 @@ export const CompanyPageContainer = styled.div`
     height: 600px;
     overflow: auto;
     padding: 20px 0;
+    overflow-x: hidden;
+    ::-webkit-scrollbar {
+      width: 5px;
+      background-color: var(--grey-1);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--color-primary);
+      border-radius: 2px;
+    }
   }
 
   .noWork {
