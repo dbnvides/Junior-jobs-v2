@@ -109,7 +109,7 @@ export const JobProvider = ({ children }: IContextChildren) => {
     };
 
     if (applying) {
-      const updateJob = async (dataCandidates: any): Promise<void> => {
+      const updateJob = async (dataCandidates: IUpdateUser): Promise<void> => {
         try {
           await api.patch(`jobs/${jobId}`, dataCandidates, {
             headers: {

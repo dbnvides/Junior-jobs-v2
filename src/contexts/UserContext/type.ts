@@ -48,4 +48,5 @@ export interface IUpdateUser {
   name?: string;
   avatar?: string;
   apply_jobs?: IJob[];
+  candidates?: iUser[];
 }
