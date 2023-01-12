@@ -50,7 +50,9 @@ export const CardUserJob = ({
       {nameCompany.avatar !== undefined ? (
         <img
           src={
-            user?.type === "company" || user?.type === "Company" ? user.avatar : nameCompany.avatar
+            user?.type === "company" || user?.type === "Company"
+              ? user.avatar
+              : nameCompany.avatar
           }
           alt="img"
         />

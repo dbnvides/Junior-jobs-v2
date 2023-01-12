@@ -8,6 +8,7 @@ export const StyledCardCompanyContainer = styled.li`
   position: relative;
   margin-top: 30px;
   padding: 50px 20px 30px 20px;
+  background-color: var(--color-primary-3);
   border-radius: var(--radius-2);
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
@@ -102,8 +103,7 @@ export const StyledCardCompanyContainer = styled.li`
       right: 30px;
       bottom: auto;
       top: 50px;
-      width: 40px;
-      height: 40px;
+
       border-radius: var(--radius-1);
       font-size: 25px;
       background-color: var(--color-secondary-2);

@@ -45,8 +45,7 @@ export const UserProfile = () => {
           authorization: `Bearer ${token}`,
         },
       });
-      setApplyed(response.data.apply_jobs || [])
-
+      setApplyed(response.data.apply_jobs || []);
     } catch (error) {
       console.log(error);
     }

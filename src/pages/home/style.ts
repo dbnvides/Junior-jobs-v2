@@ -113,7 +113,7 @@ export const StyledJob = styled(motion.li)`
   }
 `;
 
-export const FilterBar = styled.div`
+export const FilterBar = styled(motion.div)`
   margin: 25px 0;
   width: 100%;
   max-width: 1000px;

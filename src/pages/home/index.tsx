@@ -12,6 +12,8 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJob } from "./types";
 import { HomeContext } from "../../contexts/HomeContext";
+import { motion } from "framer-motion";
+import { slideRightVariants } from "./motion";
 
 export const Home = () => {
   const {
@@ -167,7 +169,18 @@ export const Home = () => {
       <StyledHome>
         <Header />
         <Container>
-          <FilterBar>
+          <FilterBar
+            variants={slideRightVariants}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              delay: 0.6,
+              damping: 40,
+            }}
+          >
             <div className="mainFilter">
               <div className="filterTitle">
                 <img src={searchIcon} alt="" />

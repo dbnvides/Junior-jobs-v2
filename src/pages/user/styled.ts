@@ -10,7 +10,7 @@ export const StyledMain = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--white);
+    background-color: var(--color-primary-3);
     position: relative;
     top: -20px;
     padding: 25px 0 15px 0;
