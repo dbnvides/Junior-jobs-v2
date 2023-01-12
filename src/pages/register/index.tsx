@@ -11,14 +11,14 @@ import { iRegister } from "../../contexts/types";
 
 export const Register = () => {
   const [typed, setTyped] = useState(false);
-  const { registerUser, user, setLoading } = useContext(authContext);
+  const { registerUser, setLoading } = useContext(authContext);
   const navigate = useNavigate();
   const schema = yup.object().shape({
     name: yup.string().required("O nome e obrigatório").min(4, "o mínino de caracteres e 4"),
     email: yup.string().required("O email e obrigatório").email("Email inválido"),
     documentation: yup
       .string()
-      .required(typed ? "Cnpj obrigatório" : "Cpf obrigatório")
+      .required(typed ? "CNPJ obrigatório" : "CPF obrigatório")
       .matches(
         typed
           ? /[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/
@@ -38,7 +38,7 @@ export const Register = () => {
       .string()
       .required("Confirmação da senha e obrigatória")
       .oneOf([yup.ref("password")], "As senhas devem ser iguais "),
-    locality: yup.string(),
+    locality: yup.string().required("Localidade é obrigatório"),
     site: yup.string(),
   });
   const {
@@ -66,11 +66,11 @@ export const Register = () => {
     setLoading(true);
 
     const validation = () => {
-      if (user?.type === "Company" || user?.type === "company") {
-        navigate("/company");
-      } else if (user?.type === "Dev") {
+      const token = localStorage.getItem("@TOKEN");
+      if (token) {
         navigate("/home");
       }
+
       setLoading(false);
     };
     validation();

@@ -1,3 +1,5 @@
+import { IJob } from "../home/types";
+
 export interface iUser {
   email: string;
   name: string;
@@ -6,7 +8,7 @@ export interface iUser {
   avatar: string | undefined;
   type: string;
   id: number;
-  apply_jobs?: any;
+  apply_jobs?: IJob[];
 }
 
 export interface iJobs {

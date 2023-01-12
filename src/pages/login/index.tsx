@@ -12,7 +12,7 @@ import { iLogin } from "../../contexts/types";
 import { schema } from "./loginSchema";
 
 export const Login = () => {
-  const { login, setLoading, loading, user } = useContext(authContext);
+  const { login, setLoading, loading } = useContext(authContext);
   const navigate = useNavigate();
   const {
     register,
@@ -33,11 +33,11 @@ export const Login = () => {
     setLoading(true);
 
     const validation = () => {
-      if (user?.type === "Company" || user?.type === "company") {
-        navigate("/company");
-      } else if (user?.type === "Dev") {
+      const token = localStorage.getItem("@TOKEN");
+      if (token) {
         navigate("/home");
       }
+
       setLoading(false);
     };
     validation();
