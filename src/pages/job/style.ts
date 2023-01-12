@@ -18,12 +18,6 @@ export const StyledMain = styled.main`
     color: var(--grey-4);
   }
 
-  .text{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   .card {
     display: flex;
     flex-direction: column;
@@ -31,7 +25,7 @@ export const StyledMain = styled.main`
     justify-content: center;
 
     width: 100%;
-    height: 230px;
+    height: 320px;
 
     gap: 16px;
 
@@ -41,6 +35,7 @@ export const StyledMain = styled.main`
     border-radius: var(--radius-2);
 
     position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     div {
       min-width: 50px;
@@ -52,7 +47,7 @@ export const StyledMain = styled.main`
 
       overflow: hidden;
       position: absolute;
-      top: -25px;
+      top: -30px;
 
       img {
         width: 100%;
@@ -62,7 +57,6 @@ export const StyledMain = styled.main`
     }
 
     span {
-      max-width: 40%;
       text-align: center;
 
       p {
@@ -105,18 +99,7 @@ export const StyledMain = styled.main`
 
     background-color: var(--white);
     border-radius: var(--radius-2);
-
-    h3{
-      width: 60%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    p{
-      width: 80%;
-      overflow: hidden;
-    }
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     button {
       display: flex;
@@ -140,6 +123,12 @@ export const StyledMain = styled.main`
   }
 
   @media (min-width: 768px) {
+    .text{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .card {
       margin: 0 auto;
 
@@ -151,6 +140,10 @@ export const StyledMain = styled.main`
       width: 730px;
 
       gap: 50px;
+
+      span{
+        max-width: 40%;
+      }
 
       div {
         display: flex;
@@ -182,12 +175,24 @@ export const StyledMain = styled.main`
         width: 210px;
       }
 
+      h3{
+      width: 60%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+      p{
+      width: 80%;
+      overflow: hidden;
+      }
+
       h5 {
         position: relative;
         bottom: 8px;
       }
 
-      .text {
+      .margin {
         margin-bottom: 60px;
       }
     }
