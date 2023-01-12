@@ -44,8 +44,6 @@ export interface iContextValue {
     setEditProfileCompany: React.Dispatch<React.SetStateAction<boolean>>;
     editJobModal: boolean;
     setEditJobModal: React.Dispatch<React.SetStateAction<boolean>>;
-    loadingInModal: boolean;
-    setLoadingInModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface iUser {
     email: string;
