@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { Header } from "../../components/Header";
 import { StyledMain } from "./styled";
 import { StyledFooter } from "../../components/Footer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ModalEditProfile from "./modalEditProfile";
 import { authContext } from "../../contexts/authContext";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -25,9 +25,17 @@ export const UserProfile = () => {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("@TOKEN");
 
-  if (user?.type === "Company" || user?.type === "company") {
-    navigate("/company");
-  }
+  useEffect(() => {
+    setLoading(true);
+
+    const validation = () => {
+      if (user?.type === "Company" || user?.type === "company") {
+        navigate("/company");
+      }
+      setLoading(false);
+    };
+    validation();
+  }, []);
 
   const handleClick = () => {
     navigate("/home");
@@ -45,8 +53,7 @@ export const UserProfile = () => {
           authorization: `Bearer ${token}`,
         },
       });
-      setApplyed(response.data.apply_jobs || [])
-
+      setApplyed(response.data.apply_jobs || []);
     } catch (error) {
       console.log(error);
     }

@@ -140,6 +140,7 @@ export const StyledInfCompany = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  cursor: pointer;
 
   .smallDetail {
     width: max-content;

@@ -12,19 +12,18 @@ import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJob } from "./types";
 import { HomeContext } from "../../contexts/HomeContext";
+import { authContext } from "../../contexts/authContext";
+import { useNavigate } from "react-router";
 
 export const Home = () => {
-  const {
-    jobsList,
-    setJobsList,
-    searchTitle,
-    setSearchTitle,
-    searchLocal,
-    setSearchLocal,
-  } = useContext(HomeContext);
+  const { jobsList, setJobsList, searchTitle, setSearchTitle, searchLocal, setSearchLocal } =
+    useContext(HomeContext);
+  const { user } = useContext(authContext);
   const [pageCounter, setPageCounter] = useState(12);
   const [check, setCheck] = useState(false);
   const [mobileFilter, setMobileFilter] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getJobs = async () => {
@@ -35,6 +34,13 @@ export const Home = () => {
         console.log(error);
       }
     };
+    const validation = () => {
+      if (user?.type === "Company" || user?.type === "company") {
+        navigate("/company");
+      }
+      setLoading(false);
+    };
+    validation();
     getJobs();
   }, []);
 
@@ -193,9 +199,7 @@ export const Home = () => {
                     <input
                       type="checkbox"
                       checked={check}
-                      onChange={() =>
-                        check === false ? setCheck(true) : setCheck(false)
-                      }
+                      onChange={() => (check === false ? setCheck(true) : setCheck(false))}
                     />
                     Apenas Integral
                   </label>
@@ -236,9 +240,7 @@ export const Home = () => {
                     <input
                       type="checkbox"
                       checked={check}
-                      onChange={() =>
-                        check === false ? setCheck(true) : setCheck(false)
-                      }
+                      onChange={() => (check === false ? setCheck(true) : setCheck(false))}
                     />
                     Apenas Integral
                   </label>
@@ -259,9 +261,7 @@ export const Home = () => {
           </StyledJobsList>
         </Container>
         <StyledViewMoreContainer>
-          <button onClick={() => setPageCounter(pageCounter + 12)}>
-            Carregar Mais
-          </button>
+          <button onClick={() => setPageCounter(pageCounter + 12)}>Carregar Mais</button>
         </StyledViewMoreContainer>
         <StyledFooter />
       </StyledHome>

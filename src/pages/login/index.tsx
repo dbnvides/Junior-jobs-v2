@@ -1,27 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { authContext } from "../../contexts/authContext";
 import { SpanErro } from "../register/style";
 import { StyleSection } from "./style";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadPage } from "../../components/Loading";
 import { iLogin } from "../../contexts/types";
+import { schema } from "./loginSchema";
 
 export const Login = () => {
-  const schema = yup.object().shape({
-    email: yup.string().required("O email e obrigatorio").email("email invalido"),
-    password: yup.string().required("A senha e obrigatoria"),
-  });
   const { login, setLoading, loading } = useContext(authContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<iLogin>({
+    mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
@@ -31,10 +29,24 @@ export const Login = () => {
     setLoading(true);
   };
 
+  useEffect(() => {
+    setLoading(true);
+
+    const validation = () => {
+      const token = localStorage.getItem("@TOKEN");
+      if (token) {
+        navigate("/home");
+      }
+
+      setLoading(false);
+    };
+    validation();
+  }, []);
+
   return (
     <>
-      <Header />
       {loading && <LoadPage />}
+      <Header />
       <StyleSection>
         <div>
           <h2>Login</h2>
