@@ -52,6 +52,7 @@ export const CompanyProvider = ({ children }: iCompanyProviderProps) => {
         setJobId,
         jobEdit,
         setJobEdit,
+        loading,
         setLoading,
       }}
     >

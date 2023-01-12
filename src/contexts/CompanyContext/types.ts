@@ -16,6 +16,7 @@ export interface iCompanyContext {
   setJobId: React.Dispatch<React.SetStateAction<number | undefined>>;
   jobEdit: iJobs | undefined;
   setJobEdit: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
+  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -27,7 +28,7 @@ export interface iUser {
   avatar: string | undefined;
   type: string;
   id: number;
-  apply_jobs?: IJob[];
+  apply_jobs?: any;
 }
 
 export interface iJobs {

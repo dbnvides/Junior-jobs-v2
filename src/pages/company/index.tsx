@@ -3,7 +3,7 @@ import { StyledFooter } from "../../components/Footer";
 import { CompanyPageContainer } from "./style";
 import { CardCompany } from "../../components/CardCompany";
 import { ModalViewer } from "../../components/ModalViewer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ModalAddJob } from "../../components/ModalAddJob";
 import { authContext } from "../../contexts/authContext";
 import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
@@ -23,15 +23,22 @@ export const Company = () => {
   const {
     isVisible,
     setVisible,
-    loadingInModal,
     setEditProfileCompany,
     user,
     editProfileCompany,
     editJobModal,
     setEditJobModal,
   } = useContext(authContext);
-  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId, setJobEdit, setLoading } =
-    useContext(CompanyContext);
+  const {
+    modalViewer,
+    setModalViewer,
+    jobs,
+    setJobViewer,
+    setJobId,
+    setJobEdit,
+    loading,
+    setLoading,
+  } = useContext(CompanyContext);
 
   const company = user;
 
@@ -81,7 +88,7 @@ export const Company = () => {
       {isVisible && <ModalAddJob />}
       {editJobModal && <ModalEditJob />}
       {modalViewer && <ModalViewer />}
-      {loadingInModal && <LoadPage />}
+      {loading && <LoadPage />}
       <Header />
       <CompanyPageContainer>
         <motion.div
@@ -126,7 +133,7 @@ export const Company = () => {
             <button onClick={() => setVisible(true)}>Adicionar Vagas</button>
           </div>
           <ul>
-            {!!jobs.length ? (
+            {!!jobs.length &&
               jobs.map((element, index) => {
                 return (
                   <CardCompany
@@ -139,7 +146,7 @@ export const Company = () => {
                     responsabilitys={element.responsabilitys}
                     id={element.id}
                     nameCompany={company?.name}
-                    locality={element.locality}
+                    locality="Brasil"
                     key={index}
                   >
                     <button onClick={() => openEditJob(element)}>
@@ -158,12 +165,7 @@ export const Company = () => {
                     </button>
                   </CardCompany>
                 );
-              })
-            ) : (
-              <li className="noWork">
-                <span>Não aplicou em nenhuma vaga :(</span>
-              </li>
-            )}
+              })}
           </ul>
         </motion.div>
       </CompanyPageContainer>
