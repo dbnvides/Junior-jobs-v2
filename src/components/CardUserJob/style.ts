@@ -76,7 +76,7 @@ export const StyledCardCompanyContainer = styled.li`
 
     .description {
       display: flex;
-      width: 70%;
+      width: 60%;
       overflow: hidden;
     }
     .description p {

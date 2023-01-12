@@ -17,29 +17,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { BsTrash, BsPencilSquare } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { slideRightVariants, slideLeftVariants } from "../home/motion";
-
-interface iUser {
-  email: string;
-  name: string;
-  password: string;
-  documentation: string;
-  avatar: string | undefined;
-  type: string;
-  id: number;
-  apply_jobs?: any;
-}
-
-interface iJobs {
-  description: string;
-  id: number;
-  job_name: string;
-  period: string;
-  requirements: string;
-  responsabilitys: string;
-  usersId: number;
-  work_type: string;
-  candidates: iUser[];
-}
+import { iJobs, iUser } from "./types";
 
 export const Company = () => {
   const {
@@ -52,15 +30,8 @@ export const Company = () => {
     editJobModal,
     setEditJobModal,
   } = useContext(authContext);
-  const {
-    modalViewer,
-    setModalViewer,
-    jobs,
-    setJobViewer,
-    setJobId,
-    setJobEdit,
-    setLoading,
-  } = useContext(CompanyContext);
+  const { modalViewer, setModalViewer, jobs, setJobViewer, setJobId, setJobEdit, setLoading } =
+    useContext(CompanyContext);
 
   const company = user;
 
@@ -134,9 +105,7 @@ export const Company = () => {
               <h2>{user?.name}</h2>
               <p>{user?.email}</p>
             </div>
-            <button onClick={() => setEditProfileCompany(true)}>
-              Editar Perfil
-            </button>
+            <button onClick={() => setEditProfileCompany(true)}>Editar Perfil</button>
           </div>
         </motion.div>
         <motion.div
@@ -157,7 +126,7 @@ export const Company = () => {
             <button onClick={() => setVisible(true)}>Adicionar Vagas</button>
           </div>
           <ul>
-            {!!jobs.length &&
+            {!!jobs.length ? (
               jobs.map((element, index) => {
                 return (
                   <CardCompany
@@ -170,7 +139,7 @@ export const Company = () => {
                     responsabilitys={element.responsabilitys}
                     id={element.id}
                     nameCompany={company?.name}
-                    locality="Brasil"
+                    locality={element.locality}
                     key={index}
                   >
                     <button onClick={() => openEditJob(element)}>
@@ -189,7 +158,12 @@ export const Company = () => {
                     </button>
                   </CardCompany>
                 );
-              })}
+              })
+            ) : (
+              <li className="noWork">
+                <span>Não aplicou em nenhuma vaga :(</span>
+              </li>
+            )}
           </ul>
         </motion.div>
       </CompanyPageContainer>

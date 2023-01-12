@@ -14,21 +14,21 @@ export const Register = () => {
   const { registerUser, user, setLoading } = useContext(authContext);
   const navigate = useNavigate();
   const schema = yup.object().shape({
-    name: yup.string().required("O nome e obrigatorio").min(4, "o minino de caracteres e 4"),
-    email: yup.string().required("O email e obrigatorio").email("email invalido"),
+    name: yup.string().required("O nome e obrigatório").min(4, "o mínino de caracteres e 4"),
+    email: yup.string().required("O email e obrigatório").email("Email inválido"),
     documentation: yup
       .string()
-      .required(typed ? "cnpj obrigatorio" : "cpf obrigatorio")
+      .required(typed ? "Cnpj obrigatório" : "Cpf obrigatório")
       .matches(
         typed
           ? /[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/
           : /[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}/,
-        typed ? "O cnpj tem 14 digitos" : "O cpf tem 11 digitos"
+        typed ? "O cnpj tem 14 digitos" : "O cpf tem 11 dígitos"
       ),
-    avatar: yup.string().required("Avatar obrigatorio"),
+    avatar: yup.string().required("Avatar obrigatório"),
     password: yup
       .string()
-      .required("A senha e obrigatoria")
+      .required("A senha e obrigatória")
       .matches(/(?=.*?[A-Z])/, "Pelo menos uma letra maiúscula")
       .matches(/(?=.*?[a-z])/, "Pelo menos uma letra minúscula")
       .matches(/(?=.*?[0-9])/, "pelo menos um numero")
@@ -36,8 +36,8 @@ export const Register = () => {
       .min(8, "pelo menos oito caracteres"),
     confirPass: yup
       .string()
-      .required("Confirmação da senha e obrigatoria")
-      .oneOf([yup.ref("password")], "As senhas devem ser a mesma "),
+      .required("Confirmação da senha e obrigatória")
+      .oneOf([yup.ref("password")], "As senhas devem ser iguais "),
     locality: yup.string(),
     site: yup.string(),
   });
@@ -46,6 +46,7 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<iRegister>({
+    mode: "onBlur",
     resolver: yupResolver(schema),
   });
   let types = {
@@ -67,7 +68,7 @@ export const Register = () => {
     const validation = () => {
       if (user?.type === "Company" || user?.type === "company") {
         navigate("/company");
-      } else {
+      } else if (user?.type === "Dev") {
         navigate("/home");
       }
       setLoading(false);
@@ -90,7 +91,7 @@ export const Register = () => {
           <Input
             label="Nome"
             type="text"
-            placeholder={typed ? "Nome fantasia" : "Digite seu nome"}
+            placeholder={typed ? "Nome da empresa" : "Digite seu nome"}
             {...register("name")}
           />
           {errors.name?.message && <SpanErro>{errors.name.message}</SpanErro>}

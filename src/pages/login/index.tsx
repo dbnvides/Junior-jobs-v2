@@ -6,16 +6,12 @@ import { Input } from "../../components/Input";
 import { authContext } from "../../contexts/authContext";
 import { SpanErro } from "../register/style";
 import { StyleSection } from "./style";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadPage } from "../../components/Loading";
 import { iLogin } from "../../contexts/types";
+import { schema } from "./loginSchema";
 
 export const Login = () => {
-  const schema = yup.object().shape({
-    email: yup.string().required("O email e obrigatorio").email("email invalido"),
-    password: yup.string().required("A senha e obrigatoria"),
-  });
   const { login, setLoading, loading, user } = useContext(authContext);
   const navigate = useNavigate();
   const {
@@ -23,6 +19,7 @@ export const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<iLogin>({
+    mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
@@ -38,7 +35,7 @@ export const Login = () => {
     const validation = () => {
       if (user?.type === "Company" || user?.type === "company") {
         navigate("/company");
-      } else {
+      } else if (user?.type === "Dev") {
         navigate("/home");
       }
       setLoading(false);
@@ -48,8 +45,8 @@ export const Login = () => {
 
   return (
     <>
-      <Header />
       {loading && <LoadPage />}
+      <Header />
       <StyleSection>
         <div>
           <h2>Login</h2>

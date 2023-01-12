@@ -96,6 +96,6 @@ export const StyleDiv = styled.div`
 `;
 export const SpanErro = styled.p`
   font-size: var(--font-size-2);
-  color: var(--negative);
+  color: red;
   font-weight: var(--font-weight-2);
 `;
