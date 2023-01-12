@@ -20,8 +20,6 @@ export const CardUserJob = ({
   const { user } = useContext(authContext);
   const navigate = useNavigate();
 
-  console.log(nameCompany);
-
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
 
