@@ -19,7 +19,7 @@ export const ModalEditProfile = () => {
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm<IFormModalEdit>({
-    mode: "onChange",
+    mode: "onBlur",
     resolver: yupResolver(formEditSchema),
     defaultValues: {
       name: user?.name,

@@ -12,10 +12,10 @@ export const StyledMain = styled.main`
     align-items: center;
     background-color: var(--white);
     position: relative;
-    top: -20px;
+    margin-top: 30px;
     padding: 25px 0 15px 0;
     border-radius: var(--radius-1);
-    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     @media (min-width: 769px) {
       width: 95%;

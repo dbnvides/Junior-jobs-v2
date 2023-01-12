@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { authContext } from "../../contexts/authContext";
 import { StyleModalBase } from "./modaBase";
-import { AiOutlineCloseCircle } from "react-icons/ai";
 
 interface Props {
   title: string;
@@ -23,7 +22,7 @@ export const ModalBase = ({ children, title }: Props) => {
                 setVisible(false);
               }}
             >
-              <AiOutlineCloseCircle />
+              X
             </button>
           </div>
           {children}

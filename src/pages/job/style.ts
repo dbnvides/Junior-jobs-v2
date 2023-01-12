@@ -48,7 +48,6 @@ export const StyledMain = styled.main`
       max-width: 50px;
       max-height: 50px;
 
-      background-color: orange;
       border-radius: var(--radius-2);
 
       overflow: hidden;
