@@ -35,7 +35,7 @@ export const ModalAddJob = () => {
                     authorization: `Bearer ${token}`,
                 },
             });
-            console.log(data);
+         
             toast.success("Vaga adicionada com sucesso");
             return response.data;
         } catch (error) {
