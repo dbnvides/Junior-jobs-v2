@@ -61,7 +61,7 @@ export const Company = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      toast.success("Job deletado com sucesso !");
+      toast.success("Job deletado com sucesso!");
     } catch (error) {
       setLoading(false);
       console.error(error);
