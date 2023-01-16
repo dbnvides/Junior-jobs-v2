@@ -17,8 +17,9 @@ import { AiOutlineEye } from "react-icons/ai";
 import { BsTrash, BsPencilSquare } from "react-icons/bs";
 import { motion } from "framer-motion";
 import { slideRightVariants, slideLeftVariants } from "../home/motion";
-import { iJobs, iUser } from "./types";
+import { iJobs } from "./types";
 import { Container } from "../../components/Container";
+import { iUser } from "../../contexts/types";
 
 export const Company = () => {
   const {
@@ -114,9 +115,7 @@ export const Company = () => {
                 <h2>{user?.name}</h2>
                 <p>{user?.email}</p>
               </div>
-              <button onClick={() => setEditProfileCompany(true)}>
-                Editar Perfil
-              </button>
+              <button onClick={() => setEditProfileCompany(true)}>Editar Perfil</button>
             </div>
           </motion.div>
           <motion.div

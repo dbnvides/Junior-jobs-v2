@@ -1,37 +1,23 @@
 import { ModalViewerContainer } from "./style";
 import iconExcluir from "../../assets/img/icon-excluir.svg";
 import iconLink from "../../assets/img/link.svg";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
 import { api } from "../../services/api";
-
-interface iUser {
-  email?: string;
-  name?: string;
-  password?: string;
-  documentation?: string;
-  avatar?: string | undefined;
-  type?: string;
-  id?: number;
-  apply_jobs?: any;
-}
+import { iUser } from "../../contexts/types";
 
 interface iTeste {
   candidates: iUser[] | undefined;
 }
 
 export const ModalViewer = () => {
-  const { setModalViewer, jobViewer, loadJobs, setJobViewer, jobId } =
-    useContext(CompanyContext);
+  const { setModalViewer, jobViewer, loadJobs, jobId } = useContext(CompanyContext);
 
-  const updateCandidates = async (
-    data: iTeste | undefined,
-    id: number | undefined
-  ) => {
+  const updateCandidates = async (data: iTeste | undefined, id: number | undefined) => {
     const token = localStorage.getItem("@TOKEN");
 
     try {
-      const response = await api.patch(`jobs/${id}`, data, {
+      await api.patch(`jobs/${id}`, data, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -75,15 +61,15 @@ export const ModalViewer = () => {
                       <div className="infCompany">
                         <div>
                           <p>{element.name}</p>
-                          <h1>{element.email}</h1>
+                          <h2>{element.email}</h2>
                           <span>{element.type}</span>
                         </div>
 
-                        <p>Recife</p>
+                        <p>{element.locality ? element.locality : "Localização não informada"}</p>
                       </div>
 
                       <div className="description">
-                        <p>{}</p>
+                        <p>{element.bio ? element.bio : "Sem biografia"}</p>
                       </div>
 
                       <div className="boxButtons">

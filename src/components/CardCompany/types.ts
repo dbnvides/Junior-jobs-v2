@@ -8,7 +8,7 @@ export interface IPropCard {
   description?: string;
   requirements?: string;
   responsabilitys?: string;
-  id?: number;
+  id?: number | undefined;
   nameCompany?: string;
   locality?: string;
   children?: React.ReactNode;

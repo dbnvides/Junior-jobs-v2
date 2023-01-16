@@ -1,4 +1,4 @@
-import { IJob } from "../UserContext/type";
+import { iUser } from "../types";
 
 export interface iCompanyProviderProps {
   children: React.ReactNode;
@@ -18,17 +18,6 @@ export interface iCompanyContext {
   setJobEdit: React.Dispatch<React.SetStateAction<iJobs | undefined>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface iUser {
-  email: string;
-  name: string;
-  password: string;
-  documentation: string;
-  avatar: string | undefined;
-  type: string;
-  id: number;
-  apply_jobs?: any;
 }
 
 export interface iJobs {
