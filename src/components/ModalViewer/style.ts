@@ -68,7 +68,7 @@ export const ModalViewerContainer = styled.div`
       padding: 50px 20px 30px 20px;
       border-radius: 5px;
       background-color: var(--color-primary-1);
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 
       > img {
         position: absolute;

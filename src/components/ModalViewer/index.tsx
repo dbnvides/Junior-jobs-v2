@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { CompanyContext } from "../../contexts/CompanyContext/companyContext";
 import { api } from "../../services/api";
 import { iUser } from "../../contexts/types";
+import { Link } from "react-router-dom";
 
 interface iTeste {
   candidates: iUser[] | undefined;
@@ -76,9 +77,11 @@ export const ModalViewer = () => {
                         <button onClick={() => removeCandidate(element)}>
                           <img src={iconExcluir} alt="Excluir" />
                         </button>
-                        <button>
-                          <img src={iconLink} alt="Linkedin" />
-                        </button>
+                        {element.linkedin && (
+                          <Link to={element.linkedin}>
+                            <img src={iconLink} alt="Linkedin" />
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </li>

@@ -58,7 +58,7 @@ export const Company = () => {
     }
     try {
       setLoading(true);
-      const { data } = await api.delete(`jobs/${job.id}`, {
+      await api.delete(`jobs/${job.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
