@@ -14,7 +14,7 @@ export const Header = () => {
         <StyledHeader>
           <Container>
             <nav>
-              <img src={Logo} alt="Júnior Jobs" />
+              <img src={Logo} alt="Júnior Jobs" className="logo" />
               <MenuBox />
             </nav>
           </Container>

@@ -1,15 +1,4 @@
-import { IJob } from "../home/types";
-
-export interface iUser {
-  email: string;
-  name: string;
-  password: string;
-  documentation: string;
-  avatar: string | undefined;
-  type: string;
-  id: number;
-  apply_jobs?: IJob[];
-}
+import { iUser } from "../../contexts/types";
 
 export interface iJobs {
   description: string;

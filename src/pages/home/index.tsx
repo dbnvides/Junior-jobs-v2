@@ -1,5 +1,5 @@
 import { Container } from "../../components/Container";
-import { StyledHome, StyledJobsList, StyledViewMoreContainer } from "./style";
+import { StyledHome, StyledJobsList, StyledViewMoreContainer } from "./styled";
 import { Header } from "../../components/Header";
 import { StyledFooter } from "../../components/Footer";
 import { CardJob } from "../../components/CardJob/CardJob";
@@ -7,7 +7,7 @@ import searchIcon from "../../assets/img/search-icon.png";
 import localizationIcon from "../../assets/img/localization-icon.png";
 import funnelIcon from "../../assets/img/funnel-icon.png";
 import closeIcon from "../../assets/img/close-icon.png";
-import { FilterBar } from "./style";
+import { FilterBar } from "./styled";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { IJob } from "./types";

@@ -5,8 +5,8 @@ export interface IJobContext {
   company: ICompany;
   addJob(job: IJob): void;
   loading: boolean;
-  find: false | IJob
-  setApplyed: React.Dispatch<React.SetStateAction<IJob[]>>
+  find: false | IJob;
+  setApplyed: React.Dispatch<React.SetStateAction<IJob[]>>;
 }
 
 export interface IJob {
@@ -26,7 +26,7 @@ export interface ICompany {
   email?: string;
   password?: string;
   documentation?: string;
-  avatar?: string;
+  avatar?: string | undefined;
   type?: string;
   id?: number;
   candidates?: iUser[];

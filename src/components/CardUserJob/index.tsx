@@ -32,7 +32,11 @@ export const CardUserJob = ({
           },
         });
 
-        setNameCompany(data.find((company: ICompany) => company.id === id));
+        if (data) {
+          setNameCompany(
+            data.find((company: ICompany) => company.type === "Company" && company.id === id)
+          );
+        }
       } catch (err) {
         setLoading(false);
         console.log(err);
@@ -45,13 +49,8 @@ export const CardUserJob = ({
 
   return (
     <StyledCardCompanyContainer>
-      {nameCompany.avatar !== undefined ? (
-        <img
-          src={
-            user?.type === "company" || user?.type === "Company" ? user.avatar : nameCompany.avatar
-          }
-          alt="img"
-        />
+      {nameCompany.avatar !== undefined && nameCompany.avatar !== null ? (
+        <img src={user?.type === "Company" ? user.avatar : nameCompany.avatar} alt="img" />
       ) : (
         <div className="avatarDefault">
           <FaUser />

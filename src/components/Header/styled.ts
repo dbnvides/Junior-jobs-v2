@@ -2,15 +2,11 @@ import styled from "styled-components";
 
 export const StyledHeader = styled.header`
   width: 100%;
-  height: 140px;
+  height: 80px;
   display: flex;
   align-items: center;
   background-color: var(--color-primary);
   animation: appear 1s ease;
-
-  @media (min-width: 768px) {
-    border-radius: 0 0 0 70px;
-  }
 
   nav {
     display: flex;
@@ -22,8 +18,12 @@ export const StyledHeader = styled.header`
   }
 
   img {
-    width: 120px;
-    height: 74px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .logo {
+    width: 100px;
+    height: 57px;
   }
 
   .boxMenu {

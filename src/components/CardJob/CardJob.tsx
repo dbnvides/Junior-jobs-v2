@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledJob } from "../../pages/home/style";
+import { StyledJob } from "../../pages/home/styled";
 import { api } from "../../services/api";
 import { motion } from "framer-motion";
-import {
-  slideRightVariants,
-  slideDownVariants,
-  slideLeftVariants,
-} from "../../pages/home/motion";
+import { slideRightVariants, slideDownVariants, slideLeftVariants } from "../../pages/home/motion";
 import { IJob } from "../../pages/home/types";
 
-export const CardJob = ({
-  description,
-  id,
-  job_name,
-  locality,
-  period,
-  usersId,
-}: IJob) => {
+export const CardJob = ({ description, id, job_name, locality, period, usersId }: IJob) => {
   const navigate = useNavigate();
   const [user, setUser]: any = useState();
   const token = localStorage.getItem("@TOKEN");

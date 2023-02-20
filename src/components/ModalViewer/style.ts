@@ -15,7 +15,7 @@ export const ModalViewerContainer = styled.div`
   .Modal {
     width: 95%;
     max-width: 800px;
-    height: 800px;
+    min-height: 500px;
     background-color: var(--white);
     overflow: auto;
     border-radius: 5px;
@@ -67,8 +67,8 @@ export const ModalViewerContainer = styled.div`
       margin-top: 30px;
       padding: 50px 20px 30px 20px;
       border-radius: 5px;
-      background-color: var(--color-primary-3);
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      background-color: var(--color-primary-1);
+      box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
 
       > img {
         position: absolute;
@@ -77,21 +77,35 @@ export const ModalViewerContainer = styled.div`
         width: 50px;
         height: 50px;
         border-radius: 10px;
+        object-fit: contain;
+        background-color: var(--grey-1);
+        border: 2px solid var(--grey-3);
       }
 
       .description {
+        width: 50%;
+
+        p {
+          font-size: 20px;
+        }
       }
 
       > div {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 10px;
       }
 
       .infCompany {
         display: flex;
         flex-direction: column;
         gap: 40px;
+
+        > div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
       }
 
       .boxButtons {
@@ -99,24 +113,32 @@ export const ModalViewerContainer = styled.div`
         gap: 10px;
 
         > button {
-          width: 50px;
-          height: 50px;
-          background-color: var(--grey-3);
+          width: 40px;
+          height: 40px;
+          background-color: var(--grey-1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           border-radius: 5px;
           cursor: pointer;
+
+          :hover {
+            background-color: var(--grey-2);
+          }
         }
       }
 
       @media (min-width: 769px) {
         width: 95%;
         max-width: 1000px;
-        height: 250px;
+        height: 220px;
         padding: 50px 30px 30px 30px;
 
         .description {
           display: flex;
           width: 60%;
+          justify-content: center;
         }
 
         > div {
@@ -125,7 +147,7 @@ export const ModalViewerContainer = styled.div`
         }
 
         .infCompany {
-          width: 40%;
+          width: 30%;
         }
 
         .boxButtons {
